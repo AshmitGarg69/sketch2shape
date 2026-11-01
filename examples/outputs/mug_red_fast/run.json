@@ -1,0 +1,308 @@
+{
+  "timestamp": "2026-10-31T23:35:37+0000",
+  "request": {
+    "source": "upload",
+    "prompt": "matte red ceramic",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "fast",
+    "viewpoint": "Auto",
+    "seed": 15,
+    "out_root": "/kaggle/working/outputs",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "balanced",
+  "environment": {
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "Tesla T4",
+      "total_gb": 14.56,
+      "compute_cap": [
+        7,
+        5
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "580.178.04\n580.178.04"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.01,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.47
+    },
+    "s2_understand": {
+      "seconds": 3.62,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 16.47
+    },
+    "s3_generate": {
+      "seconds": 68.15,
+      "vram_peak_gb": 10.06,
+      "rss_gb": 16.47
+    },
+    "s4_prepare": {
+      "seconds": 0.61,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.47
+    },
+    "s5_reconstruct": {
+      "seconds": 28.05,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.47
+    },
+    "s6_cleanup": {
+      "seconds": 0.81,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.47
+    },
+    "s7_export": {
+      "seconds": 0.57,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.47
+    },
+    "s8_verify": {
+      "seconds": 2.09,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.47
+    }
+  },
+  "warnings": [],
+  "fallbacks": [],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 0,
+      "backend": "triposr",
+      "seed": 15,
+      "recon_consistency": 0.9076,
+      "sketch_fidelity": 0.8695,
+      "valid": true
+    }
+  ],
+  "total_seconds": 105.75,
+  "seed": 15,
+  "validation": {
+    "loads": true,
+    "vertices": 39910,
+    "faces": 79820,
+    "extent": [
+      1.2293095588684082,
+      1.0,
+      1.19400155544281
+    ],
+    "nan": false,
+    "texture": null,
+    "vertex_colors": true,
+    "geometries": 1,
+    "gltf_color_0": true,
+    "gltf_base_color_texture": false,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.9076,
+  "sketch_fidelity": 0.8695,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    10.0,
+    10.0
+  ],
+  "input_view": [
+    10.0,
+    10.0
+  ],
+  "mirror_direct": 0.9076,
+  "mirror_flipped": 0.7903,
+  "object": "mug",
+  "object_conf": 0.01741926558315754,
+  "object_top5": [
+    [
+      "mug",
+      0.01741926558315754
+    ],
+    [
+      "cup",
+      0.016721300780773163
+    ],
+    [
+      "teacup",
+      0.016528507694602013
+    ],
+    [
+      "plate",
+      0.012263466604053974
+    ],
+    [
+      "bowl",
+      0.01001403946429491
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "mug, matte red ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "mug, matte red ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "mug, matte red ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "mug, matte red ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.8598,
+      "seed": 15,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.35373973846435547,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9191246431969553,
+        "stroke": 0.9305301645338209,
+        "stroke_detail": {
+          "recall": 0.8701,
+          "precision": 1.0,
+          "f": 0.9305,
+          "interior_density": 0.0124
+        },
+        "semantic": 0.574310302734375,
+        "clean": 0.9812845253597108
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.8321,
+      "seed": 16,
+      "controlnet_scale": 0.7,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.35247802734375,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9193380643582528,
+        "stroke": 0.9136397319466588,
+        "stroke_detail": {
+          "recall": 0.841,
+          "precision": 1.0,
+          "f": 0.9136,
+          "interior_density": 0.022
+        },
+        "semantic": 0.460784912109375,
+        "clean": 0.9813636363636363
+      }
+    },
+    {
+      "index": 2,
+      "score": 0.7901,
+      "seed": 17,
+      "controlnet_scale": 0.9,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.35356616973876953,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9269737451022738,
+        "stroke": 0.7596817270346576,
+        "stroke_detail": {
+          "recall": 0.6125,
+          "precision": 1.0,
+          "f": 0.7597,
+          "interior_density": 0.0313
+        },
+        "semantic": 0.466278076171875,
+        "clean": 0.981410202810048
+      }
+    },
+    {
+      "index": 3,
+      "score": 0.813,
+      "seed": 18,
+      "controlnet_scale": 0.5,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.35295677185058594,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9226821652703496,
+        "stroke": 0.8203192679615713,
+        "stroke_detail": {
+          "recall": 0.6954,
+          "precision": 1.0,
+          "f": 0.8203,
+          "interior_density": 0.0275
+        },
+        "semantic": 0.498626708984375,
+        "clean": 0.9814294437749593
+      }
+    }
+  ],
+  "selected_candidate": 0,
+  "backend": "triposr",
+  "backend_meta": {
+    "backend": "triposr",
+    "mesh": "mesh.glb",
+    "resolution": 192,
+    "seconds": 27.5,
+    "vram_peak_gb": 3.41,
+    "has_uv": false,
+    "has_pbr": false,
+    "faces": 79657
+  },
+  "gen_profile": "balanced",
+  "s3_timing": {
+    "load_s": 3.07,
+    "load_from": "ram",
+    "generate_s": 54.75,
+    "n": 4,
+    "ram_free_gb_after": 14.1,
+    "parked": true
+  },
+  "tier": 2,
+  "material": "ceramic",
+  "cleanup": {
+    "raw_faces": 79657,
+    "raw_vertices": 39916,
+    "prune": {
+      "components": 3,
+      "removed": 1,
+      "removed_area_frac": 2.2589314933879304e-06
+    },
+    "repair": {
+      "faces_in": 79649,
+      "faces_out": 79820,
+      "watertight": true
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "/kaggle/working/outputs/20261031_233351_91e2cb22/mesh/model.glb",
+      "bytes": 1597696
+    },
+    "obj_zip": {
+      "path": "/kaggle/working/outputs/20261031_233351_91e2cb22/mesh/model.obj.zip",
+      "bytes": 946340
+    }
+  },
+  "notice": null
+}

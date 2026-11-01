@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-11-01T04:10:49+0530",
+  "request": {
+    "source": "upload",
+    "prompt": "",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "balanced",
+    "viewpoint": "Auto",
+    "seed": 7,
+    "out_root": "outputs_local2",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "lite",
+  "environment": {
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "total_gb": 5.72,
+      "compute_cap": [
+        8,
+        9
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "615.78.08"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.01,
+      "vram_peak_gb": 0.0,
+      "rss_gb": 0.61
+    },
+    "s2_understand": {
+      "seconds": 3.01,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 1.35
+    },
+    "s3_generate": {
+      "seconds": 19.46,
+      "vram_peak_gb": 2.87,
+      "rss_gb": 4.36
+    },
+    "s4_prepare": {
+      "seconds": 0.24,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 4.36
+    },
+    "s5_reconstruct": {
+      "seconds": 25.66,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 1.2
+    },
+    "s6_cleanup": {
+      "seconds": 0.86,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 1.44
+    },
+    "s7_export": {
+      "seconds": 0.41,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 1.44
+    },
+    "s8_verify": {
+      "seconds": 1.45,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 1.46
+    }
+  },
+  "warnings": [],
+  "fallbacks": [
+    "triposr: quality balanced -> fast to fit 5.5 GB free VRAM"
+  ],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 1,
+      "backend": "triposr",
+      "seed": 7,
+      "recon_consistency": 0.9117,
+      "sketch_fidelity": 0.8702,
+      "valid": true
+    }
+  ],
+  "total_seconds": 52.84,
+  "seed": 7,
+  "validation": {
+    "loads": true,
+    "vertices": 34372,
+    "faces": 68752,
+    "extent": [
+      1.3204364776611328,
+      1.0,
+      1.3298317193984985
+    ],
+    "nan": false,
+    "texture": null,
+    "vertex_colors": true,
+    "geometries": 1,
+    "gltf_color_0": true,
+    "gltf_base_color_texture": false,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.9117,
+  "sketch_fidelity": 0.8702,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    10.0,
+    10.0
+  ],
+  "input_view": [
+    10.0,
+    10.0
+  ],
+  "mirror_direct": 0.9117,
+  "mirror_flipped": 0.7819,
+  "object": "mug",
+  "object_conf": 0.01742289774119854,
+  "object_top5": [
+    [
+      "mug",
+      0.01742289774119854
+    ],
+    [
+      "cup",
+      0.01671457849442959
+    ],
+    [
+      "teacup",
+      0.016521865501999855
+    ],
+    [
+      "plate",
+      0.012266022153198719
+    ],
+    [
+      "bowl",
+      0.010016126558184624
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "mug, glossy white ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "mug, glossy white ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.5942,
+      "seed": 7,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.3065910339355469,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.593085168220605,
+        "stroke": 0.46573427150458396,
+        "stroke_detail": {
+          "recall": 0.51,
+          "precision": 0.4286,
+          "f": 0.4657,
+          "interior_density": 0.0217
+        },
+        "semantic": 0.605438232421875,
+        "clean": 0.9619514501499297
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.7986,
+      "seed": 8,
+      "controlnet_scale": 0.7,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.3446693420410156,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0642
+      },
+      "terms": {
+        "silhouette_iou": 0.8878555965484648,
+        "stroke": 0.8962960928742595,
+        "stroke_detail": {
+          "recall": 0.8121,
+          "precision": 1.0,
+          "f": 0.8963,
+          "interior_density": 0.0229
+        },
+        "semantic": 0.394561767578125,
+        "clean": 0.9565713020862154
+      }
+    }
+  ],
+  "selected_candidate": 1,
+  "backend": "triposr",
+  "backend_meta": {
+    "backend": "triposr",
+    "mesh": "mesh.glb",
+    "resolution": 192,
+    "seconds": 21.37,
+    "vram_peak_gb": 2.44,
+    "has_uv": false,
+    "has_pbr": false,
+    "faces": 68588
+  },
+  "gen_profile": "lite",
+  "s3_timing": {
+    "load_s": 3.95,
+    "load_from": "disk",
+    "generate_s": 12.61,
+    "n": 2,
+    "ram_free_gb_after": 2.0,
+    "parked": false
+  },
+  "tier": 2,
+  "material": "ceramic",
+  "cleanup": {
+    "raw_faces": 68588,
+    "raw_vertices": 34372,
+    "prune": {
+      "components": 3,
+      "removed": 0,
+      "removed_area_frac": 0.0
+    },
+    "repair": {
+      "faces_in": 68588,
+      "faces_out": 68752,
+      "watertight": true
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "outputs_local2/20261101_040956_91e2cb22/mesh/model.glb",
+      "bytes": 1376308
+    },
+    "obj_zip": {
+      "path": "outputs_local2/20261101_040956_91e2cb22/mesh/model.obj.zip",
+      "bytes": 796658
+    }
+  },
+  "notice": null
+}

@@ -1,0 +1,15 @@
+# Derived from third_party/TripoSR/requirements.txt @ 107cefdc (read in Phase 0).
+# torch is installed first by scripts/setup_backend.sh (torch 2.1.0+cu121, same wheel as InstantMesh).
+# Additions vs upstream: numpy<2 (torch 2.1 ABI), huggingface-hub==0.17.3 (transformers 4.35 -> tokenizers<0.15 -> hub<0.18), torchmcubes pinned to the
+# July-2023 setup.py commit (upstream HEAD moved to scikit-build-core after TripoSR's release).
+omegaconf==2.3.0
+Pillow==10.1.0
+einops==0.7.0
+transformers==4.35.0
+trimesh==4.0.5
+rembg==2.0.59
+huggingface-hub==0.17.3
+imageio[ffmpeg]
+xatlas==0.0.9
+moderngl==5.10.0
+numpy<2

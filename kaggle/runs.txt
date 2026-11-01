@@ -1,0 +1,8 @@
+# final balanced golden set (shadow-aware matte recovery + RAM parking); one process => warm path after run 1
+--sketch examples/sketches/handdrawn_mug.jpg --preset balanced --seed 7
+--sketch examples/sketches/synthetic_chair.png --preset balanced --seed 12
+--sketch examples/sketches/synthetic_chair.png --prompt "a fire-breathing dragon with red scales" --preset balanced --seed 12
+--sketch examples/sketches/synthetic_car_side.png --view "side profile" --preset balanced --seed 11
+--sketch examples/sketches/synthetic_lamp.png --preset balanced --seed 13
+--sketch examples/sketches/synthetic_open_doodle.png --preset balanced --seed 14
+--sketch examples/sketches/handdrawn_mug.jpg --prompt "matte red ceramic" --preset fast --seed 15

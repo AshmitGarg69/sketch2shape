@@ -1,0 +1,8 @@
+# Words kept by the hedge candidate (spec §4.3). Everything else in the user's free text is dropped.
+colors: [red, orange, yellow, green, blue, purple, violet, pink, brown, black, white, grey, gray, silver, gold, golden,
+         beige, cream, teal, cyan, magenta, navy, maroon, turquoise, bronze, copper, pastel, dark, light, bright, matte, glossy]
+materials: [wood, wooden, oak, walnut, bamboo, metal, metallic, steel, iron, aluminium, aluminum, chrome, brass, plastic,
+            ceramic, porcelain, clay, glass, crystal, fabric, cloth, velvet, leather, stone, marble, granite, concrete,
+            rubber, paper, cardboard, wool, cotton, denim, gem, jade, ivory]
+style: [modern, minimalist, vintage, retro, rustic, futuristic, sci-fi, steampunk, cartoon, cute, toy, realistic, elegant,
+        ornate, simple, sleek, industrial, classic, antique, low-poly, stylized, striped, polka-dot, checkered, floral]

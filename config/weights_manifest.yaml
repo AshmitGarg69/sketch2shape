@@ -1,0 +1,73 @@
+# Hub-only, revision-pinned (spec §13). Resolved with HfApi().model_info() on 2026-10-31.
+# Project-managed models -> weights/<name>/ (local_dir). Backend-internal models -> shared HF cache (weights/hf).
+models:
+  sdxl:
+    repo_id: stabilityai/stable-diffusion-xl-base-1.0
+    revision: 462165984030d82259a11f4367a4eed129e94a7b
+    allow_patterns: ["model_index.json", "scheduler/*", "tokenizer/*", "tokenizer_2/*", "text_encoder/config.json",
+                     "text_encoder/model.fp16.safetensors", "text_encoder_2/config.json", "text_encoder_2/model.fp16.safetensors",
+                     "unet/config.json", "unet/diffusion_pytorch_model.fp16.safetensors"]
+    expected_gb: 6.8
+    profile: [balanced]
+    license: openrail++
+  sdxl_vae_fp16:
+    repo_id: madebyollin/sdxl-vae-fp16-fix
+    revision: 207b116dae70ace3637169f1ddd2434b91b3a8cd
+    allow_patterns: ["config.json", "diffusion_pytorch_model.safetensors"]
+    expected_gb: 0.33
+    profile: [balanced]
+    license: mit
+  controlnet_scribble_sdxl:
+    repo_id: xinsir/controlnet-scribble-sdxl-1.0
+    revision: 0bed4973b80c2329f76e0abf4196c51dfbf9108c
+    allow_patterns: ["config.json", "diffusion_pytorch_model.safetensors"]
+    expected_gb: 2.5
+    profile: [balanced]
+    license: apache-2.0
+    cond_polarity: white_on_black   # verified against the card's example images (000155_scribble_concat.webp)
+    cond_resolution: 1024
+  hyper_sdxl_lora:
+    repo_id: ByteDance/Hyper-SD
+    revision: bc08d970a87c74c71209491d64e3525845698863
+    allow_patterns: ["Hyper-SDXL-8steps-CFG-lora.safetensors"]
+    expected_gb: 0.8
+    profile: [balanced]
+    license: openrail++ (per model card)
+  sd15:
+    repo_id: stable-diffusion-v1-5/stable-diffusion-v1-5
+    revision: 451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+    allow_patterns: ["model_index.json", "scheduler/*", "tokenizer/*", "text_encoder/config.json", "text_encoder/model.fp16.safetensors",
+                     "unet/config.json", "unet/diffusion_pytorch_model.fp16.safetensors", "vae/config.json",
+                     "vae/diffusion_pytorch_model.fp16.safetensors", "feature_extractor/*"]
+    expected_gb: 2.2
+    profile: [lite]
+    license: creativeml-openrail-m
+  controlnet_scribble_sd15:
+    repo_id: lllyasviel/control_v11p_sd15_scribble
+    revision: 3564ec7b87dd706d5fc760d21c9e90bb160d1e9f
+    allow_patterns: ["config.json", "diffusion_pytorch_model.fp16.safetensors"]
+    expected_gb: 0.72
+    profile: [lite]
+    license: openrail
+    cond_polarity: white_on_black
+    cond_resolution: 512
+  siglip:
+    repo_id: google/siglip-base-patch16-256
+    revision: b078df89e446d623010d890864d4207fe6399f61
+    allow_patterns: ["*.json", "*.model", "model.safetensors"]
+    expected_gb: 0.82
+    profile: [lite, balanced]
+    license: apache-2.0
+  birefnet:
+    repo_id: ZhengPeng7/BiRefNet
+    revision: e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4
+    allow_patterns: ["*.py", "*.json", "model.safetensors"]
+    expected_gb: 0.9
+    profile: [lite, balanced]
+    license: mit
+    trust_remote_code: true
+backend_cache:   # populated into HF_HOME with snapshot_download (no local_dir); used inside backend subprocesses
+  triposr: [{repo_id: stabilityai/TripoSR, revision: 5b521936b01fbe1890f6f9baed0254ab6351c04a, allow_patterns: [config.yaml, model.ckpt]}, {repo_id: facebook/dino-vitb16, revision: f205d5d8e640a89a2b8ef0369670dfc37cc07fc2, allow_patterns: ['*.json', pytorch_model.bin]}]
+  instantmesh: [{repo_id: TencentARC/InstantMesh, revision: b785b4ecfb6636ef34a08c748f96f6a5686244d0},
+                {repo_id: sudo-ai/zero123plus-v1.2, revision: 2da07e89919e1a130c9b5add1584c70c7aa065fd},
+                {repo_id: facebook/dino-vitb16, revision: f205d5d8e640a89a2b8ef0369670dfc37cc07fc2, allow_patterns: ['*.json', pytorch_model.bin]}]

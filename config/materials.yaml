@@ -1,0 +1,41 @@
+# Prompt-blank defaults (spec §4.3): object -> palette + material; PBR scalars per material for the GLB patcher.
+default: {palette: "soft neutral colors", material: plastic}
+objects:
+  chair: {palette: "warm brown wooden frame with a beige cushion", material: wood}
+  armchair: {palette: "dark green fabric upholstery with wooden legs", material: fabric}
+  table: {palette: "light oak wood", material: wood}
+  sofa: {palette: "grey fabric upholstery", material: fabric}
+  lamp: {palette: "white lampshade on a brass stand", material: metal}
+  mug: {palette: "glossy white ceramic", material: ceramic}
+  cup: {palette: "glossy white ceramic", material: ceramic}
+  teapot: {palette: "glossy blue and white porcelain", material: ceramic}
+  vase: {palette: "blue glazed ceramic", material: ceramic}
+  bottle: {palette: "translucent green glass", material: glass}
+  car: {palette: "glossy red paint with black tyres and chrome trim", material: metal}
+  sports car: {palette: "glossy red paint with black tyres", material: metal}
+  truck: {palette: "blue paint with black tyres", material: metal}
+  house: {palette: "white walls and a red tiled roof", material: stone}
+  robot: {palette: "silver metal with blue accents", material: metal}
+  robot toy: {palette: "bright red and yellow plastic", material: plastic}
+  sword: {palette: "polished steel blade with a brown leather grip and gold guard", material: metal}
+  shoe: {palette: "white leather with a grey sole", material: leather}
+  sneaker: {palette: "white and blue sneaker with a rubber sole", material: leather}
+  guitar: {palette: "natural wood body with a dark fretboard", material: wood}
+  helmet: {palette: "matte black with a tinted visor", material: plastic}
+  airplane: {palette: "white fuselage with blue stripes", material: metal}
+  rocket: {palette: "white and red with grey fins", material: metal}
+  boat: {palette: "white hull with wooden deck", material: wood}
+  tree: {palette: "brown trunk with green leaves", material: wood}
+  apple: {palette: "glossy red apple with a green leaf", material: plastic}
+  teddy bear: {palette: "soft brown plush fur", material: fabric}
+  bird: {palette: "blue and yellow feathers", material: fabric}
+  fish: {palette: "orange and white scales", material: plastic}
+pbr:   # metallicFactor, roughnessFactor
+  wood: [0.0, 0.75]
+  metal: [0.85, 0.35]
+  plastic: [0.0, 0.5]
+  ceramic: [0.0, 0.25]
+  glass: [0.0, 0.1]
+  fabric: [0.0, 0.95]
+  leather: [0.0, 0.6]
+  stone: [0.0, 0.85]

@@ -1,0 +1,262 @@
+{
+  "timestamp": "2026-11-01T04:12:09+0530",
+  "request": {
+    "source": "upload",
+    "prompt": "a fire-breathing dragon with red scales",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "balanced",
+    "viewpoint": "Auto",
+    "seed": 12,
+    "out_root": "outputs_local2",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "lite",
+  "environment": {
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "total_gb": 5.72,
+      "compute_cap": [
+        8,
+        9
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "615.78.08"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.0,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.47
+    },
+    "s2_understand": {
+      "seconds": 1.46,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 2.48
+    },
+    "s3_generate": {
+      "seconds": 17.71,
+      "vram_peak_gb": 2.86,
+      "rss_gb": 2.5
+    },
+    "s4_prepare": {
+      "seconds": 0.19,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.5
+    },
+    "s5_reconstruct": {
+      "seconds": 16.43,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.48
+    },
+    "s6_cleanup": {
+      "seconds": 0.19,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.48
+    },
+    "s7_export": {
+      "seconds": 0.2,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.48
+    },
+    "s8_verify": {
+      "seconds": 1.32,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.48
+    }
+  },
+  "warnings": [
+    "prompt_conflict_suspected"
+  ],
+  "fallbacks": [
+    "triposr: quality balanced -> fast to fit 5.5 GB free VRAM"
+  ],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 1,
+      "backend": "triposr",
+      "seed": 12,
+      "recon_consistency": 0.7688,
+      "sketch_fidelity": 0.7941,
+      "valid": true
+    }
+  ],
+  "total_seconds": 38.88,
+  "seed": 12,
+  "validation": {
+    "loads": true,
+    "vertices": 18248,
+    "faces": 36488,
+    "extent": [
+      0.5303124189376831,
+      1.0,
+      0.4798073172569275
+    ],
+    "nan": false,
+    "texture": null,
+    "vertex_colors": true,
+    "geometries": 1,
+    "gltf_color_0": true,
+    "gltf_base_color_texture": false,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.7688,
+  "sketch_fidelity": 0.7941,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    -10.0,
+    10.0
+  ],
+  "input_view": [
+    10.0,
+    10.0
+  ],
+  "mirror_direct": 0.6727,
+  "mirror_flipped": 0.6772,
+  "object": "chair",
+  "object_conf": 0.01938512735068798,
+  "object_top5": [
+    [
+      "chair",
+      0.01938512735068798
+    ],
+    [
+      "stool",
+      0.015523239970207214
+    ],
+    [
+      "armchair",
+      0.013310186564922333
+    ],
+    [
+      "table",
+      0.012415548786520958
+    ],
+    [
+      "desk",
+      0.011475497856736183
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "chair, a fire-breathing dragon with red scales, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "chair, red, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.5782,
+      "seed": 12,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.37139892578125,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.5129440529267942,
+        "stroke": 0.4351612379579577,
+        "stroke_detail": {
+          "recall": 0.4217,
+          "precision": 0.4495,
+          "f": 0.4352,
+          "interior_density": 0.0328
+        },
+        "semantic": 0.73590087890625,
+        "clean": 0.9529571273033546
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.7334,
+      "seed": 13,
+      "controlnet_scale": 0.7,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.22705841064453125,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.8010169667410367,
+        "stroke": 0.8902522238626354,
+        "stroke_detail": {
+          "recall": 0.8596,
+          "precision": 0.9232,
+          "f": 0.8903,
+          "interior_density": 0.0008
+        },
+        "semantic": 0.26409912109375,
+        "clean": 0.9306318565932497
+      }
+    }
+  ],
+  "selected_candidate": 1,
+  "backend": "triposr",
+  "backend_meta": {
+    "backend": "triposr",
+    "mesh": "mesh.glb",
+    "resolution": 192,
+    "seconds": 15.98,
+    "vram_peak_gb": 2.44,
+    "has_uv": false,
+    "has_pbr": false,
+    "faces": 36400
+  },
+  "gen_profile": "lite",
+  "s3_timing": {
+    "load_s": 3.16,
+    "load_from": "disk",
+    "generate_s": 12.19,
+    "n": 2,
+    "ram_free_gb_after": 3.6,
+    "parked": false
+  },
+  "tier": 2,
+  "material": "wood",
+  "cleanup": {
+    "raw_faces": 36400,
+    "raw_vertices": 18248,
+    "prune": {
+      "components": 2,
+      "removed": 0,
+      "removed_area_frac": 0.0
+    },
+    "repair": {
+      "faces_in": 36400,
+      "faces_out": 36488,
+      "watertight": true
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "outputs_local2/20261101_041130_6a58998c/mesh/model.glb",
+      "bytes": 731152
+    },
+    "obj_zip": {
+      "path": "outputs_local2/20261101_041130_6a58998c/mesh/model.obj.zip",
+      "bytes": 405314
+    }
+  },
+  "notice": "Your prompt seemed to pull the result away from your sketch; the sketch was prioritised."
+}

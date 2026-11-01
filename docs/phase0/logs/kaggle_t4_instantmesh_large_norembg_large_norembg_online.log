@@ -1,0 +1,577 @@
+Seed set to 42
+Loading diffusion model ...
+Downloading model_index.json: 0.00B [00:00, ?B/s]Downloading model_index.json: 2.63kB [00:00, 13.2MB/s]
+Fetching 16 files:   0%|          | 0/16 [00:00<?, ?it/s]
+Downloading (…)rocessor_config.json:   0%|          | 0.00/466 [00:00<?, ?B/s][A
+Downloading scheduler_config.json:   0%|          | 0.00/391 [00:00<?, ?B/s][ADownloading (…)rocessor_config.json: 100%|██████████| 466/466 [00:00<00:00, 391kB/s]
+Downloading scheduler_config.json: 100%|██████████| 391/391 [00:00<00:00, 819kB/s]
+
+Downloading tokenizer_config.json:   0%|          | 0.00/855 [00:00<?, ?B/s][ADownloading tokenizer_config.json: 100%|██████████| 855/855 [00:00<00:00, 754kB/s]
+
+Downloading merges.txt: 0.00B [00:00, ?B/s][A
+
+Downloading config.json:   0%|          | 0.00/708 [00:00<?, ?B/s][A[ADownloading config.json: 100%|██████████| 708/708 [00:00<00:00, 4.11MB/s]
+
+
+Downloading (…)cial_tokens_map.json:   0%|          | 0.00/460 [00:00<?, ?B/s][A[ADownloading (…)cial_tokens_map.json: 100%|██████████| 460/460 [00:00<00:00, 2.39MB/s]
+
+
+Downloading model.safetensors:   0%|          | 0.00/681M [00:00<?, ?B/s][A[ADownloading merges.txt: 525kB [00:00, 15.9MB/s]
+
+Downloading vocab.json: 0.00B [00:00, ?B/s][A
+
+
+Downloading config.json: 0.00B [00:00, ?B/s][A[A[ADownloading config.json: 1.96kB [00:00, 7.67MB/s]
+Fetching 16 files:  50%|█████     | 8/16 [00:00<00:00, 31.14it/s]
+
+
+Downloading config.json:   0%|          | 0.00/745 [00:00<?, ?B/s][A[A[ADownloading config.json: 100%|██████████| 745/745 [00:00<00:00, 3.79MB/s]
+Downloading vocab.json: 1.06MB [00:00, 24.3MB/s]
+
+Downloading (…)ch_model.safetensors:   0%|          | 0.00/3.46G [00:00<?, ?B/s][A
+
+
+Downloading config.json:   0%|          | 0.00/672 [00:00<?, ?B/s][A[A[ADownloading config.json: 100%|██████████| 672/672 [00:00<00:00, 3.30MB/s]
+
+
+
+Downloading (…)ch_model.safetensors:   0%|          | 0.00/167M [00:00<?, ?B/s][A[A[A
+
+
+
+Downloading model.safetensors:   0%|          | 0.00/1.26G [00:00<?, ?B/s][A[A[A[A
+
+
+
+
+Downloading (…)rocessor_config.json:   0%|          | 0.00/369 [00:00<?, ?B/s][A[A[A[A[ADownloading (…)rocessor_config.json: 100%|██████████| 369/369 [00:00<00:00, 1.79MB/s]
+
+
+Downloading model.safetensors:   2%|▏         | 10.5M/681M [00:00<00:21, 31.3MB/s][A[A
+
+Downloading model.safetensors:   5%|▍         | 31.5M/681M [00:00<00:08, 80.4MB/s][A[A
+
+
+
+Downloading model.safetensors:   1%|          | 10.5M/1.26G [00:00<00:42, 29.4MB/s][A[A[A[A
+
+
+Downloading (…)ch_model.safetensors:   6%|▋         | 10.5M/167M [00:00<00:06, 25.8MB/s][A[A[A
+
+Downloading model.safetensors:   8%|▊         | 52.4M/681M [00:00<00:05, 113MB/s] [A[A
+
+
+
+Downloading model.safetensors:   2%|▏         | 31.5M/1.26G [00:00<00:16, 74.6MB/s][A[A[A[A
+
+Downloading model.safetensors:  11%|█         | 73.4M/681M [00:00<00:04, 137MB/s][A[A
+
+
+Downloading (…)ch_model.safetensors:  25%|██▌       | 41.9M/167M [00:00<00:01, 89.0MB/s][A[A[A
+
+
+Downloading (…)ch_model.safetensors:  38%|███▊      | 62.9M/167M [00:00<00:00, 118MB/s] [A[A[A
+
+
+
+Downloading model.safetensors:   4%|▍         | 52.4M/1.26G [00:00<00:12, 97.8MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:   0%|          | 10.5M/3.46G [00:00<04:07, 14.0MB/s][A
+
+
+
+Downloading model.safetensors:   6%|▌         | 73.4M/1.26G [00:00<00:10, 118MB/s] [A[A[A[A
+
+
+Downloading (…)ch_model.safetensors:  56%|█████▋    | 94.4M/167M [00:00<00:00, 149MB/s][A[A[A
+Downloading (…)ch_model.safetensors:   1%|          | 31.5M/3.46G [00:00<01:20, 42.7MB/s][A
+
+
+Downloading (…)ch_model.safetensors:  69%|██████▉   | 115M/167M [00:00<00:00, 163MB/s] [A[A[A
+
+
+
+Downloading model.safetensors:   7%|▋         | 94.4M/1.26G [00:00<00:09, 126MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:   2%|▏         | 52.4M/3.46G [00:01<00:50, 68.1MB/s][A
+
+
+Downloading (…)ch_model.safetensors:  81%|████████▏ | 136M/167M [00:01<00:00, 173MB/s][A[A[A
+
+
+
+Downloading model.safetensors:   9%|▉         | 115M/1.26G [00:01<00:08, 133MB/s] [A[A[A[A
+Downloading (…)ch_model.safetensors:   2%|▏         | 73.4M/3.46G [00:01<00:37, 90.2MB/s][A
+
+
+Downloading (…)ch_model.safetensors:  94%|█████████▍| 157M/167M [00:01<00:00, 178MB/s][A[A[ADownloading (…)ch_model.safetensors: 100%|██████████| 167M/167M [00:01<00:00, 141MB/s]
+
+
+
+
+Downloading model.safetensors:  11%|█         | 136M/1.26G [00:01<00:07, 142MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:   3%|▎         | 94.4M/3.46G [00:01<00:32, 105MB/s] [A
+
+
+
+Downloading model.safetensors:  12%|█▏        | 157M/1.26G [00:01<00:07, 147MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:   3%|▎         | 115M/3.46G [00:01<00:27, 120MB/s] [A
+
+
+
+Downloading model.safetensors:  14%|█▍        | 178M/1.26G [00:01<00:07, 150MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:   4%|▍         | 136M/3.46G [00:01<00:24, 134MB/s][A
+
+Downloading model.safetensors:  14%|█▍        | 94.4M/681M [00:01<00:13, 42.3MB/s][A[A
+
+
+
+Downloading model.safetensors:  16%|█▌        | 199M/1.26G [00:01<00:06, 153MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:   5%|▍         | 157M/3.46G [00:01<00:23, 144MB/s][A
+
+Downloading model.safetensors:  17%|█▋        | 115M/681M [00:01<00:09, 58.4MB/s] [A[A
+Downloading (…)ch_model.safetensors:   5%|▌         | 178M/3.46G [00:01<00:21, 151MB/s][A
+
+
+
+Downloading model.safetensors:  17%|█▋        | 220M/1.26G [00:01<00:07, 141MB/s][A[A[A[A
+
+Downloading model.safetensors:  20%|██        | 136M/681M [00:01<00:07, 75.5MB/s][A[A
+Downloading (…)ch_model.safetensors:   6%|▌         | 199M/3.46G [00:01<00:20, 158MB/s][A
+
+Downloading model.safetensors:  23%|██▎       | 157M/681M [00:02<00:05, 94.7MB/s][A[A
+
+
+
+Downloading model.safetensors:  19%|█▉        | 241M/1.26G [00:01<00:07, 143MB/s][A[A[A[A
+
+Downloading model.safetensors:  26%|██▌       | 178M/681M [00:02<00:04, 113MB/s] [A[A
+Downloading (…)ch_model.safetensors:   6%|▋         | 220M/3.46G [00:02<00:22, 144MB/s][A
+
+
+
+Downloading model.safetensors:  21%|██        | 262M/1.26G [00:02<00:07, 139MB/s][A[A[A[A
+
+Downloading model.safetensors:  29%|██▉       | 199M/681M [00:02<00:03, 128MB/s][A[A
+Downloading (…)ch_model.safetensors:   7%|▋         | 241M/3.46G [00:02<00:21, 148MB/s][A
+
+
+
+Downloading model.safetensors:  22%|██▏       | 283M/1.26G [00:02<00:06, 142MB/s][A[A[A[A
+
+Downloading model.safetensors:  32%|███▏      | 220M/681M [00:02<00:03, 129MB/s][A[A
+Downloading (…)ch_model.safetensors:   8%|▊         | 262M/3.46G [00:02<00:21, 148MB/s][A
+
+
+
+Downloading model.safetensors:  24%|██▍       | 304M/1.26G [00:02<00:06, 147MB/s][A[A[A[A
+
+Downloading model.safetensors:  35%|███▌      | 241M/681M [00:02<00:03, 141MB/s][A[A
+Downloading (…)ch_model.safetensors:   8%|▊         | 283M/3.46G [00:02<00:21, 148MB/s][A
+
+
+
+Downloading model.safetensors:  26%|██▌       | 325M/1.26G [00:02<00:06, 152MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:   9%|▉         | 304M/3.46G [00:02<00:21, 148MB/s][A
+
+
+
+Downloading model.safetensors:  27%|██▋       | 346M/1.26G [00:02<00:05, 153MB/s][A[A[A[A
+
+Downloading model.safetensors:  39%|███▊      | 262M/681M [00:02<00:03, 125MB/s][A[A
+Downloading (…)ch_model.safetensors:   9%|▉         | 325M/3.46G [00:02<00:20, 156MB/s][A
+
+
+
+Downloading model.safetensors:  29%|██▉       | 367M/1.26G [00:02<00:05, 150MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  10%|▉         | 346M/3.46G [00:02<00:20, 155MB/s][A
+
+
+
+Downloading model.safetensors:  31%|███       | 388M/1.26G [00:02<00:05, 151MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  11%|█         | 367M/3.46G [00:03<00:19, 161MB/s][A
+
+Downloading model.safetensors:  42%|████▏     | 283M/681M [00:03<00:04, 85.8MB/s][A[A
+
+
+
+Downloading model.safetensors:  32%|███▏      | 409M/1.26G [00:03<00:05, 147MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  11%|█         | 388M/3.46G [00:03<00:18, 166MB/s][A
+
+Downloading model.safetensors:  45%|████▍     | 304M/681M [00:03<00:03, 104MB/s] [A[A
+
+
+
+Downloading model.safetensors:  34%|███▍      | 430M/1.26G [00:03<00:05, 151MB/s][A[A[A[A
+
+Downloading model.safetensors:  48%|████▊     | 325M/681M [00:03<00:02, 122MB/s][A[A
+
+
+
+Downloading model.safetensors:  36%|███▌      | 451M/1.26G [00:03<00:05, 147MB/s][A[A[A[A
+
+Downloading model.safetensors:  51%|█████     | 346M/681M [00:03<00:02, 139MB/s][A[A
+Downloading (…)ch_model.safetensors:  12%|█▏        | 409M/3.46G [00:03<00:27, 110MB/s][A
+
+Downloading model.safetensors:  54%|█████▍    | 367M/681M [00:03<00:02, 151MB/s][A[A
+
+
+
+Downloading model.safetensors:  37%|███▋      | 472M/1.26G [00:03<00:05, 146MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  12%|█▏        | 430M/3.46G [00:03<00:24, 121MB/s][A
+
+Downloading model.safetensors:  57%|█████▋    | 388M/681M [00:03<00:01, 159MB/s][A[A
+
+
+
+Downloading model.safetensors:  39%|███▉      | 493M/1.26G [00:03<00:05, 146MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  13%|█▎        | 451M/3.46G [00:03<00:22, 132MB/s][A
+
+
+
+Downloading model.safetensors:  41%|████      | 514M/1.26G [00:03<00:05, 147MB/s][A[A[A[A
+
+Downloading model.safetensors:  60%|██████    | 409M/681M [00:03<00:01, 142MB/s][A[A
+Downloading (…)ch_model.safetensors:  14%|█▎        | 472M/3.46G [00:03<00:21, 142MB/s][A
+
+
+
+Downloading model.safetensors:  42%|████▏     | 535M/1.26G [00:03<00:04, 147MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  14%|█▍        | 493M/3.46G [00:03<00:20, 148MB/s][A
+
+
+
+Downloading model.safetensors:  44%|████▍     | 556M/1.26G [00:04<00:04, 144MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  15%|█▍        | 514M/3.46G [00:04<00:19, 154MB/s][A
+Downloading (…)ch_model.safetensors:  15%|█▌        | 535M/3.46G [00:04<00:18, 157MB/s][A
+
+
+
+Downloading model.safetensors:  46%|████▌     | 577M/1.26G [00:04<00:04, 146MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  16%|█▌        | 556M/3.46G [00:04<00:17, 164MB/s][A
+
+
+
+Downloading model.safetensors:  47%|████▋     | 598M/1.26G [00:04<00:04, 150MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  17%|█▋        | 577M/3.46G [00:04<00:17, 170MB/s][A
+
+Downloading model.safetensors:  63%|██████▎   | 430M/681M [00:04<00:03, 68.1MB/s][A[A
+Downloading (…)ch_model.safetensors:  17%|█▋        | 598M/3.46G [00:04<00:16, 171MB/s][A
+
+
+
+Downloading model.safetensors:  49%|████▉     | 619M/1.26G [00:04<00:05, 128MB/s][A[A[A[A
+
+Downloading model.safetensors:  68%|██████▊   | 461M/681M [00:04<00:02, 93.2MB/s][A[A
+
+
+
+Downloading model.safetensors:  51%|█████     | 640M/1.26G [00:04<00:04, 134MB/s][A[A[A[A
+
+Downloading model.safetensors:  71%|███████   | 482M/681M [00:04<00:01, 109MB/s] [A[A
+Downloading (…)ch_model.safetensors:  18%|█▊        | 619M/3.46G [00:04<00:18, 152MB/s][A
+
+
+
+Downloading model.safetensors:  52%|█████▏    | 661M/1.26G [00:04<00:04, 142MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  18%|█▊        | 640M/3.46G [00:04<00:18, 156MB/s][A
+
+Downloading model.safetensors:  75%|███████▌  | 514M/681M [00:05<00:01, 131MB/s][A[A
+Downloading (…)ch_model.safetensors:  19%|█▉        | 661M/3.46G [00:04<00:17, 164MB/s][A
+
+Downloading model.safetensors:  79%|███████▊  | 535M/681M [00:05<00:01, 144MB/s][A[A
+
+
+
+Downloading model.safetensors:  54%|█████▍    | 682M/1.26G [00:04<00:04, 142MB/s][A[A[A[A
+
+Downloading model.safetensors:  82%|████████▏ | 556M/681M [00:05<00:00, 156MB/s][A[A
+Downloading (…)ch_model.safetensors:  20%|█▉        | 682M/3.46G [00:05<00:16, 166MB/s][A
+
+
+
+Downloading model.safetensors:  56%|█████▌    | 703M/1.26G [00:05<00:03, 148MB/s][A[A[A[A
+
+Downloading model.safetensors:  85%|████████▍ | 577M/681M [00:05<00:00, 164MB/s][A[A
+Downloading (…)ch_model.safetensors:  20%|██        | 703M/3.46G [00:05<00:16, 168MB/s][A
+
+
+
+Downloading model.safetensors:  57%|█████▋    | 724M/1.26G [00:05<00:03, 149MB/s][A[A[A[A
+
+Downloading model.safetensors:  88%|████████▊ | 598M/681M [00:05<00:00, 175MB/s][A[A
+Downloading (…)ch_model.safetensors:  21%|██        | 724M/3.46G [00:05<00:16, 164MB/s][A
+
+
+
+Downloading model.safetensors:  59%|█████▉    | 744M/1.26G [00:05<00:03, 152MB/s][A[A[A[A
+
+Downloading model.safetensors:  91%|█████████ | 619M/681M [00:05<00:00, 161MB/s][A[A
+Downloading (…)ch_model.safetensors:  21%|██▏       | 744M/3.46G [00:05<00:17, 156MB/s][A
+
+
+
+Downloading model.safetensors:  61%|██████    | 765M/1.26G [00:05<00:03, 156MB/s][A[A[A[A
+
+Downloading model.safetensors:  95%|█████████▌| 650M/681M [00:05<00:00, 180MB/s][A[A
+Downloading (…)ch_model.safetensors:  22%|██▏       | 765M/3.46G [00:05<00:17, 157MB/s][A
+
+
+
+Downloading model.safetensors:  62%|██████▏   | 786M/1.26G [00:05<00:03, 155MB/s][A[A[A[A
+
+Downloading model.safetensors: 100%|██████████| 681M/681M [00:05<00:00, 187MB/s][A[ADownloading model.safetensors: 100%|██████████| 681M/681M [00:05<00:00, 116MB/s]
+
+Downloading (…)ch_model.safetensors:  23%|██▎       | 786M/3.46G [00:05<00:16, 159MB/s][A
+
+
+
+Downloading model.safetensors:  64%|██████▍   | 807M/1.26G [00:05<00:03, 151MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  23%|██▎       | 807M/3.46G [00:05<00:19, 136MB/s][A
+
+
+
+Downloading model.safetensors:  66%|██████▌   | 828M/1.26G [00:05<00:03, 140MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  24%|██▍       | 828M/3.46G [00:06<00:18, 142MB/s][A
+
+
+
+Downloading model.safetensors:  67%|██████▋   | 849M/1.26G [00:06<00:02, 144MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  25%|██▍       | 849M/3.46G [00:06<00:17, 145MB/s][A
+
+
+
+Downloading model.safetensors:  69%|██████▉   | 870M/1.26G [00:06<00:02, 144MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  25%|██▌       | 870M/3.46G [00:06<00:18, 144MB/s][A
+
+
+
+Downloading model.safetensors:  71%|███████   | 891M/1.26G [00:06<00:02, 145MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  26%|██▌       | 891M/3.46G [00:06<00:16, 151MB/s][A
+
+
+
+Downloading model.safetensors:  72%|███████▏  | 912M/1.26G [00:06<00:02, 146MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  26%|██▋       | 912M/3.46G [00:06<00:16, 152MB/s][A
+
+
+
+Downloading model.safetensors:  74%|███████▍  | 933M/1.26G [00:06<00:02, 150MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  27%|██▋       | 933M/3.46G [00:06<00:16, 156MB/s][A
+
+
+
+Downloading model.safetensors:  75%|███████▌  | 954M/1.26G [00:06<00:02, 152MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  28%|██▊       | 954M/3.46G [00:06<00:16, 155MB/s][A
+
+
+
+Downloading model.safetensors:  77%|███████▋  | 975M/1.26G [00:06<00:01, 153MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  28%|██▊       | 975M/3.46G [00:07<00:15, 160MB/s][A
+
+
+
+Downloading model.safetensors:  79%|███████▉  | 996M/1.26G [00:07<00:01, 150MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  29%|██▉       | 996M/3.46G [00:07<00:15, 164MB/s][A
+
+
+
+Downloading model.safetensors:  80%|████████  | 1.02G/1.26G [00:07<00:01, 152MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  29%|██▉       | 1.02G/3.46G [00:07<00:16, 145MB/s][A
+
+
+
+Downloading model.safetensors:  82%|████████▏ | 1.04G/1.26G [00:07<00:01, 135MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  30%|██▉       | 1.04G/3.46G [00:07<00:16, 146MB/s][A
+
+
+
+Downloading model.safetensors:  84%|████████▍ | 1.06G/1.26G [00:07<00:01, 139MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  31%|███       | 1.06G/3.46G [00:07<00:15, 155MB/s][A
+
+
+
+Downloading model.safetensors:  85%|████████▌ | 1.08G/1.26G [00:07<00:01, 144MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  31%|███       | 1.08G/3.46G [00:07<00:15, 157MB/s][A
+
+
+
+Downloading model.safetensors:  87%|████████▋ | 1.10G/1.26G [00:07<00:01, 146MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  32%|███▏      | 1.10G/3.46G [00:07<00:14, 158MB/s][A
+
+
+
+Downloading model.safetensors:  89%|████████▊ | 1.12G/1.26G [00:07<00:00, 147MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  32%|███▏      | 1.12G/3.46G [00:08<00:14, 160MB/s][A
+Downloading (…)ch_model.safetensors:  33%|███▎      | 1.14G/3.46G [00:08<00:13, 167MB/s][A
+
+
+
+Downloading model.safetensors:  90%|█████████ | 1.14G/1.26G [00:08<00:00, 150MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  34%|███▎      | 1.16G/3.46G [00:08<00:13, 169MB/s][A
+
+
+
+Downloading model.safetensors:  92%|█████████▏| 1.16G/1.26G [00:08<00:00, 128MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  34%|███▍      | 1.18G/3.46G [00:08<00:13, 170MB/s][A
+
+
+
+Downloading model.safetensors:  94%|█████████▎| 1.18G/1.26G [00:08<00:00, 136MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  35%|███▍      | 1.21G/3.46G [00:08<00:13, 171MB/s][A
+
+
+
+Downloading model.safetensors:  95%|█████████▌| 1.21G/1.26G [00:08<00:00, 139MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  35%|███▌      | 1.23G/3.46G [00:08<00:15, 148MB/s][A
+
+
+
+Downloading model.safetensors:  97%|█████████▋| 1.23G/1.26G [00:08<00:00, 140MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  36%|███▌      | 1.25G/3.46G [00:08<00:14, 157MB/s][A
+Downloading (…)ch_model.safetensors:  37%|███▋      | 1.27G/3.46G [00:08<00:13, 162MB/s][A
+
+
+
+Downloading model.safetensors:  99%|█████████▊| 1.25G/1.26G [00:08<00:00, 137MB/s][A[A[A[A
+Downloading (…)ch_model.safetensors:  37%|███▋      | 1.29G/3.46G [00:09<00:12, 168MB/s][ADownloading model.safetensors: 100%|██████████| 1.26G/1.26G [00:08<00:00, 141MB/s]
+
+Downloading (…)ch_model.safetensors:  38%|███▊      | 1.31G/3.46G [00:09<00:12, 171MB/s][A
+Downloading (…)ch_model.safetensors:  38%|███▊      | 1.33G/3.46G [00:09<00:12, 172MB/s][A
+Downloading (…)ch_model.safetensors:  39%|███▉      | 1.35G/3.46G [00:09<00:12, 170MB/s][A
+Downloading (…)ch_model.safetensors:  40%|███▉      | 1.37G/3.46G [00:09<00:12, 166MB/s][A
+Downloading (…)ch_model.safetensors:  40%|████      | 1.39G/3.46G [00:09<00:12, 168MB/s][A
+Downloading (…)ch_model.safetensors:  41%|████      | 1.42G/3.46G [00:09<00:14, 140MB/s][A
+Downloading (…)ch_model.safetensors:  41%|████▏     | 1.44G/3.46G [00:09<00:13, 150MB/s][A
+Downloading (…)ch_model.safetensors:  42%|████▏     | 1.46G/3.46G [00:10<00:12, 154MB/s][A
+Downloading (…)ch_model.safetensors:  43%|████▎     | 1.48G/3.46G [00:10<00:12, 160MB/s][A
+Downloading (…)ch_model.safetensors:  43%|████▎     | 1.50G/3.46G [00:10<00:11, 167MB/s][A
+Downloading (…)ch_model.safetensors:  44%|████▍     | 1.52G/3.46G [00:10<00:11, 172MB/s][A
+Downloading (…)ch_model.safetensors:  45%|████▍     | 1.54G/3.46G [00:10<00:10, 178MB/s][A
+Downloading (…)ch_model.safetensors:  45%|████▌     | 1.56G/3.46G [00:10<00:11, 173MB/s][A
+Downloading (…)ch_model.safetensors:  46%|████▌     | 1.58G/3.46G [00:10<00:11, 166MB/s][A
+Downloading (…)ch_model.safetensors:  46%|████▋     | 1.60G/3.46G [00:10<00:11, 167MB/s][A
+Downloading (…)ch_model.safetensors:  47%|████▋     | 1.63G/3.46G [00:11<00:13, 141MB/s][A
+Downloading (…)ch_model.safetensors:  48%|████▊     | 1.65G/3.46G [00:11<00:11, 153MB/s][A
+Downloading (…)ch_model.safetensors:  48%|████▊     | 1.67G/3.46G [00:11<00:11, 157MB/s][A
+Downloading (…)ch_model.safetensors:  49%|████▊     | 1.69G/3.46G [00:11<00:11, 161MB/s][A
+Downloading (…)ch_model.safetensors:  49%|████▉     | 1.71G/3.46G [00:11<00:10, 167MB/s][A
+Downloading (…)ch_model.safetensors:  50%|████▉     | 1.73G/3.46G [00:11<00:10, 171MB/s][A
+Downloading (…)ch_model.safetensors:  51%|█████     | 1.75G/3.46G [00:11<00:10, 169MB/s][A
+Downloading (…)ch_model.safetensors:  51%|█████     | 1.77G/3.46G [00:11<00:09, 173MB/s][A
+Downloading (…)ch_model.safetensors:  52%|█████▏    | 1.79G/3.46G [00:12<00:09, 170MB/s][A
+Downloading (…)ch_model.safetensors:  52%|█████▏    | 1.81G/3.46G [00:12<00:14, 115MB/s][A
+Downloading (…)ch_model.safetensors:  53%|█████▎    | 1.84G/3.46G [00:12<00:12, 128MB/s][A
+Downloading (…)ch_model.safetensors:  54%|█████▎    | 1.86G/3.46G [00:12<00:11, 141MB/s][A
+Downloading (…)ch_model.safetensors:  54%|█████▍    | 1.88G/3.46G [00:12<00:10, 153MB/s][A
+Downloading (…)ch_model.safetensors:  55%|█████▍    | 1.90G/3.46G [00:12<00:09, 163MB/s][A
+Downloading (…)ch_model.safetensors:  55%|█████▌    | 1.92G/3.46G [00:12<00:09, 168MB/s][A
+Downloading (…)ch_model.safetensors:  56%|█████▌    | 1.94G/3.46G [00:13<00:08, 171MB/s][A
+Downloading (…)ch_model.safetensors:  57%|█████▋    | 1.96G/3.46G [00:13<00:08, 174MB/s][A
+Downloading (…)ch_model.safetensors:  57%|█████▋    | 1.98G/3.46G [00:13<00:08, 174MB/s][A
+Downloading (…)ch_model.safetensors:  58%|█████▊    | 2.00G/3.46G [00:13<00:08, 178MB/s][A
+Downloading (…)ch_model.safetensors:  58%|█████▊    | 2.02G/3.46G [00:13<00:08, 166MB/s][A
+Downloading (…)ch_model.safetensors:  59%|█████▉    | 2.04G/3.46G [00:13<00:08, 169MB/s][A
+Downloading (…)ch_model.safetensors:  60%|█████▉    | 2.07G/3.46G [00:13<00:08, 171MB/s][A
+Downloading (…)ch_model.safetensors:  60%|██████    | 2.09G/3.46G [00:13<00:08, 163MB/s][A
+Downloading (…)ch_model.safetensors:  61%|██████    | 2.11G/3.46G [00:14<00:08, 165MB/s][A
+Downloading (…)ch_model.safetensors:  61%|██████▏   | 2.13G/3.46G [00:14<00:07, 170MB/s][A
+Downloading (…)ch_model.safetensors:  62%|██████▏   | 2.15G/3.46G [00:14<00:07, 170MB/s][A
+Downloading (…)ch_model.safetensors:  63%|██████▎   | 2.17G/3.46G [00:14<00:07, 175MB/s][A
+Downloading (…)ch_model.safetensors:  63%|██████▎   | 2.19G/3.46G [00:14<00:07, 177MB/s][A
+Downloading (…)ch_model.safetensors:  64%|██████▍   | 2.21G/3.46G [00:14<00:06, 181MB/s][A
+Downloading (…)ch_model.safetensors:  64%|██████▍   | 2.23G/3.46G [00:14<00:08, 141MB/s][A
+Downloading (…)ch_model.safetensors:  65%|██████▌   | 2.25G/3.46G [00:15<00:08, 149MB/s][A
+Downloading (…)ch_model.safetensors:  66%|██████▌   | 2.28G/3.46G [00:15<00:08, 147MB/s][A
+Downloading (…)ch_model.safetensors:  66%|██████▋   | 2.30G/3.46G [00:15<00:07, 155MB/s][A
+Downloading (…)ch_model.safetensors:  67%|██████▋   | 2.32G/3.46G [00:15<00:07, 160MB/s][A
+Downloading (…)ch_model.safetensors:  68%|██████▊   | 2.34G/3.46G [00:15<00:06, 163MB/s][A
+Downloading (…)ch_model.safetensors:  68%|██████▊   | 2.36G/3.46G [00:15<00:06, 169MB/s][A
+Downloading (…)ch_model.safetensors:  69%|██████▊   | 2.38G/3.46G [00:15<00:06, 165MB/s][A
+Downloading (…)ch_model.safetensors:  69%|██████▉   | 2.40G/3.46G [00:15<00:06, 167MB/s][A
+Downloading (…)ch_model.safetensors:  70%|██████▉   | 2.42G/3.46G [00:16<00:06, 164MB/s][A
+Downloading (…)ch_model.safetensors:  71%|███████   | 2.44G/3.46G [00:16<00:06, 163MB/s][A
+Downloading (…)ch_model.safetensors:  71%|███████   | 2.46G/3.46G [00:16<00:06, 157MB/s][A
+Downloading (…)ch_model.safetensors:  72%|███████▏  | 2.49G/3.46G [00:16<00:06, 160MB/s][A
+Downloading (…)ch_model.safetensors:  72%|███████▏  | 2.51G/3.46G [00:16<00:05, 165MB/s][A
+Downloading (…)ch_model.safetensors:  73%|███████▎  | 2.53G/3.46G [00:16<00:05, 164MB/s][A
+Downloading (…)ch_model.safetensors:  74%|███████▎  | 2.55G/3.46G [00:16<00:05, 167MB/s][A
+Downloading (…)ch_model.safetensors:  74%|███████▍  | 2.57G/3.46G [00:16<00:05, 168MB/s][A
+Downloading (…)ch_model.safetensors:  75%|███████▍  | 2.59G/3.46G [00:17<00:05, 172MB/s][A
+Downloading (…)ch_model.safetensors:  75%|███████▌  | 2.61G/3.46G [00:17<00:05, 168MB/s][A
+Downloading (…)ch_model.safetensors:  76%|███████▌  | 2.63G/3.46G [00:17<00:06, 131MB/s][A
+Downloading (…)ch_model.safetensors:  77%|███████▋  | 2.65G/3.46G [00:17<00:05, 141MB/s][A
+Downloading (…)ch_model.safetensors:  77%|███████▋  | 2.67G/3.46G [00:17<00:05, 151MB/s][A
+Downloading (…)ch_model.safetensors:  78%|███████▊  | 2.69G/3.46G [00:17<00:04, 160MB/s][A
+Downloading (…)ch_model.safetensors:  78%|███████▊  | 2.72G/3.46G [00:17<00:04, 167MB/s][A
+Downloading (…)ch_model.safetensors:  79%|███████▉  | 2.74G/3.46G [00:18<00:04, 164MB/s][A
+Downloading (…)ch_model.safetensors:  80%|███████▉  | 2.76G/3.46G [00:18<00:04, 173MB/s][A
+Downloading (…)ch_model.safetensors:  80%|████████  | 2.78G/3.46G [00:18<00:03, 173MB/s][A
+Downloading (…)ch_model.safetensors:  81%|████████  | 2.80G/3.46G [00:18<00:04, 164MB/s][A
+Downloading (…)ch_model.safetensors:  81%|████████▏ | 2.82G/3.46G [00:18<00:04, 159MB/s][A
+Downloading (…)ch_model.safetensors:  82%|████████▏ | 2.84G/3.46G [00:18<00:03, 161MB/s][A
+Downloading (…)ch_model.safetensors:  83%|████████▎ | 2.86G/3.46G [00:18<00:03, 169MB/s][A
+Downloading (…)ch_model.safetensors:  83%|████████▎ | 2.88G/3.46G [00:18<00:03, 174MB/s][A
+Downloading (…)ch_model.safetensors:  84%|████████▍ | 2.90G/3.46G [00:18<00:03, 177MB/s][A
+Downloading (…)ch_model.safetensors:  84%|████████▍ | 2.93G/3.46G [00:19<00:03, 179MB/s][A
+Downloading (…)ch_model.safetensors:  85%|████████▌ | 2.95G/3.46G [00:19<00:02, 180MB/s][A
+Downloading (…)ch_model.safetensors:  86%|████████▌ | 2.97G/3.46G [00:19<00:02, 180MB/s][A
+Downloading (…)ch_model.safetensors:  86%|████████▋ | 2.99G/3.46G [00:19<00:02, 174MB/s][A
+Downloading (…)ch_model.safetensors:  87%|████████▋ | 3.01G/3.46G [00:19<00:02, 177MB/s][AFetching 16 files:  94%|█████████▍| 15/16 [00:19<00:01,  1.33s/it]
+Downloading (…)ch_model.safetensors:  87%|████████▋ | 3.03G/3.46G [00:19<00:04, 108MB/s][A
+Downloading (…)ch_model.safetensors:  88%|████████▊ | 3.05G/3.46G [00:20<00:03, 114MB/s][A
+Downloading (…)ch_model.safetensors:  89%|████████▊ | 3.07G/3.46G [00:21<00:12, 31.8MB/s][A
+Downloading (…)ch_model.safetensors:  89%|████████▉ | 3.09G/3.46G [00:21<00:08, 42.1MB/s][A
+Downloading (…)ch_model.safetensors:  90%|████████▉ | 3.11G/3.46G [00:22<00:06, 54.4MB/s][A
+Downloading (…)ch_model.safetensors:  91%|█████████ | 3.14G/3.46G [00:22<00:04, 68.6MB/s][A
+Downloading (…)ch_model.safetensors:  91%|█████████ | 3.16G/3.46G [00:22<00:03, 82.1MB/s][A
+Downloading (…)ch_model.safetensors:  92%|█████████▏| 3.18G/3.46G [00:22<00:02, 98.8MB/s][A
+Downloading (…)ch_model.safetensors:  92%|█████████▏| 3.20G/3.46G [00:22<00:02, 113MB/s] [A
+Downloading (…)ch_model.safetensors:  93%|█████████▎| 3.22G/3.46G [00:22<00:01, 126MB/s][A
+Downloading (…)ch_model.safetensors:  94%|█████████▎| 3.24G/3.46G [00:22<00:01, 135MB/s][A
+Downloading (…)ch_model.safetensors:  94%|█████████▍| 3.26G/3.46G [00:22<00:01, 147MB/s][A
+Downloading (…)ch_model.safetensors:  95%|█████████▍| 3.28G/3.46G [00:23<00:01, 155MB/s][A
+Downloading (…)ch_model.safetensors:  95%|█████████▌| 3.30G/3.46G [00:23<00:00, 161MB/s][A
+Downloading (…)ch_model.safetensors:  96%|█████████▌| 3.32G/3.46G [00:23<00:00, 163MB/s][A
+Downloading (…)ch_model.safetensors:  97%|█████████▋| 3.34G/3.46G [00:23<00:00, 166MB/s][A
+Downloading (…)ch_model.safetensors:  97%|█████████▋| 3.37G/3.46G [00:23<00:00, 170MB/s][A
+Downloading (…)ch_model.safetensors:  98%|█████████▊| 3.39G/3.46G [00:23<00:00, 172MB/s][A
+Downloading (…)ch_model.safetensors:  98%|█████████▊| 3.41G/3.46G [00:23<00:00, 174MB/s][A
+Downloading (…)ch_model.safetensors:  99%|█████████▉| 3.43G/3.46G [00:23<00:00, 160MB/s][A
+Downloading (…)ch_model.safetensors: 100%|█████████▉| 3.45G/3.46G [00:24<00:00, 162MB/s][ADownloading (…)ch_model.safetensors: 100%|██████████| 3.46G/3.46G [00:24<00:00, 143MB/s]
+Fetching 16 files: 100%|██████████| 16/16 [00:24<00:00,  1.53s/it]Fetching 16 files: 100%|██████████| 16/16 [00:24<00:00,  1.53s/it]
+Loading pipeline components...:   0%|          | 0/8 [00:00<?, ?it/s]Loading pipeline components...:  12%|█▎        | 1/8 [00:00<00:03,  1.76it/s]The config attributes {'dropout': 0.0, 'reverse_transformer_layers_per_block': None} were passed to UNet2DConditionModel, but are not expected and will be ignored. Please verify your config.json configuration file.
+Loading pipeline components...:  25%|██▌       | 2/8 [00:09<00:32,  5.37s/it]Loading pipeline components...:  62%|██████▎   | 5/8 [00:09<00:04,  1.55s/it]Loading pipeline components...:  88%|████████▊ | 7/8 [00:09<00:01,  1.02s/it]Loading pipeline components...: 100%|██████████| 8/8 [00:09<00:00,  1.24s/it]
+Loading custom white-background unet ...
+Downloading (…)on_pytorch_model.bin:   0%|          | 0.00/1.73G [00:00<?, ?B/s]Downloading (…)on_pytorch_model.bin:   1%|          | 10.5M/1.73G [00:02<05:33, 5.17MB/s]Downloading (…)on_pytorch_model.bin:   2%|▏         | 31.5M/1.73G [00:02<01:33, 18.2MB/s]Downloading (…)on_pytorch_model.bin:   3%|▎         | 52.4M/1.73G [00:02<00:51, 32.8MB/s]Downloading (…)on_pytorch_model.bin:   4%|▍         | 73.4M/1.73G [00:02<00:33, 49.1MB/s]Downloading (…)on_pytorch_model.bin:   5%|▌         | 94.4M/1.73G [00:02<00:24, 66.3MB/s]Downloading (…)on_pytorch_model.bin:   7%|▋         | 115M/1.73G [00:02<00:19, 83.4MB/s] Downloading (…)on_pytorch_model.bin:   8%|▊         | 136M/1.73G [00:02<00:16, 98.4MB/s]Downloading (…)on_pytorch_model.bin:   9%|▉         | 157M/1.73G [00:02<00:13, 115MB/s] Downloading (…)on_pytorch_model.bin:  10%|█         | 178M/1.73G [00:03<00:12, 126MB/s]Downloading (…)on_pytorch_model.bin:  12%|█▏        | 199M/1.73G [00:03<00:11, 135MB/s]Downloading (…)on_pytorch_model.bin:  13%|█▎        | 220M/1.73G [00:03<00:13, 115MB/s]Downloading (…)on_pytorch_model.bin:  14%|█▍        | 241M/1.73G [00:03<00:11, 133MB/s]Downloading (…)on_pytorch_model.bin:  15%|█▌        | 262M/1.73G [00:04<00:21, 69.2MB/s]Downloading (…)on_pytorch_model.bin:  16%|█▋        | 283M/1.73G [00:04<00:16, 85.7MB/s]Downloading (…)on_pytorch_model.bin:  18%|█▊        | 304M/1.73G [00:04<00:13, 103MB/s] Downloading (…)on_pytorch_model.bin:  19%|█▉        | 325M/1.73G [00:04<00:12, 115MB/s]Downloading (…)on_pytorch_model.bin:  20%|█▉        | 346M/1.73G [00:04<00:10, 127MB/s]Downloading (…)on_pytorch_model.bin:  21%|██        | 367M/1.73G [00:04<00:10, 135MB/s]Downloading (…)on_pytorch_model.bin:  22%|██▏       | 388M/1.73G [00:04<00:09, 142MB/s]Downloading (…)on_pytorch_model.bin:  24%|██▎       | 409M/1.73G [00:05<00:08, 152MB/s]Downloading (…)on_pytorch_model.bin:  25%|██▍       | 430M/1.73G [00:05<00:08, 155MB/s]Downloading (…)on_pytorch_model.bin:  26%|██▌       | 451M/1.73G [00:05<00:08, 154MB/s]Downloading (…)on_pytorch_model.bin:  27%|██▋       | 472M/1.73G [00:05<00:08, 147MB/s]Downloading (…)on_pytorch_model.bin:  28%|██▊       | 493M/1.73G [00:05<00:08, 149MB/s]Downloading (…)on_pytorch_model.bin:  30%|██▉       | 514M/1.73G [00:05<00:08, 147MB/s]Downloading (…)on_pytorch_model.bin:  31%|███       | 535M/1.73G [00:05<00:08, 144MB/s]Downloading (…)on_pytorch_model.bin:  32%|███▏      | 556M/1.73G [00:06<00:08, 137MB/s]Downloading (…)on_pytorch_model.bin:  33%|███▎      | 577M/1.73G [00:06<00:08, 137MB/s]Downloading (…)on_pytorch_model.bin:  35%|███▍      | 598M/1.73G [00:06<00:07, 145MB/s]Downloading (…)on_pytorch_model.bin:  36%|███▌      | 619M/1.73G [00:06<00:08, 128MB/s]Downloading (…)on_pytorch_model.bin:  37%|███▋      | 640M/1.73G [00:06<00:08, 128MB/s]Downloading (…)on_pytorch_model.bin:  38%|███▊      | 661M/1.73G [00:07<00:14, 73.8MB/s]Downloading (…)on_pytorch_model.bin:  39%|███▉      | 682M/1.73G [00:07<00:12, 83.1MB/s]Downloading (…)on_pytorch_model.bin:  41%|████      | 703M/1.73G [00:07<00:10, 95.5MB/s]Downloading (…)on_pytorch_model.bin:  42%|████▏     | 724M/1.73G [00:07<00:09, 104MB/s] Downloading (…)on_pytorch_model.bin:  43%|████▎     | 744M/1.73G [00:07<00:08, 112MB/s]Downloading (…)on_pytorch_model.bin:  44%|████▍     | 765M/1.73G [00:08<00:08, 121MB/s]Downloading (…)on_pytorch_model.bin:  45%|████▌     | 786M/1.73G [00:08<00:07, 133MB/s]Downloading (…)on_pytorch_model.bin:  47%|████▋     | 807M/1.73G [00:08<00:07, 116MB/s]Downloading (…)on_pytorch_model.bin:  48%|████▊     | 828M/1.73G [00:08<00:07, 122MB/s]Downloading (…)on_pytorch_model.bin:  49%|████▉     | 849M/1.73G [00:08<00:06, 130MB/s]Downloading (…)on_pytorch_model.bin:  50%|█████     | 870M/1.73G [00:08<00:06, 132MB/s]Downloading (…)on_pytorch_model.bin:  51%|█████▏    | 891M/1.73G [00:09<00:06, 137MB/s]Downloading (…)on_pytorch_model.bin:  53%|█████▎    | 912M/1.73G [00:09<00:05, 142MB/s]Downloading (…)on_pytorch_model.bin:  54%|█████▍    | 933M/1.73G [00:09<00:05, 136MB/s]Downloading (…)on_pytorch_model.bin:  55%|█████▌    | 954M/1.73G [00:09<00:05, 135MB/s]Downloading (…)on_pytorch_model.bin:  56%|█████▋    | 975M/1.73G [00:09<00:05, 136MB/s]Downloading (…)on_pytorch_model.bin:  58%|█████▊    | 996M/1.73G [00:09<00:05, 126MB/s]Downloading (…)on_pytorch_model.bin:  59%|█████▊    | 1.02G/1.73G [00:10<00:05, 121MB/s]Downloading (…)on_pytorch_model.bin:  60%|█████▉    | 1.04G/1.73G [00:10<00:07, 94.7MB/s]Downloading (…)on_pytorch_model.bin:  61%|██████    | 1.06G/1.73G [00:10<00:06, 108MB/s] Downloading (…)on_pytorch_model.bin:  62%|██████▏   | 1.08G/1.73G [00:10<00:05, 119MB/s]Downloading (…)on_pytorch_model.bin:  64%|██████▎   | 1.10G/1.73G [00:10<00:05, 126MB/s]Downloading (…)on_pytorch_model.bin:  65%|██████▍   | 1.12G/1.73G [00:10<00:04, 132MB/s]Downloading (…)on_pytorch_model.bin:  66%|██████▌   | 1.14G/1.73G [00:11<00:04, 134MB/s]Downloading (…)on_pytorch_model.bin:  67%|██████▋   | 1.16G/1.73G [00:11<00:04, 142MB/s]Downloading (…)on_pytorch_model.bin:  68%|██████▊   | 1.18G/1.73G [00:11<00:03, 150MB/s]Downloading (…)on_pytorch_model.bin:  70%|███████   | 1.22G/1.73G [00:11<00:03, 144MB/s]Downloading (…)on_pytorch_model.bin:  71%|███████▏  | 1.24G/1.73G [00:11<00:03, 154MB/s]Downloading (…)on_pytorch_model.bin:  73%|███████▎  | 1.26G/1.73G [00:11<00:02, 165MB/s]Downloading (…)on_pytorch_model.bin:  74%|███████▍  | 1.28G/1.73G [00:11<00:02, 171MB/s]Downloading (…)on_pytorch_model.bin:  75%|███████▌  | 1.30G/1.73G [00:11<00:02, 176MB/s]Downloading (…)on_pytorch_model.bin:  76%|███████▋  | 1.32G/1.73G [00:12<00:02, 172MB/s]Downloading (…)on_pytorch_model.bin:  77%|███████▋  | 1.34G/1.73G [00:12<00:02, 178MB/s]Downloading (…)on_pytorch_model.bin:  79%|███████▊  | 1.36G/1.73G [00:12<00:02, 181MB/s]Downloading (…)on_pytorch_model.bin:  80%|███████▉  | 1.38G/1.73G [00:12<00:01, 183MB/s]Downloading (…)on_pytorch_model.bin:  81%|████████  | 1.41G/1.73G [00:12<00:01, 181MB/s]Downloading (…)on_pytorch_model.bin:  83%|████████▎ | 1.44G/1.73G [00:12<00:01, 189MB/s]Downloading (…)on_pytorch_model.bin:  84%|████████▍ | 1.46G/1.73G [00:12<00:01, 180MB/s]Downloading (…)on_pytorch_model.bin:  85%|████████▌ | 1.48G/1.73G [00:12<00:01, 182MB/s]Downloading (…)on_pytorch_model.bin:  87%|████████▋ | 1.50G/1.73G [00:13<00:01, 185MB/s]Downloading (…)on_pytorch_model.bin:  88%|████████▊ | 1.53G/1.73G [00:13<00:01, 199MB/s]Downloading (…)on_pytorch_model.bin:  90%|████████▉ | 1.55G/1.73G [00:13<00:00, 195MB/s]Downloading (…)on_pytorch_model.bin:  91%|█████████ | 1.57G/1.73G [00:13<00:00, 195MB/s]Downloading (…)on_pytorch_model.bin:  92%|█████████▏| 1.59G/1.73G [00:13<00:00, 199MB/s]Downloading (…)on_pytorch_model.bin:  93%|█████████▎| 1.61G/1.73G [00:13<00:00, 158MB/s]Downloading (…)on_pytorch_model.bin:  94%|█████████▍| 1.64G/1.73G [00:13<00:00, 162MB/s]Downloading (…)on_pytorch_model.bin:  96%|█████████▌| 1.66G/1.73G [00:13<00:00, 170MB/s]Downloading (…)on_pytorch_model.bin:  97%|█████████▋| 1.68G/1.73G [00:14<00:00, 177MB/s]Downloading (…)on_pytorch_model.bin:  98%|█████████▊| 1.70G/1.73G [00:14<00:00, 184MB/s]Downloading (…)on_pytorch_model.bin:  99%|█████████▉| 1.72G/1.73G [00:14<00:00, 175MB/s]Downloading (…)on_pytorch_model.bin: 100%|██████████| 1.73G/1.73G [00:14<00:00, 121MB/s]
+Loading reconstruction model ...
+Downloading pytorch_model.bin:   0%|          | 0.00/343M [00:00<?, ?B/s]Downloading pytorch_model.bin:   3%|▎         | 10.5M/343M [00:00<00:19, 17.1MB/s]Downloading pytorch_model.bin:  15%|█▌        | 52.4M/343M [00:00<00:03, 90.0MB/s]Downloading pytorch_model.bin:  24%|██▍       | 83.9M/343M [00:00<00:01, 136MB/s] Downloading pytorch_model.bin:  34%|███▎      | 115M/343M [00:00<00:01, 172MB/s] Downloading pytorch_model.bin:  43%|████▎     | 147M/343M [00:01<00:01, 177MB/s]Downloading pytorch_model.bin:  52%|█████▏    | 178M/343M [00:01<00:02, 75.7MB/s]Downloading pytorch_model.bin:  58%|█████▊    | 199M/343M [00:03<00:03, 36.6MB/s]Downloading pytorch_model.bin:  64%|██████▍   | 220M/343M [00:04<00:04, 30.0MB/s]Downloading pytorch_model.bin:  67%|██████▋   | 231M/343M [00:05<00:05, 22.3MB/s]Downloading pytorch_model.bin:  70%|███████   | 241M/343M [00:06<00:05, 18.8MB/s]Downloading pytorch_model.bin:  73%|███████▎  | 252M/343M [00:07<00:04, 19.0MB/s]Downloading pytorch_model.bin:  76%|███████▋  | 262M/343M [00:08<00:05, 14.4MB/s]Downloading pytorch_model.bin:  79%|███████▉  | 273M/343M [00:08<00:04, 17.0MB/s]Downloading pytorch_model.bin:  92%|█████████▏| 315M/343M [00:08<00:00, 38.1MB/s]Downloading pytorch_model.bin: 100%|██████████| 343M/343M [00:08<00:00, 38.4MB/s]
+Some weights of ViTModel were not initialized from the model checkpoint at facebook/dino-vitb16 and are newly initialized: ['encoder.layer.11.adaLN_modulation.1.weight', 'encoder.layer.7.adaLN_modulation.1.weight', 'encoder.layer.1.adaLN_modulation.1.bias', 'encoder.layer.9.adaLN_modulation.1.bias', 'encoder.layer.8.adaLN_modulation.1.bias', 'encoder.layer.6.adaLN_modulation.1.weight', 'encoder.layer.0.adaLN_modulation.1.weight', 'encoder.layer.0.adaLN_modulation.1.bias', 'encoder.layer.8.adaLN_modulation.1.weight', 'encoder.layer.3.adaLN_modulation.1.weight', 'encoder.layer.4.adaLN_modulation.1.bias', 'encoder.layer.11.adaLN_modulation.1.bias', 'encoder.layer.10.adaLN_modulation.1.weight', 'encoder.layer.7.adaLN_modulation.1.bias', 'encoder.layer.5.adaLN_modulation.1.bias', 'encoder.layer.2.adaLN_modulation.1.bias', 'encoder.layer.1.adaLN_modulation.1.weight', 'encoder.layer.3.adaLN_modulation.1.bias', 'encoder.layer.5.adaLN_modulation.1.weight', 'encoder.layer.10.adaLN_modulation.1.bias', 'encoder.layer.9.adaLN_modulation.1.weight', 'encoder.layer.6.adaLN_modulation.1.bias', 'encoder.layer.2.adaLN_modulation.1.weight', 'encoder.layer.4.adaLN_modulation.1.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Downloading (…)rocessor_config.json:   0%|          | 0.00/244 [00:00<?, ?B/s]Downloading (…)rocessor_config.json: 100%|██████████| 244/244 [00:00<00:00, 1.06MB/s]
+Downloading (…)tant_mesh_large.ckpt:   0%|          | 0.00/1.51G [00:00<?, ?B/s]Downloading (…)tant_mesh_large.ckpt:   1%|          | 10.5M/1.51G [00:00<01:53, 13.2MB/s]Downloading (…)tant_mesh_large.ckpt:   3%|▎         | 41.9M/1.51G [00:00<00:25, 57.5MB/s]Downloading (…)tant_mesh_large.ckpt:   5%|▍         | 73.4M/1.51G [00:01<00:14, 98.6MB/s]Downloading (…)tant_mesh_large.ckpt:   7%|▋         | 105M/1.51G [00:01<00:10, 135MB/s]  Downloading (…)tant_mesh_large.ckpt:   9%|▉         | 136M/1.51G [00:01<00:08, 166MB/s]Downloading (…)tant_mesh_large.ckpt:  11%|█         | 168M/1.51G [00:01<00:06, 193MB/s]Downloading (…)tant_mesh_large.ckpt:  13%|█▎        | 199M/1.51G [00:01<00:06, 213MB/s]Downloading (…)tant_mesh_large.ckpt:  15%|█▌        | 231M/1.51G [00:01<00:08, 151MB/s]Downloading (…)tant_mesh_large.ckpt:  17%|█▋        | 262M/1.51G [00:02<00:08, 150MB/s]Downloading (…)tant_mesh_large.ckpt:  19%|█▉        | 294M/1.51G [00:02<00:06, 175MB/s]Downloading (…)tant_mesh_large.ckpt:  21%|██▏       | 325M/1.51G [00:02<00:06, 196MB/s]Downloading (…)tant_mesh_large.ckpt:  24%|██▎       | 357M/1.51G [00:02<00:05, 217MB/s]Downloading (…)tant_mesh_large.ckpt:  26%|██▌       | 388M/1.51G [00:02<00:04, 233MB/s]Downloading (…)tant_mesh_large.ckpt:  28%|██▊       | 419M/1.51G [00:02<00:06, 172MB/s]Downloading (…)tant_mesh_large.ckpt:  30%|██▉       | 451M/1.51G [00:02<00:05, 192MB/s]Downloading (…)tant_mesh_large.ckpt:  32%|███▏      | 482M/1.51G [00:03<00:04, 209MB/s]Downloading (…)tant_mesh_large.ckpt:  34%|███▍      | 514M/1.51G [00:03<00:04, 225MB/s]Downloading (…)tant_mesh_large.ckpt:  36%|███▌      | 545M/1.51G [00:03<00:04, 240MB/s]Downloading (…)tant_mesh_large.ckpt:  38%|███▊      | 577M/1.51G [00:03<00:03, 239MB/s]Downloading (…)tant_mesh_large.ckpt:  40%|████      | 608M/1.51G [00:03<00:04, 189MB/s]Downloading (…)tant_mesh_large.ckpt:  42%|████▏     | 640M/1.51G [00:03<00:05, 152MB/s]Downloading (…)tant_mesh_large.ckpt:  44%|████▍     | 671M/1.51G [00:04<00:04, 175MB/s]Downloading (…)tant_mesh_large.ckpt:  46%|████▋     | 703M/1.51G [00:04<00:04, 197MB/s]Downloading (…)tant_mesh_large.ckpt:  48%|████▊     | 734M/1.51G [00:04<00:03, 216MB/s]Downloading (…)tant_mesh_large.ckpt:  51%|█████     | 765M/1.51G [00:04<00:03, 229MB/s]Downloading (…)tant_mesh_large.ckpt:  53%|█████▎    | 797M/1.51G [00:04<00:02, 245MB/s]Downloading (…)tant_mesh_large.ckpt:  55%|█████▍    | 828M/1.51G [00:04<00:04, 148MB/s]Downloading (…)tant_mesh_large.ckpt:  57%|█████▋    | 860M/1.51G [00:05<00:03, 168MB/s]Downloading (…)tant_mesh_large.ckpt:  59%|█████▉    | 891M/1.51G [00:05<00:03, 184MB/s]Downloading (…)tant_mesh_large.ckpt:  61%|██████    | 923M/1.51G [00:05<00:02, 200MB/s]Downloading (…)tant_mesh_large.ckpt:  63%|██████▎   | 954M/1.51G [00:05<00:02, 217MB/s]Downloading (…)tant_mesh_large.ckpt:  65%|██████▌   | 986M/1.51G [00:05<00:02, 233MB/s]Downloading (…)tant_mesh_large.ckpt:  67%|██████▋   | 1.02G/1.51G [00:05<00:02, 178MB/s]Downloading (…)tant_mesh_large.ckpt:  69%|██████▉   | 1.05G/1.51G [00:06<00:03, 129MB/s]Downloading (…)tant_mesh_large.ckpt:  71%|███████▏  | 1.08G/1.51G [00:06<00:02, 150MB/s]Downloading (…)tant_mesh_large.ckpt:  73%|███████▎  | 1.11G/1.51G [00:06<00:02, 173MB/s]Downloading (…)tant_mesh_large.ckpt:  75%|███████▌  | 1.14G/1.51G [00:06<00:01, 193MB/s]Downloading (…)tant_mesh_large.ckpt:  78%|███████▊  | 1.17G/1.51G [00:06<00:01, 210MB/s]Downloading (…)tant_mesh_large.ckpt:  80%|███████▉  | 1.21G/1.51G [00:06<00:01, 228MB/s]Downloading (…)tant_mesh_large.ckpt:  82%|████████▏ | 1.24G/1.51G [00:07<00:01, 151MB/s]Downloading (…)tant_mesh_large.ckpt:  84%|████████▍ | 1.27G/1.51G [00:07<00:01, 171MB/s]Downloading (…)tant_mesh_large.ckpt:  86%|████████▌ | 1.30G/1.51G [00:07<00:01, 191MB/s]Downloading (…)tant_mesh_large.ckpt:  88%|████████▊ | 1.33G/1.51G [00:07<00:00, 208MB/s]Downloading (…)tant_mesh_large.ckpt:  90%|████████▉ | 1.36G/1.51G [00:07<00:00, 221MB/s]Downloading (…)tant_mesh_large.ckpt:  92%|█████████▏| 1.39G/1.51G [00:07<00:00, 237MB/s]Downloading (…)tant_mesh_large.ckpt:  94%|█████████▍| 1.43G/1.51G [00:08<00:00, 176MB/s]Downloading (…)tant_mesh_large.ckpt:  96%|█████████▌| 1.46G/1.51G [00:08<00:00, 180MB/s]Downloading (…)tant_mesh_large.ckpt:  98%|█████████▊| 1.49G/1.51G [00:08<00:00, 200MB/s]Downloading (…)tant_mesh_large.ckpt: 100%|██████████| 1.51G/1.51G [00:08<00:00, 179MB/s]
+Total number of input images: 1
+[1/1] Imagining blue_cat ...
+  0%|          | 0/75 [00:00<?, ?it/s]  1%|▏         | 1/75 [00:00<00:58,  1.26it/s]  3%|▎         | 2/75 [00:01<00:45,  1.59it/s]  4%|▍         | 3/75 [00:01<00:41,  1.74it/s]  5%|▌         | 4/75 [00:02<00:39,  1.81it/s]  7%|▋         | 5/75 [00:02<00:37,  1.86it/s]  8%|▊         | 6/75 [00:03<00:36,  1.88it/s]  9%|▉         | 7/75 [00:03<00:35,  1.90it/s] 11%|█         | 8/75 [00:04<00:35,  1.91it/s] 12%|█▏        | 9/75 [00:04<00:34,  1.92it/s] 13%|█▎        | 10/75 [00:05<00:33,  1.92it/s] 15%|█▍        | 11/75 [00:05<00:33,  1.93it/s] 16%|█▌        | 12/75 [00:06<00:32,  1.92it/s] 17%|█▋        | 13/75 [00:07<00:32,  1.91it/s] 19%|█▊        | 14/75 [00:07<00:31,  1.91it/s] 20%|██        | 15/75 [00:08<00:31,  1.91it/s] 21%|██▏       | 16/75 [00:08<00:31,  1.90it/s] 23%|██▎       | 17/75 [00:09<00:30,  1.90it/s] 24%|██▍       | 18/75 [00:09<00:30,  1.90it/s] 25%|██▌       | 19/75 [00:10<00:29,  1.91it/s] 27%|██▋       | 20/75 [00:10<00:28,  1.91it/s] 28%|██▊       | 21/75 [00:11<00:28,  1.90it/s] 29%|██▉       | 22/75 [00:11<00:27,  1.91it/s] 31%|███       | 23/75 [00:12<00:27,  1.91it/s] 32%|███▏      | 24/75 [00:12<00:26,  1.90it/s] 33%|███▎      | 25/75 [00:13<00:26,  1.90it/s] 35%|███▍      | 26/75 [00:13<00:25,  1.90it/s] 36%|███▌      | 27/75 [00:14<00:25,  1.89it/s] 37%|███▋      | 28/75 [00:14<00:24,  1.89it/s] 39%|███▊      | 29/75 [00:15<00:24,  1.90it/s] 40%|████      | 30/75 [00:15<00:23,  1.89it/s] 41%|████▏     | 31/75 [00:16<00:23,  1.89it/s] 43%|████▎     | 32/75 [00:17<00:22,  1.88it/s] 44%|████▍     | 33/75 [00:17<00:22,  1.88it/s] 45%|████▌     | 34/75 [00:18<00:21,  1.88it/s] 47%|████▋     | 35/75 [00:18<00:21,  1.87it/s] 48%|████▊     | 36/75 [00:19<00:20,  1.87it/s] 49%|████▉     | 37/75 [00:19<00:20,  1.87it/s] 51%|█████     | 38/75 [00:20<00:19,  1.87it/s] 52%|█████▏    | 39/75 [00:20<00:19,  1.87it/s] 53%|█████▎    | 40/75 [00:21<00:18,  1.86it/s] 55%|█████▍    | 41/75 [00:21<00:18,  1.87it/s] 56%|█████▌    | 42/75 [00:22<00:17,  1.86it/s] 57%|█████▋    | 43/75 [00:22<00:17,  1.85it/s] 59%|█████▊    | 44/75 [00:23<00:16,  1.85it/s] 60%|██████    | 45/75 [00:24<00:16,  1.84it/s] 61%|██████▏   | 46/75 [00:24<00:15,  1.85it/s] 63%|██████▎   | 47/75 [00:25<00:15,  1.85it/s] 64%|██████▍   | 48/75 [00:25<00:14,  1.86it/s] 65%|██████▌   | 49/75 [00:26<00:14,  1.85it/s] 67%|██████▋   | 50/75 [00:26<00:13,  1.86it/s] 68%|██████▊   | 51/75 [00:27<00:12,  1.85it/s] 69%|██████▉   | 52/75 [00:27<00:12,  1.86it/s] 71%|███████   | 53/75 [00:28<00:11,  1.85it/s] 72%|███████▏  | 54/75 [00:28<00:11,  1.85it/s] 73%|███████▎  | 55/75 [00:29<00:10,  1.86it/s] 75%|███████▍  | 56/75 [00:29<00:10,  1.85it/s] 76%|███████▌  | 57/75 [00:30<00:09,  1.84it/s] 77%|███████▋  | 58/75 [00:31<00:09,  1.83it/s] 79%|███████▊  | 59/75 [00:31<00:08,  1.83it/s] 80%|████████  | 60/75 [00:32<00:08,  1.83it/s] 81%|████████▏ | 61/75 [00:32<00:07,  1.83it/s] 83%|████████▎ | 62/75 [00:33<00:07,  1.83it/s] 84%|████████▍ | 63/75 [00:33<00:06,  1.83it/s] 85%|████████▌ | 64/75 [00:34<00:06,  1.83it/s] 87%|████████▋ | 65/75 [00:34<00:05,  1.83it/s] 88%|████████▊ | 66/75 [00:35<00:04,  1.83it/s] 89%|████████▉ | 67/75 [00:35<00:04,  1.83it/s] 91%|█████████ | 68/75 [00:36<00:03,  1.82it/s] 92%|█████████▏| 69/75 [00:37<00:03,  1.82it/s] 93%|█████████▎| 70/75 [00:37<00:02,  1.82it/s] 95%|█████████▍| 71/75 [00:38<00:02,  1.82it/s] 96%|█████████▌| 72/75 [00:38<00:01,  1.81it/s] 97%|█████████▋| 73/75 [00:39<00:01,  1.82it/s] 99%|█████████▊| 74/75 [00:39<00:00,  1.81it/s]100%|██████████| 75/75 [00:40<00:00,  1.81it/s]100%|██████████| 75/75 [00:40<00:00,  1.86it/s]
+Image saved to p0out/a/instant-mesh-large/images/blue_cat.png
+[1/1] Creating blue_cat ...
+Traceback (most recent call last):
+  File "/tmp/s2s/repo/third_party/InstantMesh/run.py", line 216, in <module>
+    mesh_out = model.extract_mesh(
+  File "/tmp/s2s/repo/third_party/InstantMesh/src/models/lrm_mesh.py", line 357, in extract_mesh
+    mesh_v, mesh_f, sdf, deformation, v_deformed, sdf_reg_loss = self.get_geometry_prediction(planes)
+  File "/tmp/s2s/repo/third_party/InstantMesh/src/models/lrm_mesh.py", line 165, in get_geometry_prediction
+    sdf, deformation, sdf_reg_loss, weight = self.get_sdf_deformation_prediction(planes)
+  File "/tmp/s2s/repo/third_party/InstantMesh/src/models/lrm_mesh.py", line 110, in get_sdf_deformation_prediction
+    sdf, deformation, weight = torch.utils.checkpoint.checkpoint(
+  File "/tmp/s2s/envs/instantmesh/lib/python3.10/site-packages/torch/_compile.py", line 24, in inner
+    return torch._dynamo.disable(fn, recursive)(*args, **kwargs)
+  File "/tmp/s2s/envs/instantmesh/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 328, in _fn
+    return fn(*args, **kwargs)
+  File "/tmp/s2s/envs/instantmesh/lib/python3.10/site-packages/torch/_dynamo/external_utils.py", line 17, in inner
+    return fn(*args, **kwargs)
+  File "/tmp/s2s/envs/instantmesh/lib/python3.10/site-packages/torch/utils/checkpoint.py", line 458, in checkpoint
+    ret = function(*args, **kwargs)
+  File "/tmp/s2s/repo/third_party/InstantMesh/src/models/renderer/synthesizer_mesh.py", line 132, in get_geometry_prediction
+    sdf, deformation, weight = self.decoder.get_geometry_prediction(sampled_features, flexicubes_indices)
+  File "/tmp/s2s/repo/third_party/InstantMesh/src/models/renderer/synthesizer_mesh.py", line 76, in get_geometry_prediction
+    grid_features = torch.index_select(input=sampled_features, index=flexicubes_indices.reshape(-1), dim=1)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 15.00 GiB. GPU 0 has a total capacty of 14.56 GiB of which 10.56 GiB is free. Including non-PyTorch memory, this process has 4.00 GiB memory in use. Of the allocated memory 3.63 GiB is allocated by PyTorch, and 234.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

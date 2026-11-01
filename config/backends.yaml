@@ -1,0 +1,35 @@
+backends:
+  triposr:
+    vram_gb_by_quality: {fast: 3.41, balanced: 5.55, best: 5.55}   # measured, docs/phase0/kaggle_t4_triposr_*.json
+    python: envs/triposr/bin/python
+    repo: third_party/TripoSR
+    runner: adapters/triposr_run.py
+    import_check: tsr.system
+    python_version: '3.10'
+    gated: false
+    min_vram_gb: null
+    timeout_s: 600
+    calibration:
+      phase0_passed: true
+      handedness_checked: true
+      input_view:
+        yaw: 10
+        pitch: 10
+      peak_vram_gb: 5.55
+  instantmesh:
+    vram_gb_by_quality: {fast: 11.3, balanced: 9.44, best: 9.44}   # measured; best tries g112 (13.96) then falls back in-adapter
+    python: envs/instantmesh/bin/python
+    repo: third_party/InstantMesh
+    runner: adapters/instantmesh_run.py
+    import_check: nvdiffrast.torch
+    python_version: '3.10'
+    gated: false
+    min_vram_gb: null
+    timeout_s: 900
+    calibration:
+      phase0_passed: true
+      handedness_checked: true
+      input_view:
+        yaw: 5
+        pitch: 10
+      peak_vram_gb: 11.3

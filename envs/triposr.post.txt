@@ -1,0 +1,1 @@
+torchmcubes @ git+https://github.com/tatsy/torchmcubes.git@bc36b08c62c5931e1dfc666581b3a8589278647f

@@ -1,0 +1,19 @@
+# Derived from third_party/InstantMesh/requirements.txt @ 08822c52 + README (torch 2.1.0/cu121, xformers 0.0.22.post7).
+# Dropped (not used by run.py): gradio==3.41.2 (app.py only), bitsandbytes, tensorboard, webdataset.
+# Additions: numpy<2 (torch 2.1 ABI), huggingface-hub==0.17.3 (tokenizers<0.15 needs hub<0.18; still has cached_download for diffusers 0.20.2), ninja (nvdiffrast JIT).
+pytorch-lightning==2.1.2
+huggingface-hub==0.17.3
+einops
+omegaconf
+torchmetrics
+accelerate==0.27.2
+PyMCubes
+trimesh
+rembg==2.0.59
+transformers==4.34.1
+diffusers==0.20.2
+imageio[ffmpeg]
+xatlas
+plyfile
+ninja
+numpy<2

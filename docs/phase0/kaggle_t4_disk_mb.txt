@@ -1,0 +1,6 @@
+5315	/tmp/s2s/envs/instantmesh
+1	/tmp/s2s/envs/instantmesh.build.json
+129	/tmp/s2s/envs/triposr
+1	/tmp/s2s/envs/triposr.build.json
+11539	/tmp/s2s/weights/hf
+168	/tmp/s2s/weights/u2net

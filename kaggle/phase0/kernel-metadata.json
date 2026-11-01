@@ -1,0 +1,14 @@
+{
+  "id": "ashmitgarg69/sketch2shape-phase0",
+  "title": "sketch2shape-phase0",
+  "code_file": "run_phase0.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": ["ashmitgarg69/sketch2shape-src"],
+  "competition_sources": [],
+  "kernel_sources": []
+}

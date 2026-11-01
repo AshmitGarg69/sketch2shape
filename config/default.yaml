@@ -1,0 +1,12 @@
+n_candidates: {balanced: 4, lite: 2}
+controlnet_scales: [0.5, 0.7, 0.9]   # swept across candidates; ranker chooses (spec §5.1)
+control_guidance_end: 0.9
+object_conf_tau: null                # set from the Phase-2 measurement on golden sketches; null => always trust top-1 w/ editable box
+retry_budget_s: 120
+# Phase 4 calibration (2026-11-01) from 15 known-good runs in examples/outputs (Kaggle T4 + RTX 4050):
+#   recon_consistency p10 0.826 -> 0.72 ; closed-sketch fidelity p10 0.729 -> 0.65 ; open-sketch (stroke F) min 0.679 -> 0.60
+thresholds: {recon_consistency: 0.72, sketch_fidelity: 0.65, sketch_fidelity_open: 0.60, mirror_margin: 0.10}
+max_viewer_faces: 100000
+max_render_faces: 30000
+outputs_dir: outputs
+vlm: {florence: false}

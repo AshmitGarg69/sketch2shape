@@ -1,0 +1,318 @@
+{
+  "timestamp": "2026-10-31T23:23:57+0000",
+  "request": {
+    "source": "upload",
+    "prompt": "a fire-breathing dragon with red scales",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "balanced",
+    "viewpoint": "Auto",
+    "seed": 12,
+    "out_root": "/kaggle/working/outputs",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "balanced",
+  "environment": {
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "Tesla T4",
+      "total_gb": 14.56,
+      "compute_cap": [
+        7,
+        5
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "580.178.04\n580.178.04"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.01,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 13.93
+    },
+    "s2_understand": {
+      "seconds": 3.63,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 13.93
+    },
+    "s3_generate": {
+      "seconds": 69.76,
+      "vram_peak_gb": 10.06,
+      "rss_gb": 16.48
+    },
+    "s4_prepare": {
+      "seconds": 0.42,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.48
+    },
+    "s5_reconstruct": {
+      "seconds": 119.59,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.48
+    },
+    "s6_cleanup": {
+      "seconds": 0.23,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.48
+    },
+    "s7_export": {
+      "seconds": 1.01,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.48
+    },
+    "s8_verify": {
+      "seconds": 2.12,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.48
+    }
+  },
+  "warnings": [
+    "prompt_conflict_suspected"
+  ],
+  "fallbacks": [],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 3,
+      "backend": "instantmesh",
+      "seed": 12,
+      "recon_consistency": 0.8089,
+      "sketch_fidelity": 0.8251,
+      "valid": true
+    }
+  ],
+  "total_seconds": 198.65,
+  "seed": 12,
+  "validation": {
+    "loads": true,
+    "vertices": 21519,
+    "faces": 32068,
+    "extent": [
+      0.6460771560668945,
+      1.0,
+      0.6830365061759949
+    ],
+    "nan": false,
+    "texture": {
+      "size": [
+        1024,
+        1024
+      ],
+      "std": 60.86571641295703
+    },
+    "vertex_colors": false,
+    "geometries": 1,
+    "gltf_color_0": false,
+    "gltf_base_color_texture": true,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.8089,
+  "sketch_fidelity": 0.8251,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    -5.0,
+    20.0
+  ],
+  "input_view": [
+    5.0,
+    10.0
+  ],
+  "mirror_direct": 0.7974,
+  "mirror_flipped": 0.7606,
+  "object": "chair",
+  "object_conf": 0.01941150240600109,
+  "object_top5": [
+    [
+      "chair",
+      0.01941150240600109
+    ],
+    [
+      "stool",
+      0.015544360503554344
+    ],
+    [
+      "armchair",
+      0.013303913176059723
+    ],
+    [
+      "table",
+      0.012417273595929146
+    ],
+    [
+      "desk",
+      0.011470090597867966
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "chair, a fire-breathing dragon with red scales, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "chair, a fire-breathing dragon with red scales, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "chair, a fire-breathing dragon with red scales, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "chair, red, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.4938,
+      "seed": 12,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.39905548095703125,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.5121406921360291,
+        "stroke": 0.2712758780953056,
+        "stroke_detail": {
+          "recall": 0.1934,
+          "precision": 0.4543,
+          "f": 0.2713,
+          "interior_density": 0.0999
+        },
+        "semantic": 0.555694580078125,
+        "clean": 0.9641213274129022
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.6455,
+      "seed": 13,
+      "controlnet_scale": 0.7,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.23163986206054688,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.8457619268179712,
+        "stroke": 0.22328193894613615,
+        "stroke_detail": {
+          "recall": 0.1269,
+          "precision": 0.9273,
+          "f": 0.2233,
+          "interior_density": 0.1576
+        },
+        "semantic": 0.716827392578125,
+        "clean": 0.968483935246941
+      }
+    },
+    {
+      "index": 2,
+      "score": 0.6537,
+      "seed": 14,
+      "controlnet_scale": 0.9,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.2230978012084961,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.8745237359695192,
+        "stroke": 0.23308316550147057,
+        "stroke_detail": {
+          "recall": 0.1334,
+          "precision": 0.9218,
+          "f": 0.2331,
+          "interior_density": 0.1499
+        },
+        "semantic": 0.686920166015625,
+        "clean": 0.9653792720200055
+      }
+    },
+    {
+      "index": 3,
+      "score": 0.6777,
+      "seed": 15,
+      "controlnet_scale": 0.5,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.23211383819580078,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.8635928445452254,
+        "stroke": 0.758048513565005,
+        "stroke_detail": {
+          "recall": 0.6485,
+          "precision": 0.9121,
+          "f": 0.758,
+          "interior_density": 0.0275
+        },
+        "semantic": 0.040557861328125,
+        "clean": 0.9677183438857138
+      }
+    }
+  ],
+  "selected_candidate": 3,
+  "backend": "instantmesh",
+  "backend_meta": {
+    "backend": "instantmesh",
+    "mesh": "mesh.glb",
+    "config": "/tmp/s2s/repo/adapters/instantmesh_configs/g96/instant-mesh-large.yaml",
+    "fallback_used": false,
+    "texmap": true,
+    "seconds": 119.46,
+    "vram_peak_gb": 9.46,
+    "has_uv": true,
+    "has_pbr": false,
+    "faces": 32068
+  },
+  "gen_profile": "balanced",
+  "s3_timing": {
+    "load_s": 3.0,
+    "load_from": "ram",
+    "generate_s": 56.48,
+    "n": 4,
+    "ram_free_gb_after": 16.9,
+    "parked": true
+  },
+  "tier": 1,
+  "material": "wood",
+  "cleanup": {
+    "raw_faces": 32068,
+    "raw_vertices": 21519,
+    "prune": {
+      "components": 1,
+      "removed": 0,
+      "removed_area_frac": 0.0
+    },
+    "repair": {
+      "faces_in": 32068,
+      "faces_out": 32068,
+      "watertight": false
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "/kaggle/working/outputs/20261031_232038_6a58998c/mesh/model.glb",
+      "bytes": 1637148
+    },
+    "obj_zip": {
+      "path": "/kaggle/working/outputs/20261031_232038_6a58998c/mesh/model.obj.zip",
+      "bytes": 1489108
+    }
+  },
+  "notice": "Your prompt seemed to pull the result away from your sketch; the sketch was prioritised."
+}

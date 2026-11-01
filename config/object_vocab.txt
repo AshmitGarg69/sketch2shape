@@ -1,0 +1,166 @@
+chair
+armchair
+stool
+bench
+sofa
+table
+desk
+bed
+shelf
+cabinet
+drawer
+wardrobe
+lamp
+floor lamp
+desk lamp
+chandelier
+candle
+vase
+flower pot
+plant
+tree
+mug
+cup
+teacup
+teapot
+kettle
+bowl
+plate
+bottle
+wine glass
+jar
+pot
+pan
+spoon
+fork
+knife
+toaster
+blender
+microwave
+refrigerator
+oven
+clock
+alarm clock
+watch
+phone
+smartphone
+laptop
+computer monitor
+keyboard
+computer mouse
+headphones
+speaker
+television
+camera
+radio
+microphone
+game controller
+robot
+robot toy
+teddy bear
+doll
+toy car
+toy train
+ball
+balloon
+kite
+car
+sports car
+truck
+bus
+van
+motorcycle
+bicycle
+scooter
+airplane
+helicopter
+rocket
+spaceship
+boat
+ship
+sailboat
+submarine
+train
+tank
+tractor
+house
+cottage
+castle
+tower
+lighthouse
+skyscraper
+church
+temple
+bridge
+tent
+windmill
+shoe
+sneaker
+boot
+high heel
+hat
+cap
+helmet
+glasses
+sunglasses
+backpack
+handbag
+suitcase
+wallet
+umbrella
+shirt
+dress
+glove
+ring
+necklace
+crown
+sword
+axe
+hammer
+wrench
+screwdriver
+shield
+bow
+gun
+guitar
+violin
+piano
+drum
+trumpet
+saxophone
+book
+pencil
+pen
+scissors
+key
+lock
+bell
+trophy
+globe
+fish
+bird
+cat
+dog
+horse
+rabbit
+duck
+dinosaur
+dragon
+elephant
+turtle
+snail
+mushroom
+apple
+banana
+pear
+strawberry
+cake
+cupcake
+ice cream
+burger
+pizza
+donut
+heart
+star
+diamond
+abstract sculpture

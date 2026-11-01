@@ -1,0 +1,14 @@
+# environments & caches (rebuilt by `make setup`)
+.venv/
+.venv_gpu/
+envs/*/
+envs/*.build.json
+third_party/
+weights/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+# run outputs (curated examples live in examples/outputs/)
+/outputs/
+/outputs_local*/
+/kaggle_out/

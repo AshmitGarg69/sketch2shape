@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-11-01T04:13:26+0530",
+  "request": {
+    "source": "upload",
+    "prompt": "",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "balanced",
+    "viewpoint": "Auto",
+    "seed": 13,
+    "out_root": "outputs_local2",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "lite",
+  "environment": {
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "total_gb": 5.72,
+      "compute_cap": [
+        8,
+        9
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "615.78.08"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.0,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.43
+    },
+    "s2_understand": {
+      "seconds": 1.44,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 2.44
+    },
+    "s3_generate": {
+      "seconds": 17.6,
+      "vram_peak_gb": 2.86,
+      "rss_gb": 2.48
+    },
+    "s4_prepare": {
+      "seconds": 0.14,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.48
+    },
+    "s5_reconstruct": {
+      "seconds": 15.83,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.41
+    },
+    "s6_cleanup": {
+      "seconds": 0.16,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.41
+    },
+    "s7_export": {
+      "seconds": 0.15,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.41
+    },
+    "s8_verify": {
+      "seconds": 1.28,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 2.41
+    }
+  },
+  "warnings": [],
+  "fallbacks": [
+    "triposr: quality balanced -> fast to fit 5.5 GB free VRAM"
+  ],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 1,
+      "backend": "triposr",
+      "seed": 13,
+      "recon_consistency": 0.9112,
+      "sketch_fidelity": 0.8959,
+      "valid": true
+    }
+  ],
+  "total_seconds": 38.02,
+  "seed": 13,
+  "validation": {
+    "loads": true,
+    "vertices": 13108,
+    "faces": 26208,
+    "extent": [
+      0.5394884347915649,
+      1.0,
+      0.5514111518859863
+    ],
+    "nan": false,
+    "texture": null,
+    "vertex_colors": true,
+    "geometries": 1,
+    "gltf_color_0": true,
+    "gltf_base_color_texture": false,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.9112,
+  "sketch_fidelity": 0.8959,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    0.0,
+    10.0
+  ],
+  "input_view": [
+    10.0,
+    10.0
+  ],
+  "mirror_direct": 0.7756,
+  "mirror_flipped": 0.8076,
+  "object": "lamp",
+  "object_conf": 0.017511548474431038,
+  "object_top5": [
+    [
+      "lamp",
+      0.017511548474431038
+    ],
+    [
+      "desk lamp",
+      0.01663636602461338
+    ],
+    [
+      "floor lamp",
+      0.016235124319791794
+    ],
+    [
+      "table",
+      0.01127735897898674
+    ],
+    [
+      "chandelier",
+      0.010366387665271759
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "lamp, white lampshade on a brass stand, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "lamp, white lampshade on a brass stand, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.847,
+      "seed": 13,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.14591598510742188,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9245339974341559,
+        "stroke": 0.9778597785977861,
+        "stroke_detail": {
+          "recall": 0.9567,
+          "precision": 1.0,
+          "f": 0.9779,
+          "interior_density": 0.0115
+        },
+        "semantic": 0.455291748046875,
+        "clean": 0.9274528770489661
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.8616,
+      "seed": 14,
+      "controlnet_scale": 0.7,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.14665985107421875,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.929505313861916,
+        "stroke": 0.9606003752345216,
+        "stroke_detail": {
+          "recall": 0.9242,
+          "precision": 1.0,
+          "f": 0.9606,
+          "interior_density": 0.0026
+        },
+        "semantic": 0.544708251953125,
+        "clean": 0.9272486084378089
+      }
+    }
+  ],
+  "selected_candidate": 1,
+  "backend": "triposr",
+  "backend_meta": {
+    "backend": "triposr",
+    "mesh": "mesh.glb",
+    "resolution": 192,
+    "seconds": 15.42,
+    "vram_peak_gb": 2.44,
+    "has_uv": false,
+    "has_pbr": false,
+    "faces": 26128
+  },
+  "gen_profile": "lite",
+  "s3_timing": {
+    "load_s": 3.0,
+    "load_from": "disk",
+    "generate_s": 12.18,
+    "n": 2,
+    "ram_free_gb_after": 2.6,
+    "parked": false
+  },
+  "tier": 2,
+  "material": "metal",
+  "cleanup": {
+    "raw_faces": 26128,
+    "raw_vertices": 13108,
+    "prune": {
+      "components": 2,
+      "removed": 0,
+      "removed_area_frac": 0.0
+    },
+    "repair": {
+      "faces_in": 26128,
+      "faces_out": 26208,
+      "watertight": true
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "outputs_local2/20261101_041248_51d27a38/mesh/model.glb",
+      "bytes": 525556
+    },
+    "obj_zip": {
+      "path": "outputs_local2/20261101_041248_51d27a38/mesh/model.obj.zip",
+      "bytes": 284531
+    }
+  },
+  "notice": null
+}

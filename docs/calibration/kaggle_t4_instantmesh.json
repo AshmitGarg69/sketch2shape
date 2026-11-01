@@ -1,0 +1,20 @@
+{
+  "backend": "instantmesh",
+  "best_direct": {
+    "iou": 0.9049,
+    "yaw": 5,
+    "pitch": 10
+  },
+  "best_mirrored": {
+    "iou": 0.6176,
+    "yaw": 20,
+    "pitch": 0
+  },
+  "at_input_view": {
+    "direct": 0.9049,
+    "mirrored": 0.564
+  },
+  "vram_peak_gb": 9.43,
+  "seconds": 250.37,
+  "handedness_ok": true
+}

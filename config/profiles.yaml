@@ -1,0 +1,12 @@
+# Written from Phase-0 measurements (docs/phase0/kaggle_t4_*.json, Kaggle Tesla T4 15 GB, sm_75 -> fp16).
+#   TripoSR    mc256/chunk8192: 5.55 GB peak, 16 s warm | mc192/chunk2048: 3.41 GB peak, 17 s
+#   InstantMesh base@grid128:   11.3 GB peak, 85 s      | large@grid128: OOM (needs a 15 GiB alloc)
+# The backend chain per preset is in backends/registry.py; backends whose measured peak VRAM exceeds free VRAM
+# (minus margin) are skipped automatically.
+profiles:
+  balanced:
+    min_vram_gb: 14          # SDXL + scribble ControlNet + Hyper-SD 8-step CFG LoRA @1024, then InstantMesh (11.3 GB)
+    generator: sdxl
+  lite:
+    min_vram_gb: 5           # SD1.5 + scribble ControlNet with CPU offload @512, then TripoSR fast (3.41 GB)
+    generator: sd15

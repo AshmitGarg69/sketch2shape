@@ -1,0 +1,20 @@
+{
+  "backend": "triposr",
+  "best_direct": {
+    "iou": 0.9407,
+    "yaw": 10,
+    "pitch": 10
+  },
+  "best_mirrored": {
+    "iou": 0.6846,
+    "yaw": -20,
+    "pitch": 0
+  },
+  "at_input_view": {
+    "direct": 0.9407,
+    "mirrored": 0.5653
+  },
+  "vram_peak_gb": 5.55,
+  "seconds": 24.21,
+  "handedness_ok": true
+}

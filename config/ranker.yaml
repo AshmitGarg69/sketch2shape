@@ -1,0 +1,4 @@
+# Composite ranker weights (spec §5.3). d0 / k are PLACEHOLDERS until calibrated in Phase 2.
+closed: {silhouette_iou: 0.40, stroke: 0.30, semantic: 0.20, clean: 0.10}
+open:   {silhouette_iou: 0.0,  stroke: 0.60, semantic: 0.25, clean: 0.15}
+stroke: {d0: 0.02, k: 6, blur: 1.5}

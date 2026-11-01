@@ -284,8 +284,8 @@ function UploadBox({
   const handleGenerate = () => {
     if (preview) {
       sessionStorage.setItem("sketch2shape_drawing", preview.dataUrl);
-      sessionStorage.setItem("sketch2shape_ask_prompt", "true");
-      sessionStorage.removeItem("sketch2shape_autogen");
+      sessionStorage.setItem("sketch2shape_autogen", "true");
+      sessionStorage.removeItem("sketch2shape_ask_prompt");
     }
     if (onNavigate) {
       onNavigate("final");

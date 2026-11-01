@@ -1454,6 +1454,117 @@ const gScene = new THREE.Scene(), gCam = new THREE.OrthographicCamera(-1.7, 1.7,
   gScene.add(s);
 });
 
+/* ---- DOTTED PARTICLE FIELD & MESH ANIMATION ---- */
+const COUNT = 28000;
+const logoPos = new Float32Array(COUNT * 3);
+const tgt = new Float32Array(COUNT * 3);
+const rnd = new Float32Array(COUNT);
+
+(function initParticles() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 240;
+  const x = c.getContext('2d');
+  x.strokeStyle = x.fillStyle = '#fff';
+  x.lineWidth = 16;
+  x.lineJoin = 'round';
+  x.beginPath();
+  x.moveTo(24, 28);
+  x.lineTo(216, 28);
+  x.lineTo(120, 192);
+  x.closePath();
+  x.fill();
+  x.stroke();
+
+  const d = x.getImageData(0, 0, 240, 240).data, px = [];
+  for (let i = 0; i < 57600; i++) {
+    if (d[i * 4 + 3] > 128) px.push(i);
+  }
+  for (let i = 0; i < COUNT; i++) {
+    const p = px[(Math.random() * px.length) | 0];
+    logoPos[i * 3] = ((p % 240) + Math.random() - 120) / 240 * 4.2;
+    logoPos[i * 3 + 1] = (120 - ((p / 240) | 0) - Math.random()) / 240 * 4.2;
+    logoPos[i * 3 + 2] = (Math.random() - 0.5) * 0.25;
+    rnd[i] = Math.random();
+  }
+  tgt.set(logoPos);
+})();
+
+const pgeo = new THREE.BufferGeometry();
+pgeo.setAttribute('position', new THREE.BufferAttribute(logoPos, 3));
+pgeo.setAttribute('aTarget', new THREE.BufferAttribute(tgt, 3));
+pgeo.setAttribute('aRand', new THREE.BufferAttribute(rnd, 1));
+
+const U = {
+  uTime: { value: 0 },
+  uMorph: { value: 0 },
+  uMouse: { value: new THREE.Vector2(99, 99) },
+  uHover: { value: 0 },
+  uFade: { value: 1 },
+  uSwirl: { value: 0 },
+  uPx: { value: renderer.getPixelRatio() }
+};
+
+const pmat = new THREE.ShaderMaterial({
+  uniforms: U,
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+  vertexShader: `
+    attribute vec3 aTarget;
+    attribute float aRand;
+    uniform float uTime, uMorph, uHover, uSwirl, uPx;
+    uniform vec2 uMouse;
+    varying float vA;
+    void main() {
+      float t = clamp(uMorph * 1.7 - aRand * 0.7, 0.0, 1.0);
+      t = t * t * (3.0 - 2.0 * t);
+      vec3 p = mix(position, aTarget, t);
+      p += sin(t * 3.14159) * 0.6 * vec3(sin(uTime * 2.0 + aRand * 40.0), cos(uTime * 1.7 + aRand * 31.0), sin(uTime * 2.3 + aRand * 17.0));
+      p += 0.02 * vec3(sin(uTime * 3.0 + aRand * 90.0), cos(uTime * 2.0 + aRand * 70.0), sin(uTime * 2.5 + aRand * 50.0));
+      float a = uSwirl * sin(uTime * 0.8) * 0.15 * (1.0 - t);
+      float c = cos(a), s = sin(a);
+      p.xy = mat2(c, -s, s, c) * p.xy;
+      p *= 1.0 + uSwirl * 0.03 * sin(uTime * 2.0) * (1.0 - t);
+      vec2 d = p.xy - uMouse;
+      float push = smoothstep(1.3, 0.0, length(d)) * uHover;
+      p.z += push * (1.2 + aRand);
+      p.xy += normalize(d + 1e-4) * push * 0.35;
+      vec4 mv = modelViewMatrix * vec4(p, 1.0);
+      gl_Position = projectionMatrix * mv;
+      gl_PointSize = (1.5 + aRand * 1.5 + push * 2.0) * uPx * (8.0 / -mv.z);
+      vA = 0.55 + 0.45 * aRand;
+    }
+  `,
+  fragmentShader: `
+    uniform float uFade;
+    varying float vA;
+    void main() {
+      float d = length(gl_PointCoord - 0.5);
+      if (d > 0.5) discard;
+      gl_FragColor = vec4(vec3(0.92, 0.95, 1.0), vA * uFade * smoothstep(0.5, 0.2, d));
+    }
+  `
+});
+
+const points = new THREE.Points(pgeo, pmat);
+points.frustumCulled = false;
+scene.add(points);
+
+let hoverT = 0;
+const ray = new THREE.Raycaster();
+const pl = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+const hit = new THREE.Vector3();
+const m2 = new THREE.Vector2();
+
+cv.addEventListener('pointermove', e => {
+  const r = cv.getBoundingClientRect();
+  m2.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(m2, camera);
+  if (ray.ray.intersectPlane(pl, hit)) U.uMouse.value.set(hit.x, hit.y);
+  hoverT = 1;
+});
+cv.addEventListener('pointerleave', () => { hoverT = 0; });
+
 /* ================= STATE & OVERLAY ================= */
 let status = 'idle', busy = false, current = null, wire = false, models = [], selId = null, uid = 0;
 let activeCandidates = [];
@@ -1500,6 +1611,13 @@ function showGroup(g) {
   if (g) {
     scene.add(g);
     setWire(g, wire);
+    U.uFade.value = 0;
+  } else {
+    U.uMorph.value = 0;
+    U.uFade.value = 1;
+    U.uSwirl.value = 0;
+    tgt.set(logoPos);
+    if (pgeo.attributes.aTarget) pgeo.attributes.aTarget.needsUpdate = true;
   }
   sync();
 }
@@ -1698,6 +1816,12 @@ async function generateFromBlob(blob, options = {}) {
   selId = null;
   renderModels();
 
+  // Trigger swirling particle animation during synthesis
+  U.uMorph.value = 0;
+  U.uFade.value = 1;
+  U.uSwirl.value = 1;
+  status = 'pred';
+
   const preset = $('#preset-sel')?.value || 'balanced';
   const seed = ($('#seed-input')?.value || '').trim();
   const objOverride = options.objectOverride || ($('#obj-input')?.value || '').trim();
@@ -1755,7 +1879,53 @@ async function generateFromBlob(blob, options = {}) {
 
     const group = await loadGLB(localGlbUrl);
     normalizeModel(group);
+
+    // Sample mesh surface vertices for particle morph animation
+    const sampledVerts = [];
+    group.traverse(o => {
+      if (o.geometry && o.geometry.attributes.position) {
+        const pos = o.geometry.attributes.position;
+        const step = Math.max(1, Math.floor(pos.count / 3500));
+        o.updateMatrixWorld();
+        for (let i = 0; i < pos.count; i += step) {
+          const v = new THREE.Vector3(pos.getX(i), pos.getY(i), pos.getZ(i));
+          v.applyMatrix4(o.matrixWorld);
+          sampledVerts.push(v);
+        }
+      }
+    });
+    if (sampledVerts.length > 0) {
+      for (let i = 0; i < COUNT; i++) {
+        const sv = sampledVerts[Math.floor(Math.random() * sampledVerts.length)];
+        tgt[i * 3] = sv.x + (Math.random() - 0.5) * 0.04;
+        tgt[i * 3 + 1] = sv.y + (Math.random() - 0.5) * 0.04;
+        tgt[i * 3 + 2] = sv.z + (Math.random() - 0.5) * 0.04;
+      }
+      pgeo.attributes.aTarget.needsUpdate = true;
+    }
+
+    // Morph particle field onto the 3D model contour
+    setOv('gen', 'Reconstructing 3D Mesh Topology', 'Aligning mesh particle contour…');
+    await tween(1600, t => { U.uMorph.value = t; });
+
+    // Fade in 3D model while fading out particles
     showGroup(group);
+    await tween(800, t => {
+      U.uFade.value = 1 - t;
+      group.traverse(o => {
+        if (o.material) {
+          o.material.transparent = true;
+          o.material.opacity = t;
+        }
+      });
+    });
+    group.traverse(o => {
+      if (o.material) {
+        o.material.transparent = false;
+        o.material.opacity = 1;
+      }
+    });
+    U.uFade.value = 0;
 
     setOv('none');
     status = 'final';
@@ -1810,10 +1980,16 @@ async function generateFromBlob(blob, options = {}) {
   } catch (err) {
     clearInterval(timerId);
     console.error('Generation failure:', err);
+    U.uMorph.value = 0;
+    U.uFade.value = 1;
+    U.uSwirl.value = 0;
+    tgt.set(logoPos);
+    if (pgeo.attributes.aTarget) pgeo.attributes.aTarget.needsUpdate = true;
     setOv('none');
     toast(err.message || 'Generation failed', true);
   } finally {
     busy = false;
+    U.uSwirl.value = 0;
     sync();
   }
 }
@@ -2082,8 +2258,11 @@ function resize() {
 new ResizeObserver(resize).observe(vp);
 resize();
 
+const clock = new THREE.Clock();
 (function loop() {
   requestAnimationFrame(loop);
+  U.uTime.value = clock.getElapsedTime();
+  U.uHover.value += (hoverT - U.uHover.value) * 0.08;
   controls.update();
 
   const W = cv.clientWidth, H = cv.clientHeight;
@@ -2135,22 +2314,19 @@ function initCatalogModels() {
 initCatalogModels();
 
 const savedDrawing = sessionStorage.getItem('sketch2shape_drawing');
+const shouldAutogen = sessionStorage.getItem('sketch2shape_autogen') === 'true';
+sessionStorage.removeItem('sketch2shape_ask_prompt');
+sessionStorage.removeItem('sketch2shape_autogen');
+
 if (savedDrawing) {
   const i = new Image();
   i.onload = () => {
     drawImg(i);
-    if (sessionStorage.getItem('sketch2shape_ask_prompt') === 'true') {
-      sessionStorage.removeItem('sketch2shape_ask_prompt');
-      setTimeout(() => {
-        $('#pt').value = userPrompt || '';
-        if ($('#prompt-input')) $('#prompt-input').value = userPrompt || '';
-        $('#pm').style.display = 'flex';
-        $('#pt').focus();
-      }, 250);
+    if (shouldAutogen) {
+      setTimeout(() => generate(), 250);
     }
   };
   i.src = savedDrawing;
-  renderTelemetry();
 } else {
   // Default to None option as requested
   loadSample('none');

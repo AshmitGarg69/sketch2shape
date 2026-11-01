@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, type ChangeEvent } from 'react';
-import { 
-  Pen, Paintbrush, Eraser, 
-  Minus, Square, Circle, 
+import {
+  Pen, Paintbrush, Eraser,
+  Minus, Square, Circle,
   Undo, Redo, Trash2, Download,
   Palette, Wand2, Upload, FilePlus
 } from 'lucide-react';
@@ -10,7 +10,7 @@ import { checkApiHealth } from '../../services/apiConfig';
 
 
 const COLORS = [
-  '#000000', '#FFFFFF', '#EF4444', '#3B82F6', '#10B981', 
+  '#000000', '#FFFFFF', '#EF4444', '#3B82F6', '#10B981',
   '#EAB308', '#F97316', '#A855F7', '#EC4899', '#6B7280'
 ];
 
@@ -237,7 +237,7 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
 
     try {
       e.currentTarget.setPointerCapture(e.pointerId);
-    } catch (_) {}
+    } catch (_) { }
 
     const { x, y } = getCoordinates(e);
     isDrawingRef.current = true;
@@ -300,7 +300,7 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
       if (e.currentTarget.hasPointerCapture(e.pointerId)) {
         e.currentTarget.releasePointerCapture(e.pointerId);
       }
-    } catch (_) {}
+    } catch (_) { }
 
     const canvas = canvasRef.current;
     if (canvas) {
@@ -339,13 +339,13 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
 
   return (
     <div className="h-screen w-full flex overflow-hidden bg-[#050505] text-white font-sans selection:bg-[#FFD83D] selection:text-black">
-      
+
       {/* LEFT SIDEBAR */}
       <aside className="w-[22%] min-w-[280px] h-full bg-[#151515] border-r border-[#292929] flex flex-col overflow-y-auto">
-        
+
         {/* Header */}
         <div className="p-6 border-b border-[#292929]">
-          <h1 
+          <h1
             onClick={onBackToMain}
             className="text-xl font-bold tracking-wide flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity"
             title="Go to Hero / Main Menu"
@@ -360,14 +360,13 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
             className="mt-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 hover:border-[#FFD83D]/50 text-[11px] text-[#A0A0A0] hover:text-white transition-colors cursor-pointer"
             title="Configure Kaggle GPU API"
           >
-            <span 
-              className={`w-1.5 h-1.5 rounded-full ${
-                apiOnline === true 
-                  ? "bg-emerald-400 shadow-[0_0_6px_#34d399]" 
-                  : apiOnline === false 
-                  ? "bg-red-400 shadow-[0_0_6px_#f87171]" 
-                  : "bg-amber-400 animate-pulse"
-              }`} 
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${apiOnline === true
+                  ? "bg-emerald-400 shadow-[0_0_6px_#34d399]"
+                  : apiOnline === false
+                    ? "bg-red-400 shadow-[0_0_6px_#f87171]"
+                    : "bg-amber-400 animate-pulse"
+                }`}
             />
             <span>{apiOnline === true ? "Tesla T4 Ready" : apiOnline === false ? "API Offline" : "Connecting..."}</span>
           </button>
@@ -440,9 +439,8 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
               <button
                 key={c}
                 onClick={() => setColor(c)}
-                className={`w-7 h-7 rounded-full transition-transform hover:scale-110 cursor-pointer ${
-                  color === c ? 'ring-2 ring-offset-2 ring-[#FFD83D] ring-offset-[#151515]' : 'border border-[#333]'
-                }`}
+                className={`w-7 h-7 rounded-full transition-transform hover:scale-110 cursor-pointer ${color === c ? 'ring-2 ring-offset-2 ring-[#FFD83D] ring-offset-[#151515]' : 'border border-[#333]'
+                  }`}
                 style={{ backgroundColor: c }}
                 title={c}
               />
@@ -453,16 +451,16 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
         {/* Stroke & Opacity Settings */}
         <div className="p-5 flex-1">
           <h2 className="text-xs font-semibold text-[#A0A0A0] uppercase tracking-wider mb-4">Settings</h2>
-          
+
           <div className="mb-5">
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-xs text-gray-300">Stroke Thickness</label>
               <span className="text-[11px] text-[#FFD83D] bg-[#292929] px-2 py-0.5 rounded font-mono">{strokeWidth}px</span>
             </div>
-            <input 
-              type="range" 
-              min="1" 
-              max="50" 
+            <input
+              type="range"
+              min="1"
+              max="50"
               value={strokeWidth}
               onChange={(e) => setStrokeWidth(parseInt(e.target.value))}
               className="w-full h-1.5 bg-[#292929] rounded-lg appearance-none cursor-pointer accent-[#FFD83D]"
@@ -474,11 +472,11 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
               <label className="text-xs text-gray-300">Opacity</label>
               <span className="text-[11px] text-[#FFD83D] bg-[#292929] px-2 py-0.5 rounded font-mono">{Math.round(opacity * 100)}%</span>
             </div>
-            <input 
-              type="range" 
-              min="0.1" 
-              max="1" 
-              step="0.05" 
+            <input
+              type="range"
+              min="0.1"
+              max="1"
+              step="0.05"
               value={opacity}
               onChange={(e) => setOpacity(parseFloat(e.target.value))}
               className="w-full h-1.5 bg-[#292929] rounded-lg appearance-none cursor-pointer accent-[#FFD83D]"
@@ -489,44 +487,44 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
 
       {/* RIGHT CANVAS AREA */}
       <main className="flex-1 relative flex items-center justify-center p-6 bg-[radial-gradient(#292929_1px,transparent_1px)] [background-size:20px_20px] select-none">
-        
+
         {/* Floating Top Toolbar */}
         <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-[#111111]/95 backdrop-blur-md border border-[#292929] rounded-2xl p-2 flex items-center gap-2 z-10 shadow-2xl">
-          <ActionButton 
-            icon={<Undo size={17} />} 
-            label="Undo" 
+          <ActionButton
+            icon={<Undo size={17} />}
+            label="Undo"
             onClick={handleUndo}
             disabled={!canUndo}
           />
-          <ActionButton 
-            icon={<Redo size={17} />} 
-            label="Redo" 
+          <ActionButton
+            icon={<Redo size={17} />}
+            label="Redo"
             onClick={handleRedo}
             disabled={!canRedo}
           />
           <div className="w-px h-6 bg-[#292929] mx-1" />
-          <ActionButton 
-            icon={<Trash2 size={17} />} 
-            label="Clear" 
-            onClick={clearToBlank} 
+          <ActionButton
+            icon={<Trash2 size={17} />}
+            label="Clear"
+            onClick={clearToBlank}
             danger
           />
-          <ActionButton 
-            icon={<Download size={17} />} 
-            label="Save PNG" 
-            onClick={handleDownload} 
+          <ActionButton
+            icon={<Download size={17} />}
+            label="Save PNG"
+            onClick={handleDownload}
           />
           <div className="w-px h-6 bg-[#292929] mx-1" />
-          <ActionButton 
-            icon={<Wand2 size={17} />} 
-            label="Generate" 
+          <ActionButton
+            icon={<Wand2 size={17} />}
+            label="Generate"
             onClick={handleGenerate}
             highlight
           />
         </div>
 
         {/* Canvas Container */}
-        <div 
+        <div
           ref={wrapperRef}
           className="w-full h-full max-w-[1200px] max-h-[820px] rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-[#292929] relative bg-white touch-none"
         >
@@ -562,11 +560,10 @@ function ToolButton({ icon, label, active, onClick }: ToolButtonProps) {
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col items-center justify-center p-2.5 rounded-xl transition-all duration-200 cursor-pointer ${
-        active 
-          ? 'bg-[#FFD83D] text-black shadow-lg shadow-[#FFD83D]/20 scale-105 font-medium' 
+      className={`flex flex-col items-center justify-center p-2.5 rounded-xl transition-all duration-200 cursor-pointer ${active
+          ? 'bg-[#FFD83D] text-black shadow-lg shadow-[#FFD83D]/20 scale-105 font-medium'
           : 'bg-[#1a1a1a] text-[#A0A0A0] hover:bg-[#292929] hover:text-white'
-      }`}
+        }`}
     >
       {icon}
       <span className="text-[10px] mt-1">{label}</span>
@@ -585,7 +582,7 @@ interface ActionButtonProps {
 
 function ActionButton({ icon, label, onClick, disabled = false, danger = false, highlight = false }: ActionButtonProps) {
   let baseClasses = "flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 cursor-pointer ";
-  
+
   if (disabled) {
     baseClasses += "opacity-40 cursor-not-allowed text-[#A0A0A0]";
   } else if (highlight) {

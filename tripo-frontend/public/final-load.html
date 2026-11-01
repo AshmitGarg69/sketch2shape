@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sketch2Shape</title>
+<style>
+:root{color-scheme:dark;--bg:#0e0f12;--pn:#16171b;--pn2:#1e2025;--bd:#2a2c33;--tx:#e8e9ed;--mu:#8b8f9a;--ac:#ffc21a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+nav{height:48px;display:flex;align-items:center;gap:28px;padding:0 16px;border-bottom:1px solid var(--bd);background:var(--pn);flex:none}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.2px;color:#fff}
+nav a{color:var(--mu);text-decoration:none;font-size:13px}nav a:hover{color:var(--tx)}
+main{flex:1;min-height:0;display:grid;grid-template-columns:300px 1fr 280px}
+aside{background:var(--pn);padding:14px;overflow:auto;display:flex;flex-direction:column;gap:12px}
+#L{border-right:1px solid var(--bd)}#R{border-left:1px solid var(--bd)}
+h3{margin:0;font-size:14px;font-weight:600}
+.card{background:var(--pn2);border:1px solid var(--bd);border-radius:12px;padding:10px}
+#drop{position:relative;border:1.5px dashed var(--bd);border-radius:10px;background:#fff;aspect-ratio:1;overflow:hidden;cursor:pointer}
+#drop.over{border-color:var(--ac)}#prev{width:100%;height:100%;display:block}
+#del{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:50%;border:0;background:#000a;color:#fff;cursor:pointer}
+.row{display:flex;gap:12px;margin-top:8px}
+#L .card:has(#drop){padding:16px}#L .card:has(#drop) .row{margin-top:18px}
+#pt{width:100%;height:130px;resize:vertical;background:var(--pn2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:10px;font:inherit;margin:10px 0 4px}
+button{font:inherit;color:var(--tx);background:var(--pn2);border:1px solid var(--bd);border-radius:8px;padding:7px 10px;cursor:pointer}
+button:hover:not(:disabled){border-color:#555a66}button:focus-visible,summary:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}.row button{flex:1}
+#gen{width:100%;padding:13px;background:var(--ac);color:#111;font-weight:700;font-size:16px;border:0;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+#gen:hover:not(:disabled){filter:brightness(1.08)}
+.sp{width:14px;height:14px;border:2px solid #1118;border-top-color:transparent;border-radius:50%;animation:r .7s linear infinite;display:none}.busy .sp{display:block}@keyframes r{to{transform:rotate(360deg)}}
+details{color:var(--mu)}summary{cursor:pointer;padding:4px 0}details label{display:flex;justify-content:space-between;align-items:center;margin:8px 0;color:var(--tx)}
+select{background:var(--pn2);color:var(--tx);border:1px solid var(--bd);border-radius:6px;padding:4px}
+#vp{position:relative;min-width:0;min-height:0;background:radial-gradient(ellipse at center,#1d1f25 0%,#0e0f12 75%)}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#ov{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);text-align:center;width:min(420px,86%);pointer-events:none;transition:opacity .4s}
+#ov b{font-size:15px;font-weight:500;letter-spacing:.3px}#ov p{margin:6px 0 0;color:var(--mu);font-size:12px}
+#bar{height:3px;background:#ffffff1f;border-radius:2px;margin:8px auto 0;width:140px;overflow:hidden}
+#bar i{display:block;height:100%;width:30%;background:#fff;border-radius:2px;animation:ind 1.1s ease-in-out infinite}#bar.det i{animation:none;width:0;transition:width .25s}
+@keyframes ind{0%{margin-left:-30%}100%{margin-left:100%}}
+#tb{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:6px}
+#tb button{width:36px;height:36px;padding:0;background:#16171bd9;font-size:15px}#tb button.on{border-color:var(--ac);color:var(--ac)}
+#exp{position:absolute;left:12px;top:12px;display:flex;gap:6px}#exp button{background:#16171bd9}
+#exp .pri{background:var(--ac);color:#111;border:0;font-weight:600}
+#help{position:absolute;right:56px;top:12px;background:#16171bf2;border:1px solid var(--bd);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--mu);display:none;line-height:1.7}
+#toast{position:absolute;left:50%;top:14px;transform:translateX(-50%);background:#3a1518;border:1px solid #7a2a30;padding:8px 12px;border-radius:8px;display:none;gap:10px;align-items:center;font-size:13px}
+#grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.m{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--pn2);border:1px solid var(--bd);cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--mu);font-size:12px}
+.m.sel{border-color:var(--ac)}.m img{width:100%;height:100%;object-fit:cover}
+.m .nm{position:absolute;left:0;right:0;bottom:0;padding:3px 6px;background:#000a;color:#fff;text-align:left}
+.m .ac{position:absolute;inset:0;background:#000b;display:none;flex-direction:column;justify-content:center;gap:4px;padding:10px}.m:hover .ac{display:flex}.m .ac button{padding:4px;font-size:12px}
+#det{font-size:12px;color:var(--mu);line-height:1.7}#det b{color:var(--tx);font-weight:500}
+#modal,#pm{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:9}
+#modal>div,#pm>div{background:var(--pn);border:1px solid var(--bd);border-radius:14px;padding:14px;width:min(400px,94vw)}
+#dc{width:100%;aspect-ratio:1;background:#fff;border-radius:8px;touch-action:none;cursor:crosshair;display:block}
+@media(max-width:900px){body{overflow:auto}main{display:flex;flex-direction:column}#vp{height:64vh;flex:none}#L,#R{border:0}nav a{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="logo" id="nav-logo" style="cursor:pointer" title="Go to Hero / Main Menu"><svg width="22" height="20" viewBox="0 0 22 20" aria-hidden="true"><path d="M2 2h18L11 18z" fill="#ffc21a" stroke="#ffc21a" stroke-width="2" stroke-linejoin="round"/></svg>Sketch2Shape</div><a href="#" id="nav-home">Home</a><a href="#" id="nav-gallery">Gallery</a><a href="#" id="nav-scribble">Scribble</a></nav>
+<main>
+<aside id="L">
+<h3>Generate Model</h3>
+<div class="card">
+<div id="drop" title="Click or drop an image"><canvas id="prev" width="300" height="300"></canvas><button id="del" title="Remove sketch" aria-label="Remove sketch">🗑</button></div>
+<div class="row"><button id="epm">💬 Edit prompt</button><button id="drw">✏️ Draw</button></div>
+<input type="file" id="fi" accept="image/*" hidden>
+</div>
+<button id="gen"><span class="sp"></span><span id="gt">Generate</span></button>
+<details class="card"><summary>Settings</summary>
+<label>Quality<select><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+<label>Texture<input type="checkbox" checked></label></details>
+</aside>
+<section id="vp">
+<canvas id="cv"></canvas>
+<div id="exp"><button class="pri" id="exb" disabled>⬇ Export GLB</button><select id="fmt" aria-label="Format"><option>GLB</option><option disabled>OBJ (soon)</option><option disabled>STL (soon)</option></select></div>
+<div id="tb">
+<button id="bg" class="on" title="Toggle grid">▦</button><button id="bw" title="Toggle wireframe">⬡</button><button id="ba" class="on" title="Toggle axes">✛</button><button id="bs" title="Screenshot">📷</button><button id="br" title="Reset camera">⟲</button>
+<button id="vx" title="View along X">X</button><button id="vy" title="View from top (Y)">Y</button><button id="vz" title="View along Z">Z</button><button id="bh" title="Help">?</button></div>
+<div id="help">Left-drag: rotate 360°<br>Scroll / pinch: zoom<br>Right-drag: pan<br>Double-click: reset view</div>
+<div id="ov"></div>
+<div id="toast"><span id="tm"></span><button id="retry">Retry</button></div>
+</section>
+<aside id="R">
+<h3>My Models</h3>
+<div id="grid"></div>
+<div id="det" class="card">Select a model to see details.</div>
+<input type="file" id="gf" accept=".glb,.gltf" hidden>
+</aside>
+</main>
+<div id="modal"><div><canvas id="dc" width="360" height="360"></canvas>
+<div class="row"><button id="pen">Pen</button><button id="ers">Eraser</button><input id="bs2" type="range" min="2" max="30" value="6" aria-label="Brush size"></div>
+<div class="row"><button id="und">Undo</button><button id="clr">Clear</button><button id="cnl">Cancel</button><button id="sav" style="background:var(--ac);color:#111;border:0">Save</button></div></div></div>
+
+<div id="pm"><div><h3>Edit prompt</h3><textarea id="pt" placeholder="Describe your sketch, e.g. a flower with five petals and two leaves" aria-label="Prompt"></textarea>
+<div class="row"><button id="pcn">Cancel</button><button id="psv" style="background:var(--ac);color:#111;border:0">Save</button></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/BufferGeometryUtils.js"></script>
+<script>
+const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const tween=(ms,fn)=>new Promise(r=>{const t0=performance.now();(function f(){const t=Math.min(1,(performance.now()-t0)/ms);fn(t);t<1?requestAnimationFrame(f):r()})()});
+
+/* ================= BACKEND INTEGRATION POINT (mocked) =================
+   TODO: set API_BASE_URL to your server and replace the mock bodies with fetch() calls. */
+const API_BASE_URL='';  // e.g. 'https://your-server.com/api'
+const API={
+  async predictObject(sketchBlob,prompt){ // prompt = optional text from the Edit prompt button
+    // TODO: const fd=new FormData();fd.append('sketch',sketchBlob);
+    // const r=await fetch(API_BASE_URL+'/predict',{method:'POST',body:fd});return r.json(); // {label,confidence}
+    await sleep(1800);return{label:'object',confidence:.94};
+  },
+  async generateModel(sketchBlob,label,onProgress,shape){
+    // TODO: POST to /generate, poll progress, then: const group=await loadGLB(res.glbUrl); return {group};
+    for(let p=0;p<=100;p+=4){onProgress(p);await sleep(150)}
+    return{group:buildMesh(shape)}; // mock: local extruded mesh from your sketch
+  }
+};
+function loadGLB(url){return new Promise((ok,no)=>new THREE.GLTFLoader().load(url,g=>ok(g.scene),undefined,no))}
+
+/* ================= SKETCH INPUT ================= */
+const prev=$('#prev'),pc=prev.getContext('2d');let hasSketch=true;
+function blank(){pc.fillStyle='#fff';pc.fillRect(0,0,300,300)}
+function sampleSketch(){blank();pc.strokeStyle='#111';pc.lineWidth=5;pc.lineJoin='round';
+ const c=(x,y,r)=>{pc.beginPath();pc.arc(x,y,r,0,7);pc.stroke()};
+ for(let i=0;i<5;i++){const a=i/5*6.283-1.57;c(150+Math.cos(a)*40,100+Math.sin(a)*40,28)}
+ c(150,100,22);pc.beginPath();pc.moveTo(150,128);pc.quadraticCurveTo(140,200,150,275);pc.stroke();
+ pc.beginPath();pc.ellipse(118,210,32,14,-.5,0,7);pc.stroke();pc.beginPath();pc.ellipse(184,190,32,14,.5,0,7);pc.stroke()}
+function drawImg(img){blank();const s=Math.min(300/img.width,300/img.height);pc.drawImage(img,(300-img.width*s)/2,(300-img.height*s)/2,img.width*s,img.height*s);hasSketch=true;sync()}
+const savedDrawing = sessionStorage.getItem('sketch2shape_drawing');
+if (savedDrawing) {
+  const i = new Image();
+  i.onload = () => {
+    drawImg(i);
+    if (sessionStorage.getItem('sketch2shape_ask_prompt') === 'true') {
+      sessionStorage.removeItem('sketch2shape_ask_prompt');
+      setTimeout(() => {
+        $('#pt').value = userPrompt || '';
+        $('#pm').style.display = 'flex';
+        $('#pt').focus();
+      }, 250);
+    }
+  };
+  i.src = savedDrawing;
+} else {
+  sampleSketch();
+}
+$('#nav-logo')?.addEventListener('click', (e) => { e.preventDefault(); if (window.parent && window.parent !== window) { window.parent.postMessage({ type: 'navigate', page: 'main' }, '*'); } else { window.location.href = '/main'; } });
+$('#nav-home')?.addEventListener('click', (e) => { e.preventDefault(); if (window.parent && window.parent !== window) { window.parent.postMessage({ type: 'navigate', page: 'main' }, '*'); } else { window.location.href = '/main'; } });
+$('#nav-gallery')?.addEventListener('click', (e) => { e.preventDefault(); if (window.parent && window.parent !== window) { window.parent.postMessage({ type: 'navigate', page: 'gallery' }, '*'); } else { window.location.href = '/'; } });
+$('#nav-scribble')?.addEventListener('click', (e) => { e.preventDefault(); if (window.parent && window.parent !== window) { window.parent.postMessage({ type: 'navigate', page: 'scribble' }, '*'); } else { window.location.href = '/scribble'; } });
+function loadFile(f){if(!f||!f.type.startsWith('image/'))return;const i=new Image();i.onload=()=>drawImg(i);i.src=URL.createObjectURL(f)}
+$('#drop').onclick=e=>{if(e.target.id!=='del')$('#fi').click()};let userPrompt='';
+function updatePromptBtn(){
+  $('#epm').textContent = userPrompt ? '💬 ' + (userPrompt.length > 14 ? userPrompt.slice(0, 14) + '…' : userPrompt) : '💬 Edit prompt';
+}
+$('#epm').onclick=()=>{$('#pt').value=userPrompt;$('#pm').style.display='flex';$('#pt').focus()};
+$('#pcn').onclick=()=>$('#pm').style.display='none';
+$('#psv').onclick=()=>{userPrompt=$('#pt').value.trim();updatePromptBtn();$('#pm').style.display='none'};
+$('#fi').onchange=e=>loadFile(e.target.files[0]);
+$('#drop').ondragover=e=>{e.preventDefault();$('#drop').classList.add('over')};$('#drop').ondragleave=()=>$('#drop').classList.remove('over');
+$('#drop').ondrop=e=>{e.preventDefault();$('#drop').classList.remove('over');loadFile(e.dataTransfer.files[0])};
+$('#del').onclick=()=>{blank();hasSketch=false;sync()};
+
+// Draw button redirects to Scribble page with current sketch
+$('#drw').onclick = () => {
+  try {
+    const dataUrl = prev.toDataURL('image/png');
+    sessionStorage.setItem('sketch2shape_drawing', dataUrl);
+    sessionStorage.setItem('sketch2shape_mode', 'image');
+  } catch (err) {
+    console.error('Failed to capture sketch for scribble:', err);
+  }
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: 'navigate', page: 'scribble' }, '*');
+  } else {
+    window.location.href = '/scribble';
+  }
+};
+
+/* ================= SKETCH -> SHAPE (silhouette + inflate) ================= */
+const N=96;
+function sketchToShape(){
+ const c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,N,N);x.drawImage(prev,0,0,N,N);
+ const d=x.getImageData(0,0,N,N).data,ink=new Uint8Array(N*N);
+ for(let i=0;i<N*N;i++)ink[i]=(d[i*4]+d[i*4+1]+d[i*4+2])/3<150?1:0;
+ const dl=ink.slice();for(let y=1;y<N-1;y++)for(let X=1;X<N-1;X++)if(ink[y*N+X])for(let a=-1;a<2;a++)for(let b=-1;b<2;b++)dl[(y+a)*N+X+b]=1;
+ const out=new Uint8Array(N*N),q=[];
+ for(let i=0;i<N;i++)for(const p of[i,(N-1)*N+i,i*N,i*N+N-1])if(!dl[p]&&!out[p]){out[p]=1;q.push(p)}
+ const nb=p=>{const r=[],X=p%N,y=(p/N)|0;if(X>0)r.push(p-1);if(X<N-1)r.push(p+1);if(y>0)r.push(p-N);if(y<N-1)r.push(p+N);return r};
+ for(let h=0;h<q.length;h++)for(const n of nb(q[h]))if(!dl[n]&&!out[n]){out[n]=1;q.push(n)}
+ const dist=new Int16Array(N*N).fill(-1),q2=[];
+ for(let i=0;i<N*N;i++)if(out[i]){dist[i]=0;q2.push(i)}
+ for(let h=0;h<q2.length;h++)for(const n of nb(q2[h]))if(dist[n]<0){dist[n]=dist[q2[h]]+1;q2.push(n)}
+ let x0=N,x1=0,y0=N,y1=0,cells=[];
+ for(let i=0;i<N*N;i++)if(!out[i]){const X=i%N,y=(i/N)|0;x0=Math.min(x0,X);x1=Math.max(x1,X);y0=Math.min(y0,y);y1=Math.max(y1,y);cells.push([X,y,i])}
+ if(cells.length<20)throw new Error('Sketch looks empty. Draw or upload something first.');
+ const k=4/Math.max(x1-x0+1,y1-y0+1),mx=(x0+x1)/2;
+ cells=cells.map(([X,y,i])=>({x:(X-mx)*k,y:(y1-y)*k-2,h:Math.min(.7,.12+Math.sqrt(dist[i])*.12)}));
+ return{cells,k};
+}
+function buildMesh({cells,k}){
+ const gs=cells.map(c=>new THREE.BoxGeometry(k,k,c.h*2).translate(c.x,c.y,0));
+ const g=THREE.BufferGeometryUtils.mergeBufferGeometries(gs);gs.forEach(a=>a.dispose());g.computeVertexNormals();
+ const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0xd5d8df,roughness:.45,metalness:.15,transparent:true,opacity:0}));
+ const grp=new THREE.Group();grp.add(m);grp.name='sketch2shape';return grp;
+}
+
+/* ================= THREE SCENE ================= */
+const cv=$('#cv'),vp=$('#vp');
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.autoClear=false;
+const scene=new THREE.Scene();scene.fog=new THREE.Fog(0x0e0f12,9,24);
+const camera=new THREE.PerspectiveCamera(45,1,.1,100),HOME=new THREE.Vector3(0,.8,7.5);camera.position.copy(HOME);
+const controls=new THREE.OrbitControls(camera,cv);controls.enableDamping=true;controls.minDistance=2;controls.maxDistance=20;
+const grid=new THREE.GridHelper(40,40,0x5a5f6c,0x25272e);grid.position.y=-2.02;scene.add(grid);
+const axes=new THREE.AxesHelper(2.2);axes.position.set(-2.6,-2.0,0);scene.add(axes);
+scene.add(new THREE.HemisphereLight(0xffffff,0x2a2d38,.9));
+const dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(4,6,5);scene.add(dl);
+const dl2=new THREE.DirectionalLight(0x88aaff,.35);dl2.position.set(-5,2,-4);scene.add(dl2);
+// gizmo
+const gScene=new THREE.Scene(),gCam=new THREE.OrthographicCamera(-1.7,1.7,1.7,-1.7,.1,10);
+[['x',0xff4d4d,[1,0,0]],['y',0x4dff7a,[0,1,0]],['z',0x4d8dff,[0,0,1]]].forEach(([n,col,v])=>{
+ const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3(...v)]);gScene.add(new THREE.Line(g,new THREE.LineBasicMaterial({color:col})));
+ const c=document.createElement('canvas');c.width=c.height=64;const t=c.getContext('2d');t.fillStyle='#'+col.toString(16);t.beginPath();t.arc(32,32,26,0,7);t.fill();t.fillStyle='#000';t.font='bold 34px sans-serif';t.textAlign='center';t.textBaseline='middle';t.fillText(n.toUpperCase(),32,34);
+ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),depthTest:false}));s.position.set(...v).multiplyScalar(1.25);s.scale.setScalar(.5);gScene.add(s)});
+
+/* ---- dotted particle field ---- */
+const COUNT=28000,logoPos=new Float32Array(COUNT*3),tgt=new Float32Array(COUNT*3),rnd=new Float32Array(COUNT);
+(function(){const c=document.createElement('canvas');c.width=c.height=240;const x=c.getContext('2d');x.strokeStyle=x.fillStyle='#fff';x.lineWidth=16;x.lineJoin='round';
+ x.beginPath();x.moveTo(24,28);x.lineTo(216,28);x.lineTo(120,192);x.closePath();x.fill();x.stroke();
+ 
+ 
+ const d=x.getImageData(0,0,240,240).data,px=[];for(let i=0;i<57600;i++)if(d[i*4+3]>128)px.push(i);
+ for(let i=0;i<COUNT;i++){const p=px[(Math.random()*px.length)|0];logoPos[i*3]=((p%240)+Math.random()-120)/240*4.2;logoPos[i*3+1]=(120-((p/240)|0)-Math.random())/240*4.2;logoPos[i*3+2]=(Math.random()-.5)*.25;rnd[i]=Math.random()}
+ tgt.set(logoPos)})();
+const pgeo=new THREE.BufferGeometry();pgeo.setAttribute('position',new THREE.BufferAttribute(logoPos,3));pgeo.setAttribute('aTarget',new THREE.BufferAttribute(tgt,3));pgeo.setAttribute('aRand',new THREE.BufferAttribute(rnd,1));
+const U={uTime:{value:0},uMorph:{value:0},uMouse:{value:new THREE.Vector2(99,99)},uHover:{value:0},uFade:{value:1},uSwirl:{value:0},uPx:{value:renderer.getPixelRatio()}};
+const pmat=new THREE.ShaderMaterial({uniforms:U,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+vertexShader:`attribute vec3 aTarget;attribute float aRand;uniform float uTime,uMorph,uHover,uSwirl,uPx;uniform vec2 uMouse;varying float vA;
+void main(){float t=clamp(uMorph*1.7-aRand*.7,0.,1.);t=t*t*(3.-2.*t);vec3 p=mix(position,aTarget,t);
+p+=sin(t*3.14159)*.6*vec3(sin(uTime*2.+aRand*40.),cos(uTime*1.7+aRand*31.),sin(uTime*2.3+aRand*17.));
+p+=.02*vec3(sin(uTime*3.+aRand*90.),cos(uTime*2.+aRand*70.),sin(uTime*2.5+aRand*50.));
+float a=uSwirl*sin(uTime*.8)*.15*(1.-t);float c=cos(a),s=sin(a);p.xy=mat2(c,-s,s,c)*p.xy;p*=1.+uSwirl*.03*sin(uTime*2.)*(1.-t);
+vec2 d=p.xy-uMouse;float push=smoothstep(1.3,0.,length(d))*uHover;p.z+=push*(1.2+aRand);p.xy+=normalize(d+1e-4)*push*.35;
+vec4 mv=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*mv;gl_PointSize=(1.5+aRand*1.5+push*2.)*uPx*(8./-mv.z);vA=.55+.45*aRand;}`,
+fragmentShader:`uniform float uFade;varying float vA;void main(){float d=length(gl_PointCoord-.5);if(d>.5)discard;gl_FragColor=vec4(vec3(.92,.95,1.),vA*uFade*smoothstep(.5,.2,d));}`});
+const points=new THREE.Points(pgeo,pmat);points.frustumCulled=false;scene.add(points);
+
+/* ================= STATE ================= */
+let status='idle',busy=false,current=null,wire=false,models=[],selId=null,hoverT=0,uid=0;
+const ov=$('#ov');
+function setOv(kind,label){
+ if(kind==='idle')ov.innerHTML='<p>Hover the dots · draw or upload a sketch, then press Generate</p>';
+ else if(kind==='none')ov.innerHTML='';
+ else ov.innerHTML=`<b>${kind==='pred'?'Predicting…':'Generating…'}</b><div id="bar" class="${kind==='pred'?'':'det'}"><i></i></div><p>${kind==='pred'?'Analysing your sketch':`Detected “${label}”. Reconstructing mesh with optimized topology…`}</p>`}
+setOv('idle');
+function setProg(p){const i=$('#bar i');if(i){$('#bar').classList.add('det');i.style.width=p+'%'}}
+function sync(){const b=$('#gen');b.disabled=busy||!hasSketch;b.classList.toggle('busy',busy);$('#gt').textContent=busy?'Generating…':'Generate';$('#exb').disabled=!current;$('#fmt').disabled=!current}
+function toast(msg,retry){$('#tm').textContent=msg;$('#retry').style.display=retry?'':'none';$('#toast').style.display='flex';clearTimeout(toast.t);toast.t=setTimeout(()=>$('#toast').style.display='none',7000)}
+$('#retry').onclick=()=>{$('#toast').style.display='none';generate()};
+function setWire(g,on){g&&g.traverse(o=>{if(o.material)o.material.wireframe=on})}
+function showGroup(g){if(current)scene.remove(current);current=g;if(g){scene.add(g);setWire(g,wire)}sync()}
+function showLogo(){showGroup(null);U.uMorph.value=0;U.uFade.value=1;U.uSwirl.value=0;status='idle';setOv('idle')}
+
+async function generate(){
+ if(busy||!hasSketch)return;busy=true;sync();showGroup(null);selId=null;renderModels();
+ U.uMorph.value=0;U.uFade.value=1;U.uSwirl.value=1;status='pred';setOv('pred');
+ try{
+  const blob=await new Promise(r=>prev.toBlob(r,'image/png'));
+  const shape=sketchToShape();
+  const{label}=await API.predictObject(blob,userPrompt);
+  const pts=shape.cells;for(let i=0;i<COUNT;i++){const c=pts[(Math.random()*pts.length)|0],h=c.h;tgt[i*3]=c.x+(Math.random()-.5)*shape.k;tgt[i*3+1]=c.y+(Math.random()-.5)*shape.k;tgt[i*3+2]=(Math.random()*2-1)*h}
+  pgeo.attributes.aTarget.needsUpdate=true;
+  status='morph';setOv('gen',label);await tween(2200,t=>U.uMorph.value=t);
+  const{group}=await API.generateModel(blob,label,setProg,shape);
+  group.scale.setScalar(.92);showGroup(group);
+  await tween(900,t=>{U.uFade.value=1-t;group.scale.setScalar(.92+.08*t);group.traverse(o=>{if(o.material)o.material.opacity=t})});
+  group.traverse(o=>{if(o.material){o.material.transparent=false;o.material.opacity=1}});
+  setOv('none');status='final';await sleep(60);
+  addModel(group,label,snap());
+ }catch(e){console.error(e);showLogo();toast(e.message||'Generation failed',true)}
+ busy=false;U.uSwirl.value=0;sync();
+}
+$('#gen').onclick=generate;
+
+/* ================= MODELS PANEL ================= */
+function snap(){renderer.render(scene,camera);const t=document.createElement('canvas');t.width=t.height=160;const s=Math.min(cv.width,cv.height);t.getContext('2d').drawImage(cv,(cv.width-s)/2,(cv.height-s)/2,s,s,0,0,160,160);return t.toDataURL('image/jpeg',.8)}
+function addModel(group,label,thumb){const m={id:++uid,label,group,thumb};models.unshift(m);selId=m.id;renderModels()}
+function stats(g){let v=0,f=0;g.traverse(o=>{if(o.geometry){v+=o.geometry.attributes.position.count;f+=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3}});return[v,f|0]}
+function renderModels(){
+ const G=$('#grid');G.innerHTML='<div class="m" id="gup">⬆<br>Upload GLB</div>';
+ models.forEach(m=>{const d=document.createElement('div');d.className='m'+(m.id===selId?' sel':'');
+  d.innerHTML=`<img src="${m.thumb}" alt=""><div class="nm">${m.label}</div><div class="ac"><button data-a="dl">Download</button><button data-a="rn">Rename</button><button data-a="rm">Delete</button></div>`;
+  d.onclick=e=>{const a=e.target.dataset.a;if(a==='dl'){exportGLB(m.group,m.label)}else if(a==='rn'){const n=prompt('Rename',m.label);if(n){m.label=n;renderModels()}}else if(a==='rm'){models=models.filter(x=>x!==m);if(selId===m.id){selId=null;if(current===m.group)showLogo()}renderModels()}else if(!busy){selId=m.id;U.uFade.value=0;setOv('none');showGroup(m.group);renderModels()}};G.appendChild(d)});
+ $('#gup').onclick=()=>$('#gf').click();
+ const m=models.find(x=>x.id===selId);
+ if(m){const[v,f]=stats(m.group),b=new THREE.Box3().setFromObject(m.group),s=b.getSize(new THREE.Vector3());$('#det').innerHTML=`<b>${m.label}</b><br>Vertices: <b>${v.toLocaleString()}</b> · Faces: <b>${f.toLocaleString()}</b><br>Size: <b>${s.x.toFixed(1)} × ${s.y.toFixed(1)} × ${s.z.toFixed(1)}</b><br>Format: <b>GLB</b>`}
+ else $('#det').textContent='Select a model to see details.'}
+renderModels();
+$('#gf').onchange=e=>{const f=e.target.files[0];if(!f)return;const u=URL.createObjectURL(f);loadGLB(u).then(g=>{const b=new THREE.Box3().setFromObject(g),s=b.getSize(new THREE.Vector3()),c=b.getCenter(new THREE.Vector3());g.scale.setScalar(4/Math.max(s.x,s.y,s.z));g.position.sub(c.multiplyScalar(g.scale.x));g.position.y+=2*0+(-2-b.min.y*g.scale.x)+(b.min.y*g.scale.x-(b.min.y*g.scale.x));
+  const wrap=new THREE.Group();wrap.add(g);const b2=new THREE.Box3().setFromObject(wrap);g.position.y+=-2-b2.min.y;U.uFade.value=0;setOv('none');showGroup(wrap);addModel(wrap,f.name.replace(/\.\w+$/,''),snap())}).catch(()=>toast('Could not read that GLB file'));e.target.value=''};
+
+/* ================= EXPORT / TOOLBAR ================= */
+function dl_(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+function exportGLB(g,name){if(!g)return;new THREE.GLTFExporter().parse(g,r=>dl_(new Blob([r],{type:'model/gltf-binary'}),(name||'model')+'.glb'),{binary:true})}
+$('#exb').onclick=()=>{const m=models.find(x=>x.group===current);exportGLB(current,m?m.label:'sketch2shape')};
+const tg=(id,fn)=>$(id).onclick=()=>{const on=$(id).classList.toggle('on');fn(on)};
+tg('#bg',on=>grid.visible=on);tg('#ba',on=>axes.visible=on);tg('#bw',on=>{wire=on;setWire(current,on)});
+$('#bh').onclick=()=>{const h=$('#help');h.style.display=h.style.display==='block'?'none':'block'};
+function view(v){camera.position.copy(v);controls.target.set(0,0,0);controls.update()}
+$('#br').onclick=()=>view(HOME);cv.ondblclick=()=>view(HOME);
+$('#vx').onclick=()=>view(new THREE.Vector3(8,0,0));$('#vy').onclick=()=>view(new THREE.Vector3(0,8,.001));$('#vz').onclick=()=>view(new THREE.Vector3(0,0,8));
+$('#bs').onclick=()=>{renderer.render(scene,camera);cv.toBlob(b=>dl_(b,'sketch2shape.png'))};
+
+/* ================= LOOP ================= */
+const ray=new THREE.Raycaster(),pl=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3(),m2=new THREE.Vector2();
+cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();m2.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(m2,camera);if(ray.ray.intersectPlane(pl,hit))U.uMouse.value.set(hit.x,hit.y);hoverT=1});
+cv.addEventListener('pointerleave',()=>hoverT=0);
+function resize(){const w=vp.clientWidth,h=vp.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+new ResizeObserver(resize).observe(vp);resize();
+const clock=new THREE.Clock();
+(function loop(){requestAnimationFrame(loop);U.uTime.value=clock.getElapsedTime();U.uHover.value+=(hoverT-U.uHover.value)*.08;
+ controls.update();const W=cv.clientWidth,H=cv.clientHeight;
+ renderer.setScissorTest(false);renderer.setViewport(0,0,W,H);renderer.clear();renderer.render(scene,camera);
+ gCam.position.copy(camera.position).sub(controls.target).normalize().multiplyScalar(5);gCam.up.copy(camera.up);gCam.lookAt(0,0,0);
+ const gs=96;renderer.clearDepth();renderer.setScissorTest(true);renderer.setViewport(W-gs-60,H-gs-12,gs,gs);renderer.setScissor(W-gs-60,H-gs-12,gs,gs);renderer.render(gScene,gCam);renderer.setScissorTest(false)})();
+sync();
+</script>
+</body>
+</html>

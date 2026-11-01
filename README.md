@@ -122,13 +122,28 @@ it builds the three environments in parallel (~7 min), downloads the pinned weig
 the UI with a public `*.gradio.live` link. Scripted use against that link:
 `sketch2shape run --remote https://xxxx.gradio.live --sketch my_sketch.png`.
 
-### B. Linux / WSL2 with an NVIDIA GPU
+### B. Run locally (Linux / WSL2 with an NVIDIA GPU) — tested on Fedora + RTX 4050 6 GB
+Requirements: NVIDIA driver with CUDA 12 support, `git`, ~30 GB free disk (lite) / ~45 GB (balanced). Python is
+provisioned by `uv` (no system Python changes). A CUDA toolkit (`nvcc`) is **not** needed for the lite path.
+
 ```bash
-make setup                         # parent env + one isolated env per 3D backend (uv provisions Python 3.10)
-make weights PROFILE=balanced      # or PROFILE=lite on 6–12 GB cards; no HF token needed
-make doctor                        # go / no-go table + recommended profile
-make demo                          # http://localhost:7860
+git clone https://github.com/AshmitGarg69/sketch2shape && cd sketch2shape
+
+# 6–13 GB GPUs (e.g. RTX 4050/3060 laptops): SD1.5 + TripoSR
+make setup PROFILE=lite            # parent env + TripoSR env (~6 min, ~11 GB)
+make weights PROFILE=lite          # ~7 GB, pinned revisions, no HF token
+make doctor                        # expect: CUDA GO, backend triposr ok, "Recommended profile: lite"
+make demo                          # UI at http://localhost:7860  (PORT=7861 to change; SHARE=1 for a public link)
+
+# ≥ 14 GB GPUs (T4/A10G/3090/4090…): SDXL + InstantMesh (needs nvcc for nvdiffrast)
+make setup PROFILE=balanced && make weights PROFILE=balanced && make demo
 ```
+Measured on the RTX 4050 laptop: ≈ 40 s per sketch once warm (first request ≈ 75 s). Close GPU-heavy apps first —
+TripoSR needs ≈ 2.5–3.4 GB of free VRAM. Run `make test` to execute the 43 unit/smoke tests.
+
+### C. Build your own frontend
+The running app exposes `/generate_api` (sketch → GLB/OBJ URLs) and `/capabilities`; see
+[docs/FRONTEND.md](docs/FRONTEND.md) and the tested JavaScript client [examples/frontend/client.mjs](examples/frontend/client.mjs).
 
 ### CLI
 ```bash

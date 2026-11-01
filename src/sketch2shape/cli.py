@@ -20,10 +20,17 @@ def cmd_run(a):
         from gradio_client import Client, handle_file
 
         c = Client(a.remote)
-        out = c.predict(handle_file(a.sketch), a.prompt or "", a.preset, "" if a.seed is None else str(a.seed),
-                        api_name="/generate_api")
-        print(json.dumps(out, indent=2))
-        return 0
+        info, glb, obj = c.predict(handle_file(a.sketch), a.prompt or "", a.preset, "" if a.seed is None else str(a.seed),
+                                   api_name="/generate_api")
+        Path(a.out).mkdir(parents=True, exist_ok=True)
+        import shutil
+
+        for f in (glb, obj):   # gradio_client downloads outputs to a temp dir; copy them next to the user
+            if f:
+                shutil.copy(f, Path(a.out) / Path(f).name)
+        info["downloaded_to"] = str(Path(a.out).resolve())
+        print(json.dumps(info, indent=2, default=str))
+        return 0 if info.get("ok") else 1
     from .core.context import Request
     from .core.pipeline import Pipeline
 

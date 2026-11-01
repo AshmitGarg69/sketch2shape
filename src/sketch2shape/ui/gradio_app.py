@@ -169,6 +169,7 @@ def build() -> gr.Blocks:
             api_in = gr.File()
             api_prompt, api_preset, api_seed = gr.Textbox(), gr.Textbox(), gr.Textbox()
             api_out = gr.JSON()
+            api_glb, api_obj = gr.File(), gr.File()   # downloadable URLs for custom frontends
             api_btn, cap_btn = gr.Button(), gr.Button()
 
         def generate_api(file, prompt_v, preset_v, seed_v):
@@ -178,8 +179,9 @@ def build() -> gr.Blocks:
             s = int(seed_v) if str(seed_v).strip().lstrip("-").isdigit() else None
             res = PIPE.run(Request(image=img, source="upload", prompt=prompt_v or "", quality=preset_v or "balanced",
                                    seed=s, out_root=str(ROOT / "outputs")))
-            return {"ok": res.ok, "message": res.message, "glb": str(res.glb), "obj_zip": str(res.obj_zip),
+            info = {"ok": res.ok, "message": res.message, "glb": str(res.glb), "obj_zip": str(res.obj_zip),
                     "run_json": str(res.run_json), "badges": res.badges}
+            return info, (str(res.glb) if res.glb else None), (str(res.obj_zip) if res.obj_zip else None)
 
         def capabilities():
             from ..backends.registry import BackendRegistry
@@ -189,6 +191,7 @@ def build() -> gr.Blocks:
             return {"gpu": g.name, "vram_gb": round(g.total_gb, 1), "profile": vram.pick_profile(g, PIPE.cfg["profiles"]),
                     "backends": BackendRegistry().status()}
 
-        api_btn.click(generate_api, [api_in, api_prompt, api_preset, api_seed], api_out, api_name="generate_api")
+        api_btn.click(generate_api, [api_in, api_prompt, api_preset, api_seed], [api_out, api_glb, api_obj],
+                      api_name="generate_api")
         cap_btn.click(capabilities, None, api_out, api_name="capabilities")
     return demo

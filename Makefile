@@ -3,6 +3,7 @@ PROFILE ?= balanced
 BACKENDS ?= $(if $(filter balanced,$(PROFILE)),triposr instantmesh,triposr)
 EXTRAS ?=
 UV ?= uv
+PORT ?= 7860
 PY := .venv/bin/python
 
 .PHONY: setup parent backends weights demo test doctor calibrate
@@ -10,8 +11,8 @@ PY := .venv/bin/python
 setup: parent backends
 
 parent:
-	pip install -q -U uv
-	$(UV) venv .venv --python 3.10
+	@command -v $(UV) >/dev/null || pip install --user -q -U uv   # --user: works on PEP-668 distros (Fedora/Ubuntu)
+	$(UV) venv .venv --python 3.10 --allow-existing
 	for i in 1 2 3; do $(UV) pip install --python $(PY) -r requirements.lock --extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match && break || sleep 20; done
 	$(UV) pip install --python $(PY) --no-deps -e .
 
@@ -22,7 +23,7 @@ weights:
 	$(PY) -m sketch2shape.cli weights --profile $(PROFILE) --backends "$(shell echo $(BACKENDS) | tr ' ' ',')" --extras "$(EXTRAS)"
 
 demo:
-	HF_HUB_OFFLINE=1 $(PY) -m sketch2shape.cli serve $(if $(SHARE),--share,)
+	HF_HUB_OFFLINE=1 $(PY) -m sketch2shape.cli serve --port $(PORT) $(if $(SHARE),--share,)
 
 doctor:
 	$(PY) -m sketch2shape.cli doctor

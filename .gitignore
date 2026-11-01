@@ -12,3 +12,4 @@ __pycache__/
 /outputs/
 /outputs_local*/
 /kaggle_out/
+.venv_tools/

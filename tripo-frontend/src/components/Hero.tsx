@@ -25,14 +25,18 @@ interface Showcase {
 }
 
 const SHOWCASE: Showcase[] = [
+  { id: "chair", label: "Designer Chair", glb: "/models/chair.glb" },
   { id: "car", label: "Vehicles", glb: "/models/car.glb" },
+  { id: "mug", label: "Ceramic Mug", glb: "/models/mug.glb" },
+  { id: "lamp", label: "Studio Lamp", glb: "/models/lamp.glb" },
   { id: "character", label: "Game Character", glb: "/models/character.glb" },
-  { id: "shuttle", label: "Spacecraft", glb: "/models/shuttle.glb" },
+  { id: "spacecraft", label: "Spacecraft", glb: "/models/spacecraft.glb" },
   { id: "flower", label: "Nature & Botanical", glb: "/models/flower.glb" },
   { id: "suv", label: "Concept SUV", glb: "/models/suv.glb" },
   { id: "table", label: "Furniture", glb: "/models/table.glb" },
   { id: "bottle", label: "Product Design", glb: "/models/bottle.glb" },
   { id: "train", label: "Industrial Transport", glb: "/models/train.glb" },
+  { id: "doodle", label: "Abstract Art", glb: "/models/doodle.glb" },
 ];
 
 const MODEL_URLS = SHOWCASE.map((s) => s.glb);

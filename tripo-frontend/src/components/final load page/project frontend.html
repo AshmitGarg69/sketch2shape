@@ -177,16 +177,16 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 /* BUILT-IN SKETCHES BUTTONS */
 .sample-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 5px;
 }
-.sample-grid.second-row {
-  grid-template-columns: repeat(5, 1fr);
+.sample-grid.second-row,
+.sample-grid.third-row {
   margin-top: 5px;
 }
 .sample-btn {
-  padding: 5px 2px;
-  font-size: 10.5px;
+  padding: 6px 3px;
+  font-size: 11px;
   font-weight: 500;
   border-radius: 6px;
   background: var(--pn2);
@@ -207,13 +207,19 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .sample-btn.active {
   border-color: var(--ac);
   color: var(--ac);
-  background: rgba(255, 194, 26, 0.08);
+  background: rgba(255, 194, 26, 0.12);
   font-weight: 700;
+}
+
+/* SIDEBAR LAYOUT & NO-OVERLAP GUARDS */
+#L > * {
+  flex-shrink: 0;
 }
 
 /* INPUTS & SELECTS */
 .input-field, .select-field {
   width: 100%;
+  box-sizing: border-box;
   background: var(--pn2);
   color: var(--tx);
   border: 1px solid var(--bd);
@@ -225,6 +231,22 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
   transition: border-color 0.15s;
 }
 .input-field:focus, .select-field:focus { border-color: var(--ac); }
+
+#prompt-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 58px;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  resize: vertical;
+  background: var(--pn2);
+  color: var(--tx);
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  margin-bottom: 2px;
+}
 .field-label {
   font-size: 9.5px;
   font-weight: 700;
@@ -617,27 +639,31 @@ summary::-webkit-details-marker { color: var(--mu); }
     <!-- BUILT-IN MODEL SKETCHES -->
     <div class="sec-label">BUILT-IN MODEL SKETCHES</div>
     <div class="sample-grid">
-      <button class="sample-btn active" data-sample="chair" title="Chair">Chair</button>
+      <button class="sample-btn active" data-sample="none" title="None (Blank Canvas)">None</button>
+      <button class="sample-btn" data-sample="chair" title="Chair">Chair</button>
       <button class="sample-btn" data-sample="car" title="Car">Car</button>
       <button class="sample-btn" data-sample="mug" title="Mug">Mug</button>
-      <button class="sample-btn" data-sample="lamp" title="Lamp">Lamp</button>
-      <button class="sample-btn" data-sample="doodle" title="Doodle">Doodle</button>
     </div>
     <div class="sample-grid second-row">
+      <button class="sample-btn" data-sample="lamp" title="Lamp">Lamp</button>
+      <button class="sample-btn" data-sample="doodle" title="Doodle">Doodle</button>
       <button class="sample-btn" data-sample="spacecraft" title="Spacecraft">Spacecraft</button>
       <button class="sample-btn" data-sample="table" title="Table">Table</button>
+    </div>
+    <div class="sample-grid third-row">
       <button class="sample-btn" data-sample="train" title="Train">Train</button>
       <button class="sample-btn" data-sample="flower" title="Flower">Flower</button>
-      <button class="sample-btn" data-sample="truck" title="Truck">Truck</button>
+      <button class="sample-btn" data-sample="truck" title="Truck (Concept SUV)">Truck</button>
+      <button class="sample-btn" data-sample="bottle" title="Bottle">Bottle</button>
     </div>
 
     <!-- DETECTED OBJECT OVERRIDE -->
     <div class="sec-label">DETECTED OBJECT (EDITABLE)</div>
-    <input type="text" id="obj-input" class="input-field" value="chair" placeholder="auto-detected">
+    <input type="text" id="obj-input" class="input-field" value="" placeholder="auto-detected">
 
-    <!-- OBJECT DESCRIPTION / PROMPT (WHERE CURSOR WAS) -->
+    <!-- OBJECT DESCRIPTION / PROMPT -->
     <div class="sec-label">OBJECT DESCRIPTION / PROMPT</div>
-    <textarea id="prompt-input" class="input-field" rows="2" placeholder="e.g. modern ergonomic chair, curved backrest, studio lighting..." style="resize: vertical; font-family: inherit; font-size: 11.5px; line-height: 1.4; margin-bottom: 8px;"></textarea>
+    <textarea id="prompt-input" class="input-field" rows="2" placeholder="e.g. modern ergonomic chair, curved backrest, studio lighting..."></textarea>
 
     <!-- SETTINGS & PRESETS -->
     <details class="card" open>
@@ -690,17 +716,6 @@ summary::-webkit-details-marker { color: var(--mu); }
       <span class="sp"></span>
       <span id="gt">Generate</span>
     </button>
-
-    <!-- GENERATION TELEMETRY -->
-    <div class="sec-label">GENERATION TELEMETRY</div>
-    <div class="telemetry-container" id="telemetry-box">
-      <span class="badge badge-pink" id="tel-obj">● chair</span>
-      <span class="badge badge-dark" id="tel-backend">instantmesh (balanced)</span>
-      <span class="badge badge-dark" id="tel-time">⏱ 200.6s</span>
-      <span class="badge badge-dark" id="tel-seed">🌱 Seed: 12</span>
-      <span class="badge badge-green" id="tel-match">★ Sketch Match: 88%</span>
-      <span class="badge badge-pink" id="tel-texture">🎨 Baked Texture Map</span>
-    </div>
   </aside>
 
   <!-- CENTER 3D VIEWPORT -->
@@ -1256,28 +1271,54 @@ const BUILT_IN_MODELS = {
   },
   truck: {
     name: 'truck',
-    label: 'Utility Truck',
-    prompt: 'heavy duty commercial pickup transport truck, industrial chassis, rugged cabin and wheels',
+    label: 'Concept SUV',
+    prompt: 'concept electric off-road SUV truck, modern cyber styling, rugged wheels and tinted canopy',
     sketch: '/sketches/truck.png',
     glb: '/models/truck.glb',
     obj: null,
-    vertices: 20067,
-    faces: 33900,
-    dims: '2.81 × 1.00 × 1.07',
+    vertices: 49432,
+    faces: 77376,
+    dims: '1.69 × 1.00 × 0.76',
     format: 'GLB (PBR)',
     telemetry: {
-      object: 'utility truck',
+      object: 'concept suv truck',
       backend: 'instantmesh (balanced)',
       seconds: 203.4,
       seed: 62,
-      match: 0.86,
+      match: 0.88,
       texture: 'Baked Texture Map'
     },
     candidates: [
-      { img: '/examples/truck/candidates/cand_0.jpg', score: '0.87' },
-      { img: '/examples/truck/candidates/cand_1.jpg', score: '0.84' },
-      { img: '/examples/truck/candidates/cand_2.jpg', score: '0.81' },
-      { img: '/examples/truck/candidates/cand_3.jpg', score: '0.78' }
+      { img: '/examples/truck/candidates/cand_0.jpg', score: '0.88' },
+      { img: '/examples/truck/candidates/cand_1.jpg', score: '0.85' },
+      { img: '/examples/truck/candidates/cand_2.jpg', score: '0.82' },
+      { img: '/examples/truck/candidates/cand_3.jpg', score: '0.79' }
+    ]
+  },
+  bottle: {
+    name: 'bottle',
+    label: 'Glass Bottle / Tumbler',
+    prompt: 'minimalist cylindrical glass bottle tumbler, translucent surface with subtle reflections and clean rim',
+    sketch: '/examples/can/candidates/cand_0.jpg',
+    glb: '/models/bottle.glb',
+    obj: null,
+    vertices: 24700,
+    faces: 42100,
+    dims: '0.80 × 1.80 × 0.80',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'glass tumbler bottle',
+      backend: 'instantmesh (balanced)',
+      seconds: 195.2,
+      seed: 49,
+      match: 0.91,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/can/candidates/cand_0.jpg', score: '0.91' },
+      { img: '/examples/can/candidates/cand_1.jpg', score: '0.88' },
+      { img: '/examples/can/candidates/cand_2.jpg', score: '0.84' },
+      { img: '/examples/can/candidates/cand_3.jpg', score: '0.81' }
     ]
   }
 };
@@ -1539,37 +1580,9 @@ async function selectCandidate(idx) {
   }
 }
 
-/* ================= TELEMETRY BADGES ================= */
-function renderTelemetry(data = {}) {
-  const box = $('#telemetry-box');
-  if (!box) return;
-  const objName = data.object || $('#obj-input')?.value || '3D Object';
-  const backend = data.backend || 'instantmesh (balanced)';
-  const seconds = data.seconds ? `${parseFloat(data.seconds).toFixed(1)}s` : '198.4s';
-  const seed = (data.seed !== undefined && data.seed !== null && data.seed !== '') ? data.seed : ($('#seed-input')?.value || '42');
-  const rawMatch = data.match !== undefined ? data.match : 0.90;
-  const match = typeof rawMatch === 'number' && rawMatch <= 1 ? Math.round(rawMatch * 100) : rawMatch;
-  const texture = data.texture || 'Baked Texture Map';
+/* ================= TELEMETRY (REMOVED FROM UI) ================= */
+function renderTelemetry(data = {}) {}
 
-  box.innerHTML = `
-    <span class="badge badge-pink" id="tel-obj">● ${objName}</span>
-    <span class="badge badge-dark" id="tel-backend">${backend}</span>
-    <span class="badge badge-dark" id="tel-time">⏱ ${seconds}</span>
-    <span class="badge badge-dark" id="tel-seed">🌱 Seed: ${seed}</span>
-    <span class="badge badge-green" id="tel-match">★ Sketch Match: ${match}%</span>
-    <span class="badge badge-pink" id="tel-texture">🎨 ${texture}</span>
-  `;
-}
-
-// Live update telemetry on user input
-$('#obj-input')?.addEventListener('input', () => {
-  const el = $('#tel-obj');
-  if (el) el.textContent = `● ${$('#obj-input').value.trim() || '3D Object'}`;
-});
-$('#seed-input')?.addEventListener('input', () => {
-  const el = $('#tel-seed');
-  if (el) el.textContent = `🌱 Seed: ${$('#seed-input').value.trim() || 'random'}`;
-});
 $('#prompt-input')?.addEventListener('input', () => {
   userPrompt = $('#prompt-input').value.trim();
   updatePromptBtn();
@@ -1577,6 +1590,28 @@ $('#prompt-input')?.addEventListener('input', () => {
 
 /* ================= BUILT-IN SAMPLES LOADER ================= */
 async function loadSample(sampleKey) {
+  if (sampleKey === 'none' || !sampleKey) {
+    // Select None option, reset canvas and all inputs
+    $$('.sample-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.sample === 'none');
+    });
+    blank();
+    hasSketch = false;
+    if ($('#obj-input')) $('#obj-input').value = '';
+    if ($('#prompt-input')) {
+      $('#prompt-input').value = '';
+      userPrompt = '';
+      updatePromptBtn();
+    }
+    if ($('#seed-input')) $('#seed-input').value = '';
+    renderCandidates([], 0);
+    showGroup(null);
+    selId = null;
+    renderModels();
+    sync();
+    return;
+  }
+
   const sample = BUILT_IN_MODELS[sampleKey];
   if (!sample) return;
 
@@ -2117,8 +2152,8 @@ if (savedDrawing) {
   i.src = savedDrawing;
   renderTelemetry();
 } else {
-  // Default to Chair sample matching the screenshot!
-  loadSample('chair');
+  // Default to None option as requested
+  loadSample('none');
 }
 
 updateApiBadge();

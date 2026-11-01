@@ -43,9 +43,9 @@ export default function GalleryPage({ onNavigateToMain }: { onNavigateToMain?: (
   useEffect(() => () => PIECES.forEach((p) => useGLTF.clear(p.url)), []);
 
   return (
-    <div className="relative w-full overflow-x-clip bg-[#050403]" style={{ height: "800vh" }}>
+    <div className="relative w-full overflow-x-clip bg-[#050403]" style={{ height: "1150vh" }}>
       <div className="fixed inset-0">
-        <Canvas shadows={!mobile} dpr={[1, mobile ? 1.25 : 1.5]} camera={{ fov: 50, near: 0.1, far: 120, position: [0, 1.7, 7] }}>
+        <Canvas shadows={!mobile} dpr={[1, mobile ? 1.25 : 1.5]} camera={{ fov: 50, near: 0.1, far: 140, position: [0, 1.7, 7] }}>
           <Suspense fallback={null}>
             <GalleryEnvironment />
             <GalleryCamera progress={progress} />

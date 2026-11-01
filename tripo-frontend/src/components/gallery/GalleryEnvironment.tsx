@@ -2,16 +2,16 @@ import { Edges, Environment, Lightformer } from "@react-three/drei";
 import { END_Z, FIRST_Z, HALF_W, HEIGHT, SPACING } from "./galleryData";
 import { Plaque } from "./Plaque";
 
-const LEN = 74;
+const LEN = 104;
 const CZ = 8 - LEN / 2;
-const ks = Array.from({ length: 10 }, (_, i) => i - 1); // -1..8
+const ks = Array.from({ length: 16 }, (_, i) => i - 1); // -1..14
 
 /** Warm stone corridor: floor, walls, carved panels, pilasters, ceiling, fog. Dark and cinematic, but readable. */
 export function GalleryEnvironment() {
   return (
     <>
       <color attach="background" args={["#0a0705"]} />
-      <fog attach="fog" args={["#0a0705", 12, 70]} />
+      <fog attach="fog" args={["#0a0705", 14, 98]} />
       <ambientLight intensity={0.6} color="#ffd9a8" />
       <hemisphereLight args={["#ffe2b8", "#3a2a1a", 0.55]} />
       <Environment resolution={128}>

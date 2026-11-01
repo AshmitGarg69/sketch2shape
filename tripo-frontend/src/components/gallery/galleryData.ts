@@ -8,12 +8,36 @@ export interface Piece {
 
 export const PIECES: Piece[] = [
   {
+    id: "chair",
+    label: "Designer Chair",
+    url: "/models/chair.glb",
+    plaqueTitle: "Ergonomic & Spatial Design",
+    plaqueText:
+      "Modern interior seating with balanced silhouette, clean quad topology and true-to-life studio materials.",
+  },
+  {
     id: "car",
     label: "Sedan Car",
     url: "/models/car.glb",
     plaqueTitle: "Automotive Design",
     plaqueText:
       "Precision vehicle prototyping and digital twins with accurate aerodynamics and sleek surface styling.",
+  },
+  {
+    id: "mug",
+    label: "Ceramic Mug",
+    url: "/models/mug.glb",
+    plaqueTitle: "Tactile Consumer Goods",
+    plaqueText:
+      "Comfortable ergonomic handle, glazed ceramic gloss and refined curvature designed for everyday elegance.",
+  },
+  {
+    id: "lamp",
+    label: "Studio Desk Lamp",
+    url: "/models/lamp.glb",
+    plaqueTitle: "Architectural Lighting",
+    plaqueText:
+      "Adjustable mechanical joints, spun metal shade and focused luminaire optics for creative workspaces.",
   },
   {
     id: "character",
@@ -26,7 +50,7 @@ export const PIECES: Piece[] = [
   {
     id: "shuttle",
     label: "Space Shuttle",
-    url: "/models/shuttle.glb",
+    url: "/models/spacecraft.glb",
     plaqueTitle: "Interactive Web Showcases",
     plaqueText:
       "Lightweight GLB spacecraft assets and scroll-driven experiences that load fast on phones and desktops alike.",
@@ -71,13 +95,21 @@ export const PIECES: Piece[] = [
     plaqueText:
       "Heavy transport machinery and rolling stock engineered with robust industrial dimensions and materials.",
   },
+  {
+    id: "doodle",
+    label: "Abstract Sculpture",
+    url: "/models/doodle.glb",
+    plaqueTitle: "Generative Art Forms",
+    plaqueText:
+      "Complex organic loops and expressive procedural volumes synthesized instantly from freehand line strokes.",
+  },
 ];
 
 
 // Corridor runs along -Z. The visitor enters at z = +8 and ends at the sign on END_Z.
 export const FIRST_Z = -8;
 export const SPACING = 6.5;
-export const END_Z = -62;
+export const END_Z = -88;
 export const HALF_W = 4.5;
 export const HEIGHT = 5.4;
 export const PED_H = 1;

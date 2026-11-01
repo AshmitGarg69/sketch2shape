@@ -8,52 +8,20 @@ export interface Piece {
 
 export const PIECES: Piece[] = [
   {
-    id: "chair",
-    label: "Armchair",
-    url: "/models/chair.glb",
-    plaqueTitle: "Custom 3D Asset Creation",
+    id: "car",
+    label: "Sedan Car",
+    url: "/models/car.glb",
+    plaqueTitle: "Automotive Design",
     plaqueText:
-      "Every object is modelled from your brief, from product furniture to props, with clean topology and true-to-life materials.",
+      "Precision vehicle prototyping and digital twins with accurate aerodynamics and sleek surface styling.",
   },
   {
-    id: "hair",
-    label: "Long Black Hair",
-    url: "/models/hair.glb",
+    id: "character",
+    label: "Astronaut Character",
+    url: "/models/character.glb",
     plaqueTitle: "Character & Detail Work",
     plaqueText:
-      "Fine, organic detail such as hair, fabric and skin is sculpted, textured and optimised so it stays beautiful in real time.",
-  },
-  {
-    id: "bicycle",
-    label: "Urban Bicycle",
-    url: "/models/bicycle.glb",
-    plaqueTitle: "Product Visualisation",
-    plaqueText:
-      "Photoreal digital twins let customers inspect every angle of a product before it exists, with no studio shoot required.",
-  },
-  {
-    id: "rooster",
-    label: "Rooster",
-    url: "/models/rooster.glb",
-    plaqueTitle: "Rapid Digital Prototyping",
-    plaqueText:
-      "Move from sketch to a viewable 3D prototype in days. Test shapes, colours and ideas early and iterate quickly.",
-  },
-  {
-    id: "airship",
-    label: "Airship",
-    url: "/models/airship.glb",
-    plaqueTitle: "Concept & World Building",
-    plaqueText:
-      "Imaginative vehicles, scenes and environments that give games, films and brand stories a world worth exploring.",
-  },
-  {
-    id: "skeleton",
-    label: "Skeleton",
-    url: "/models/skeleton.glb",
-    plaqueTitle: "Educational Models",
-    plaqueText:
-      "Anatomically careful models for learning and exhibitions, built to be rotated, explored and understood by everyone.",
+      "Fine, organic humanoid detail sculpted, textured and optimised to perform seamlessly in real time.",
   },
   {
     id: "shuttle",
@@ -61,17 +29,50 @@ export const PIECES: Piece[] = [
     url: "/models/shuttle.glb",
     plaqueTitle: "Interactive Web Showcases",
     plaqueText:
-      "Lightweight GLB assets and scroll-driven experiences that load fast and run smoothly on phones and desktops alike.",
+      "Lightweight GLB spacecraft assets and scroll-driven experiences that load fast on phones and desktops alike.",
   },
   {
-    id: "sakura",
-    label: "Sakura",
-    url: "/models/sakura.glb",
-    plaqueTitle: "Natural & Organic Forms",
+    id: "flower",
+    label: "Potted Flower",
+    url: "/models/flower.glb",
+    plaqueTitle: "Natural & Botanical Forms",
     plaqueText:
-      "Trees, flowers and landscapes crafted with delicate geometry and warm lighting, ready for any engine or storefront.",
+      "Delicate botanical shapes, organic petals and clean pot geometry crafted for vibrant real-time rendering.",
+  },
+  {
+    id: "suv",
+    label: "Concept SUV",
+    url: "/models/suv.glb",
+    plaqueTitle: "Concept & World Building",
+    plaqueText:
+      "Imaginative off-road vehicles, rigs and sci-fi transport that give games and brand experiences depth.",
+  },
+  {
+    id: "table",
+    label: "Wooden Table",
+    url: "/models/table.glb",
+    plaqueTitle: "Custom 3D Furniture",
+    plaqueText:
+      "Interior assets modelled with clean topology, realistic wood grain and true-to-life studio lighting.",
+  },
+  {
+    id: "bottle",
+    label: "Glass Tumbler",
+    url: "/models/bottle.glb",
+    plaqueTitle: "Product Visualisation",
+    plaqueText:
+      "Translucent material properties and cylindrical glass rendering engineered for e-commerce and packaging.",
+  },
+  {
+    id: "train",
+    label: "Locomotive",
+    url: "/models/train.glb",
+    plaqueTitle: "Industrial Engineering",
+    plaqueText:
+      "Heavy transport machinery and rolling stock engineered with robust industrial dimensions and materials.",
   },
 ];
+
 
 // Corridor runs along -Z. The visitor enters at z = +8 and ends at the sign on END_Z.
 export const FIRST_Z = -8;

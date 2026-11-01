@@ -1,0 +1,316 @@
+{
+  "timestamp": "2026-10-31T23:27:06+0000",
+  "request": {
+    "source": "upload",
+    "prompt": "",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "balanced",
+    "viewpoint": "side profile",
+    "seed": 11,
+    "out_root": "/kaggle/working/outputs",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "balanced",
+  "environment": {
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "Tesla T4",
+      "total_gb": 14.56,
+      "compute_cap": [
+        7,
+        5
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "580.178.04\n580.178.04"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.01,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.48
+    },
+    "s2_understand": {
+      "seconds": 3.64,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 16.48
+    },
+    "s3_generate": {
+      "seconds": 66.9,
+      "vram_peak_gb": 10.06,
+      "rss_gb": 16.66
+    },
+    "s4_prepare": {
+      "seconds": 0.29,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.66
+    },
+    "s5_reconstruct": {
+      "seconds": 113.98,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.66
+    },
+    "s6_cleanup": {
+      "seconds": 0.16,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.66
+    },
+    "s7_export": {
+      "seconds": 0.98,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.66
+    },
+    "s8_verify": {
+      "seconds": 1.95,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.66
+    }
+  },
+  "warnings": [],
+  "fallbacks": [],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 3,
+      "backend": "instantmesh",
+      "seed": 11,
+      "recon_consistency": 0.9566,
+      "sketch_fidelity": 0.9049,
+      "valid": true
+    }
+  ],
+  "total_seconds": 189.85,
+  "seed": 11,
+  "validation": {
+    "loads": true,
+    "vertices": 17622,
+    "faces": 24784,
+    "extent": [
+      2.9742181301116943,
+      1.0,
+      1.105448842048645
+    ],
+    "nan": false,
+    "texture": {
+      "size": [
+        1024,
+        1024
+      ],
+      "std": 67.29415086011852
+    },
+    "vertex_colors": false,
+    "geometries": 1,
+    "gltf_color_0": false,
+    "gltf_base_color_texture": true,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.9566,
+  "sketch_fidelity": 0.9049,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    -5.0,
+    0.0
+  ],
+  "input_view": [
+    5.0,
+    10.0
+  ],
+  "mirror_direct": 0.8876,
+  "mirror_flipped": 0.8286,
+  "object": "toy car",
+  "object_conf": 0.01890726387500763,
+  "object_top5": [
+    [
+      "toy car",
+      0.01890726387500763
+    ],
+    [
+      "car",
+      0.01842874102294445
+    ],
+    [
+      "sports car",
+      0.013408894650638103
+    ],
+    [
+      "truck",
+      0.01083634328097105
+    ],
+    [
+      "van",
+      0.010510639287531376
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "toy car, soft neutral colors, side profile view, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "toy car, soft neutral colors, side profile view, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "toy car, soft neutral colors, side profile view, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "toy car, soft neutral colors, side profile view, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.6834,
+      "seed": 11,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.13834857940673828,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.8159323611542042,
+        "stroke": 0.49851750687775404,
+        "stroke_detail": {
+          "recall": 0.3326,
+          "precision": 0.995,
+          "f": 0.4985,
+          "interior_density": 0.0521
+        },
+        "semantic": 0.55462646484375,
+        "clean": 0.9651476194086952
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.6419,
+      "seed": 12,
+      "controlnet_scale": 0.7,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.13605690002441406,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0091
+      },
+      "terms": {
+        "silhouette_iou": 0.7568490551718904,
+        "stroke": 0.4956881653104335,
+        "stroke_detail": {
+          "recall": 0.3295,
+          "precision": 1.0,
+          "f": 0.4957,
+          "interior_density": 0.0579
+        },
+        "semantic": 0.47589111328125,
+        "clean": 0.9530521697075047
+      }
+    },
+    {
+      "index": 2,
+      "score": 0.6682,
+      "seed": 13,
+      "controlnet_scale": 0.9,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.13187026977539062,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0104
+      },
+      "terms": {
+        "silhouette_iou": 0.7995270003941664,
+        "stroke": 0.5435211102576454,
+        "stroke_detail": {
+          "recall": 0.3732,
+          "precision": 1.0,
+          "f": 0.5435,
+          "interior_density": 0.0534
+        },
+        "semantic": 0.44598388671875,
+        "clean": 0.9613098251348732
+      }
+    },
+    {
+      "index": 3,
+      "score": 0.6879,
+      "seed": 14,
+      "controlnet_scale": 0.5,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.14670658111572266,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9248792270531401,
+        "stroke": 0.38591819871641386,
+        "stroke_detail": {
+          "recall": 0.2393,
+          "precision": 0.9966,
+          "f": 0.3859,
+          "interior_density": 0.0836
+        },
+        "semantic": 0.52349853515625,
+        "clean": 0.9752198812998512
+      }
+    }
+  ],
+  "selected_candidate": 3,
+  "backend": "instantmesh",
+  "backend_meta": {
+    "backend": "instantmesh",
+    "mesh": "mesh.glb",
+    "config": "/tmp/s2s/repo/adapters/instantmesh_configs/g96/instant-mesh-large.yaml",
+    "fallback_used": false,
+    "texmap": true,
+    "seconds": 113.83,
+    "vram_peak_gb": 9.41,
+    "has_uv": true,
+    "has_pbr": false,
+    "faces": 24784
+  },
+  "gen_profile": "balanced",
+  "s3_timing": {
+    "load_s": 3.03,
+    "load_from": "ram",
+    "generate_s": 54.88,
+    "n": 4,
+    "ram_free_gb_after": 14.4,
+    "parked": true
+  },
+  "tier": 1,
+  "material": "plastic",
+  "cleanup": {
+    "raw_faces": 24784,
+    "raw_vertices": 17622,
+    "prune": {
+      "components": 1,
+      "removed": 0,
+      "removed_area_frac": 0.0
+    },
+    "repair": {
+      "faces_in": 24784,
+      "faces_out": 24784,
+      "watertight": false
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "/kaggle/working/outputs/20261031_232357_75c5f60a/mesh/model.glb",
+      "bytes": 1545664
+    },
+    "obj_zip": {
+      "path": "/kaggle/working/outputs/20261031_232357_75c5f60a/mesh/model.obj.zip",
+      "bytes": 1444691
+    }
+  },
+  "notice": null
+}

@@ -5,6 +5,9 @@ import {
   Undo, Redo, Trash2, Download,
   Palette, Wand2, Upload, FilePlus
 } from 'lucide-react';
+import ApiSettingsModal from '../ApiSettingsModal';
+import { checkApiHealth } from '../../services/apiConfig';
+
 
 const COLORS = [
   '#000000', '#FFFFFF', '#EF4444', '#3B82F6', '#10B981', 
@@ -22,6 +25,19 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
   const [color, setColor] = useState('#000000');
   const [strokeWidth, setStrokeWidth] = useState(4);
   const [opacity, setOpacity] = useState(1.0);
+
+  // API modal & health status
+  const [showApiModal, setShowApiModal] = useState(false);
+  const [apiOnline, setApiOnline] = useState<boolean | null>(null);
+
+  const checkConnection = async () => {
+    const res = await checkApiHealth();
+    setApiOnline(res.ok);
+  };
+
+  useEffect(() => {
+    checkConnection();
+  }, []);
 
   // History state for buttons
   const [canUndo, setCanUndo] = useState(false);
@@ -338,6 +354,24 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
             Sketch<span className="text-[#FFD83D]">2</span>Shape
           </h1>
           <p className="text-xs text-[#A0A0A0] mt-1">Creative Scribble Studio</p>
+
+          <button
+            onClick={() => setShowApiModal(true)}
+            className="mt-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 hover:border-[#FFD83D]/50 text-[11px] text-[#A0A0A0] hover:text-white transition-colors cursor-pointer"
+            title="Configure Kaggle GPU API"
+          >
+            <span 
+              className={`w-1.5 h-1.5 rounded-full ${
+                apiOnline === true 
+                  ? "bg-emerald-400 shadow-[0_0_6px_#34d399]" 
+                  : apiOnline === false 
+                  ? "bg-red-400 shadow-[0_0_6px_#f87171]" 
+                  : "bg-amber-400 animate-pulse"
+              }`} 
+            />
+            <span>{apiOnline === true ? "Tesla T4 Ready" : apiOnline === false ? "API Offline" : "Connecting..."}</span>
+          </button>
+
           {onBackToMain && (
             <button
               onClick={onBackToMain}
@@ -506,6 +540,12 @@ export default function ModernCanvasApplication({ onGenerate, onBackToMain }: Sc
           />
         </div>
       </main>
+
+      <ApiSettingsModal
+        isOpen={showApiModal}
+        onClose={() => setShowApiModal(false)}
+        onApiUpdated={() => checkConnection()}
+      />
     </div>
   );
 }

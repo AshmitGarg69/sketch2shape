@@ -11,6 +11,8 @@ import {
 
 import { useGLTF } from "@react-three/drei";
 import { ModelStage, ModelView, type ModelStatus } from "./ModelViewer";
+import ApiSettingsModal from "./ApiSettingsModal";
+import { checkApiHealth } from "../services/apiConfig";
 
 /* ------------------------------------------------------------------ */
 /* Data: replace `src` (pre-rendered transparent PNG/WebP of a 3D model)
@@ -23,15 +25,16 @@ interface Showcase {
 }
 
 const SHOWCASE: Showcase[] = [
-  { id: "chair", label: "Furniture", glb: "/models/chair.glb" },
-  { id: "hair", label: "Hair Design", glb: "/models/hair.glb" },
-  { id: "bicycle", label: "Vehicles", glb: "/models/bicycle.glb" },
-  { id: "rooster", label: "Animals", glb: "/models/rooster.glb" },
-  { id: "airship", label: "Fantasy Vehicle", glb: "/models/airship.glb" },
-  { id: "skeleton", label: "Game Character", glb: "/models/skeleton.glb" },
+  { id: "car", label: "Vehicles", glb: "/models/car.glb" },
+  { id: "character", label: "Game Character", glb: "/models/character.glb" },
   { id: "shuttle", label: "Spacecraft", glb: "/models/shuttle.glb" },
-  { id: "sakura", label: "Nature & Environment", glb: "/models/sakura.glb" },
+  { id: "flower", label: "Nature & Botanical", glb: "/models/flower.glb" },
+  { id: "suv", label: "Concept SUV", glb: "/models/suv.glb" },
+  { id: "table", label: "Furniture", glb: "/models/table.glb" },
+  { id: "bottle", label: "Product Design", glb: "/models/bottle.glb" },
+  { id: "train", label: "Industrial Transport", glb: "/models/train.glb" },
 ];
+
 const MODEL_URLS = SHOWCASE.map((s) => s.glb);
 MODEL_URLS.forEach((u) => useGLTF.preload(u)); // start downloading all GLBs once, up front
 
@@ -438,7 +441,15 @@ function UploadBox({
 /* ------------------------------------------------------------------ */
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
-function NavBar({ onNavigate }: { onNavigate?: (page: string) => void }) {
+function NavBar({ 
+  onNavigate, 
+  onOpenApiModal, 
+  apiOnline 
+}: { 
+  onNavigate?: (page: string) => void;
+  onOpenApiModal?: () => void;
+  apiOnline?: boolean | null;
+}) {
   return (
     <header className="absolute inset-x-3 top-3 z-20 mx-auto flex h-12 max-w-[1560px] items-center justify-between rounded-full border border-white/10 bg-black/70 px-5 backdrop-blur">
       <div 
@@ -450,7 +461,27 @@ function NavBar({ onNavigate }: { onNavigate?: (page: string) => void }) {
           <span className="mr-1.5 text-yellow-400">▼</span>Sketch2Shape
         </span>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onOpenApiModal}
+          className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 cursor-pointer text-xs text-white/80 transition-colors"
+          title="Click to configure Kaggle GPU API"
+        >
+          <span 
+            className={`w-2 h-2 rounded-full ${
+              apiOnline === true 
+                ? "bg-emerald-400 shadow-[0_0_8px_#34d399]" 
+                : apiOnline === false 
+                ? "bg-red-400 shadow-[0_0_8px_#f87171]" 
+                : "bg-yellow-400 animate-pulse"
+            }`} 
+          />
+          <span className="hidden sm:inline">
+            {apiOnline === true ? "Tesla T4 Ready" : apiOnline === false ? "API Offline" : "Connecting..."}
+          </span>
+          <span className="sm:hidden">GPU</span>
+        </button>
+
         <button
           onClick={() => onNavigate?.("gallery")}
           className="text-xs text-white/70 hover:text-white transition-colors cursor-pointer"
@@ -488,6 +519,18 @@ export interface HeroProps {
 export default function Hero({ onCreateFromScratch, onNavigate }: HeroProps = {}) {
   const { w, h } = useSize();
   const { contentTop, minH } = layout(w, h);
+  const [showApiModal, setShowApiModal] = useState(false);
+  const [apiOnline, setApiOnline] = useState<boolean | null>(null);
+
+  const checkConnection = async () => {
+    const res = await checkApiHealth();
+    setApiOnline(res.ok);
+  };
+
+  useEffect(() => {
+    checkConnection();
+  }, []);
+
   return (
     <main
       className="relative w-full overflow-hidden bg-black text-white"
@@ -506,7 +549,11 @@ export default function Hero({ onCreateFromScratch, onNavigate }: HeroProps = {}
             "radial-gradient(ellipse at center, black 40%, transparent 85%)",
         }}
       />
-      <NavBar onNavigate={onNavigate} />
+      <NavBar 
+        onNavigate={onNavigate} 
+        onOpenApiModal={() => setShowApiModal(true)} 
+        apiOnline={apiOnline} 
+      />
       <OrbitCarousel />
       <ModelStage urls={MODEL_URLS} />
 
@@ -526,6 +573,13 @@ export default function Hero({ onCreateFromScratch, onNavigate }: HeroProps = {}
           <UploadBox onCreateFromScratch={onCreateFromScratch} onNavigate={onNavigate} />
         </div>
       </section>
+
+      <ApiSettingsModal
+        isOpen={showApiModal}
+        onClose={() => setShowApiModal(false)}
+        onApiUpdated={() => checkConnection()}
+      />
     </main>
   );
 }
+

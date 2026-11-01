@@ -1,0 +1,316 @@
+{
+  "timestamp": "2026-10-31T23:17:17+0000",
+  "request": {
+    "source": "upload",
+    "prompt": "",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "balanced",
+    "viewpoint": "Auto",
+    "seed": 7,
+    "out_root": "/kaggle/working/outputs",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "balanced",
+  "environment": {
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "Tesla T4",
+      "total_gb": 14.56,
+      "compute_cap": [
+        7,
+        5
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "580.178.04\n580.178.04"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.03,
+      "vram_peak_gb": 0.0,
+      "rss_gb": 0.53
+    },
+    "s2_understand": {
+      "seconds": 11.37,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 1.14
+    },
+    "s3_generate": {
+      "seconds": 124.91,
+      "vram_peak_gb": 10.06,
+      "rss_gb": 11.16
+    },
+    "s4_prepare": {
+      "seconds": 0.52,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 11.16
+    },
+    "s5_reconstruct": {
+      "seconds": 262.17,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 11.15
+    },
+    "s6_cleanup": {
+      "seconds": 5.39,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 11.15
+    },
+    "s7_export": {
+      "seconds": 1.65,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 11.15
+    },
+    "s8_verify": {
+      "seconds": 2.24,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 11.15
+    }
+  },
+  "warnings": [],
+  "fallbacks": [],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 1,
+      "backend": "instantmesh",
+      "seed": 7,
+      "recon_consistency": 0.8417,
+      "sketch_fidelity": 0.832,
+      "valid": true
+    }
+  ],
+  "total_seconds": 409.89,
+  "seed": 7,
+  "validation": {
+    "loads": true,
+    "vertices": 51223,
+    "faces": 75852,
+    "extent": [
+      1.444975733757019,
+      1.0,
+      1.4429216384887695
+    ],
+    "nan": false,
+    "texture": {
+      "size": [
+        1024,
+        1024
+      ],
+      "std": 76.9719160748696
+    },
+    "vertex_colors": false,
+    "geometries": 1,
+    "gltf_color_0": false,
+    "gltf_base_color_texture": true,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.8417,
+  "sketch_fidelity": 0.832,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    5.0,
+    20.0
+  ],
+  "input_view": [
+    5.0,
+    10.0
+  ],
+  "mirror_direct": 0.8049,
+  "mirror_flipped": 0.7221,
+  "object": "mug",
+  "object_conf": 0.01741926558315754,
+  "object_top5": [
+    [
+      "mug",
+      0.01741926558315754
+    ],
+    [
+      "cup",
+      0.016721300780773163
+    ],
+    [
+      "teacup",
+      0.016528507694602013
+    ],
+    [
+      "plate",
+      0.012263466604053974
+    ],
+    [
+      "bowl",
+      0.01001403946429491
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "mug, glossy white ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "mug, glossy white ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "mug, glossy white ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "mug, glossy white ceramic, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.7883,
+      "seed": 7,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.3258352279663086,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.8308802391766803,
+        "stroke": 0.8126877031307854,
+        "stroke_detail": {
+          "recall": 0.6845,
+          "precision": 1.0,
+          "f": 0.8127,
+          "interior_density": 0.0212
+        },
+        "semantic": 0.570648193359375,
+        "clean": 0.9805802793981204
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.842,
+      "seed": 8,
+      "controlnet_scale": 0.7,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.35512828826904297,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9172470674486803,
+        "stroke": 0.9069650238907299,
+        "stroke_detail": {
+          "recall": 0.8298,
+          "precision": 1.0,
+          "f": 0.907,
+          "interior_density": 0.0219
+        },
+        "semantic": 0.524566650390625,
+        "clean": 0.9814731765217695
+      }
+    },
+    {
+      "index": 2,
+      "score": 0.8296,
+      "seed": 9,
+      "controlnet_scale": 0.9,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.3528108596801758,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.909547584770423,
+        "stroke": 0.9449954914337242,
+        "stroke_detail": {
+          "recall": 0.8957,
+          "precision": 1.0,
+          "f": 0.945,
+          "interior_density": 0.0191
+        },
+        "semantic": 0.420501708984375,
+        "clean": 0.9813271559052734
+      }
+    },
+    {
+      "index": 3,
+      "score": 0.8175,
+      "seed": 10,
+      "controlnet_scale": 0.5,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.3500804901123047,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9106028466906453,
+        "stroke": 0.8607594936708861,
+        "stroke_detail": {
+          "recall": 0.7556,
+          "precision": 1.0,
+          "f": 0.8608,
+          "interior_density": 0.0187
+        },
+        "semantic": 0.484283447265625,
+        "clean": 0.9813231776749862
+      }
+    }
+  ],
+  "selected_candidate": 1,
+  "backend": "instantmesh",
+  "backend_meta": {
+    "backend": "instantmesh",
+    "mesh": "mesh.glb",
+    "config": "/tmp/s2s/repo/adapters/instantmesh_configs/g96/instant-mesh-large.yaml",
+    "fallback_used": false,
+    "texmap": true,
+    "seconds": 253.72,
+    "vram_peak_gb": 9.43,
+    "has_uv": true,
+    "has_pbr": false,
+    "faces": 78816
+  },
+  "gen_profile": "balanced",
+  "s3_timing": {
+    "load_s": 55.55,
+    "load_from": "disk",
+    "generate_s": 57.45,
+    "n": 4,
+    "ram_free_gb_after": 28.7,
+    "parked": true
+  },
+  "tier": 1,
+  "material": "ceramic",
+  "cleanup": {
+    "raw_faces": 78816,
+    "raw_vertices": 54918,
+    "prune": {
+      "components": 66,
+      "removed": 65,
+      "removed_area_frac": 0.020187717683181526
+    },
+    "repair": {
+      "faces_in": 75852,
+      "faces_out": 75852,
+      "watertight": false
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "/kaggle/working/outputs/20261031_231027_91e2cb22/mesh/model.glb",
+      "bytes": 2998360
+    },
+    "obj_zip": {
+      "path": "/kaggle/working/outputs/20261031_231027_91e2cb22/mesh/model.obj.zip",
+      "bytes": 2718374
+    }
+  },
+  "notice": null
+}

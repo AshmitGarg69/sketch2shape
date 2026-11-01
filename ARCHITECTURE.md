@@ -20,7 +20,10 @@ src/sketch2shape/
 adapters/    triposr_run.py · instantmesh_run.py (+ instantmesh_configs/g96, g112)   ← standalone, backend env only
 scripts/     phase0.py · calibrate_backend.py · setup_backend.sh · timing_table.py · batch_run.py
              render_preview.py · make_demo_assets.py · sync_kaggle_dataset.sh
-kaggle/      runner kernel + tasks.sh + runs.txt (the exact scripts behind every reported number)
+kaggle/      Sketch2Shape_Kaggle_demo.ipynb (live demo) · runner kernel + tasks.sh + runs.txt (the exact scripts behind
+             every reported number) · verify_notebook/ (automated notebook check)
+docs/        DEMO.md · FRONTEND.md · phase0/ (raw measurements) · calibration/ · timing_table.md · contact sheets
+examples/    sketches/ (inputs) · outputs/ (14 complete runs) · frontend/client.mjs
 ```
 
 ## Deviations (all measured)
@@ -38,7 +41,19 @@ kaggle/      runner kernel + tasks.sh + runs.txt (the exact scripts behind every
 | Retry thresholds 0.55 (placeholder) | recon 0.72 · closed-sketch 0.65 · open-sketch 0.60 | Phase 4: p10 of 15 known-good runs minus margin (`config/default.yaml`) |
 | nvdiffrast compiled lazily | compiled during `make setup` | first InstantMesh run was ~2 min slower otherwise |
 | Human runs `colab/phase0.ipynb` and pastes JSON | Kaggle runner kernel pushed via the Kaggle API (`kaggle/`) | same measurements, recorded automatically; no manual copy step |
+| Weights downloaded by pinned commit | + `refs/main` written to point at the pinned commit | backends call `hf_hub_download(repo, file)` (revision "main"); offline that resolves only via `refs/main` → first offline run failed on a fresh Kaggle machine |
+| `/generate_api` returns a JSON summary | returns `[JSON, GLB file, OBJ file]` | custom frontends need downloadable URLs, not server paths (tested JS client: `examples/frontend/client.mjs`) |
+| Notebook = setup + `serve --share` | streaming setup cell with heartbeat; server run with `PYTHONUNBUFFERED=1`; batch ("Save & Run All") runs generate one model and exit | `%%bash` output appeared only at the end; buffered server output hid the share link; batch serve would hold the GPU 12 h |
 | Backend envs from upstream requirements | + resolved lockfiles `envs/*.lock.txt`, `setuptools==69.5.1`, `huggingface_hub==0.17.3`, `numpy<2` | upstream pins conflict / rely on removed `pkg_resources` (see TROUBLESHOOTING.md) |
+
+## Request flow & resource lifecycle
+```
+UI/CLI/API ─► Pipeline.run  (one request at a time per GPU; Gradio queue)
+  S1-S2 CPU (+ SigLIP on GPU, freed)  ─►  S3 SDXL/SD1.5 on GPU → parked in RAM (balanced) / freed
+  S3 BiRefNet on GPU (freed)  ─►  S4 CPU  ─►  S5 backend subprocess (own env, own CUDA context, exits → VRAM freed)
+  S6-S8 CPU (trimesh + NumPy/OpenCV)  ─►  outputs/<run>/{mesh/model.glb, model.obj.zip, run.json, …}
+```
+Peak VRAM never overlaps between stages: SDXL 10.1 GB, InstantMesh 9.4 GB, TripoSR 2.4–3.4 GB (T4 has 15 GB).
 
 ## Not built (scope-cut order from the spec)
 * SF3D opt-in extra (gated weights) · Florence-2 option (off by default in the spec) · `offline_check.sh`

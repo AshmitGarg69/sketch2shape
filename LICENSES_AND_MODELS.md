@@ -37,6 +37,17 @@ PyTorch 2.4.1 (BSD), diffusers 0.31.0 / transformers 4.46.3 / accelerate / peft 
 OpenCV (Apache-2.0), scikit-image (BSD), trimesh (MIT), fast-simplification (MIT), pymatting (MIT), timm (Apache-2.0),
 kornia (Apache-2.0), huggingface_hub (Apache-2.0).
 
+## External services (disclosure)
+
+| Service | When | Required? |
+|---|---|---|
+| Hugging Face Hub (weights, pinned revisions) | `make weights` only | yes, once; runtime is offline (`HF_HUB_OFFLINE=1`) |
+| PyPI / PyTorch wheel index / GitHub (packages, pinned third-party commits) | `make setup` only | yes, once |
+| Gradio share tunnel (`*.gradio.live`) | only with `--share` / the Kaggle demo notebook | optional (public demo link) |
+| Kaggle notebooks (T4 GPU) | where we ran and measured the `balanced` profile | optional (any NVIDIA GPU works) |
+
+No paid or proprietary AI APIs are called. Optional custom-frontend client: `@gradio/client` (Apache-2.0, npm).
+
 ## Licence flags
 
 - **nvdiffrast** (required by InstantMesh) is licensed for non-commercial / research use. Commercial users must use the

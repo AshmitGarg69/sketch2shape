@@ -23,6 +23,17 @@ Laptop (`lite`) results for the same sketches are in `examples/outputs/*_rtx4050
 
 ---
 
+## At a glance — where each judging criterion is addressed
+
+| Rubric item (points) | Where to look |
+|---|---|
+| Technical implementation (25) | §1 pipeline, §5 engineering notes, [ARCHITECTURE.md](ARCHITECTURE.md) (code map + every design deviation with its measurement), `tests/` (43 tests) |
+| 3D output quality & design (25) | Sample results below, `examples/outputs/*/mesh/model.glb` (14 complete runs, open in Blender / any glTF viewer), sketch-match scores in each `run.json` |
+| End-to-end validity & efficiency (20) | §2 measured timing table (generated from real `run.json`), canvas **and** upload in the UI, GLB+OBJ export, closed-loop validation (S8) |
+| Code reproducibility (15) | §3 Quick start (Kaggle notebook / `make setup && make weights && make demo`), §6 Reproducibility details, pinned lockfiles + model revisions |
+| Documentation & README (15) | this file, [TROUBLESHOOTING.md](TROUBLESHOOTING.md), [LICENSES_AND_MODELS.md](LICENSES_AND_MODELS.md), [docs/FRONTEND.md](docs/FRONTEND.md), [docs/DEMO.md](docs/DEMO.md) |
+| Submission: prototype / code / README / artefact / repro / demo | UI + CLI · this repo · this README · `examples/outputs/` · §6 · [docs/DEMO.md](docs/DEMO.md) |
+
 ## 1. How it works
 
 ```
@@ -198,11 +209,30 @@ Full attribution with revisions and licences: [LICENSES_AND_MODELS.md](LICENSES_
 * **Tests:** `make test` — 41 tests incl. renderer regression, ranker, seam-safe pruning, GLB patching, subprocess
   resolution, OOM fallbacks and a CPU end-to-end smoke test.
 
-## 6. Limitations
+## 6. Reproducibility details
+
+| Item | Details |
+|---|---|
+| OS | Linux or WSL2 (tested: Kaggle Ubuntu image, Fedora 44). Native Windows: UI only, 3D backends unsupported |
+| GPU / driver | NVIDIA, driver with CUDA 12 support. ≥ 14 GB VRAM → `balanced`; 5–13 GB → `lite`. Compute capability < 8.0 runs fp16, ≥ 8.0 bf16 (auto) |
+| CUDA toolkit | `nvcc` only needed for InstantMesh (nvdiffrast JIT; present on Kaggle). Not needed for `lite` |
+| Python | 3.10, provisioned by `uv` per environment (parent + one per 3D backend) — the system Python is never touched |
+| Dependency pins | parent: `requirements.lock` (torch 2.4.1+cu121, diffusers 0.31.0, transformers 4.46.3, gradio 5.50.0); backends: `envs/triposr.lock.txt`, `envs/instantmesh.lock.txt` (torch 2.1.0+cu121); third-party repos at pinned commits (`scripts/setup_backend.sh`) |
+| Model weights | Hugging Face Hub only, pinned by commit in `config/weights_manifest.yaml`; **all ungated, no token**. `make weights PROFILE=…` checks free disk first. Sizes: balanced ≈ 25.6 GB, lite ≈ 7 GB |
+| External services | Hugging Face Hub + PyPI/GitHub **at setup time only**. At run time the app works offline (`HF_HUB_OFFLINE=1`). Optional: Gradio share tunnel (`--share`) for a public link. **No paid / proprietary APIs** |
+| Configuration | `config/default.yaml` (candidates, ControlNet scales, thresholds), `config/profiles.yaml`, `config/backends.yaml` (interpreters, measured VRAM, calibration), `config/ranker.yaml`, `config/materials.yaml`, `config/object_vocab.txt`, `config/prompt_allowlist.yaml` |
+| Seeds | every run records its seed in `run.json`; pass `--seed` / the UI seed box to reproduce |
+| Disk | lite ≈ 18 GB total (envs + weights); balanced ≈ 42 GB |
+| Verified fresh-machine path | the Kaggle demo notebook was run from a clean session by a team member: setup → `doctor` all GO → UI link → generated models |
+
+## 7. Limitations
 * Hidden sides are inferred, not recovered; thin parts and text/logos may be lost.
 * Generation needs an NVIDIA GPU: ≈ 3.3 min per model on a T4 in `balanced` (≈ 7 min for the first request of a session), ≈ 40 s on an RTX 4050 in `lite`.
 * Object detection uses a closed vocabulary (~190 nouns); override with the "Detected object" box.
 * InstantMesh needs Linux/WSL2 (nvdiffrast); nvdiffrast's licence is non-commercial.
 * 6 GB laptop GPUs with a desktop session using 3–4 GB cannot run even TripoSR locally — use the remote mode.
+
+* The first request of a session is slow (≈ 7 min on a T4: cold model loads); later requests ≈ 3.3 min.
+* Only one generation runs at a time per GPU (requests queue).
 
 See [TROUBLESHOOTING.md](TROUBLESHOOTING.md).

@@ -31,7 +31,7 @@ Laptop (`lite`) results for the same sketches are in `examples/outputs/*_rtx4050
 | 3D output quality & design (25) | Sample results below, `examples/outputs/*/mesh/model.glb` (14 complete runs, open in Blender / any glTF viewer), sketch-match scores in each `run.json` |
 | End-to-end validity & efficiency (20) | §2 measured timing table (generated from real `run.json`), canvas **and** upload in the UI, GLB+OBJ export, closed-loop validation (S8) |
 | Code reproducibility (15) | §3 Quick start (Kaggle notebook / `make setup && make weights && make demo`), §6 Reproducibility details, pinned lockfiles + model revisions |
-| Documentation & README (15) | this file, [TROUBLESHOOTING.md](TROUBLESHOOTING.md), [LICENSES_AND_MODELS.md](LICENSES_AND_MODELS.md), [docs/FRONTEND.md](docs/FRONTEND.md), [docs/DEMO.md](docs/DEMO.md) |
+| Documentation & README (15) | this file, [TROUBLESHOOTING.md](TROUBLESHOOTING.md), [LICENSES_AND_MODELS.md](LICENSES_AND_MODELS.md), [docs/API.md](docs/API.md), [docs/FRONTEND.md](docs/FRONTEND.md), [docs/DEMO.md](docs/DEMO.md) |
 | Submission: prototype / code / README / artefact / repro / demo | UI + CLI · this repo · this README · `examples/outputs/` · §6 · [docs/DEMO.md](docs/DEMO.md) |
 
 ## 1. How it works
@@ -152,9 +152,12 @@ make setup PROFILE=balanced && make weights PROFILE=balanced && make demo
 Measured on the RTX 4050 laptop: ≈ 40 s per sketch once warm (first request ≈ 75 s). Close GPU-heavy apps first —
 TripoSR needs ≈ 2.5–3.4 GB of free VRAM. Run `make test` to execute the 43 unit/smoke tests.
 
-### C. Build your own frontend
-The running app exposes `/generate_api` (sketch → GLB/OBJ URLs) and `/capabilities`; see
-[docs/FRONTEND.md](docs/FRONTEND.md) and the tested JavaScript client [examples/frontend/client.mjs](examples/frontend/client.mjs).
+### C. Use it as an API from your own frontend (engine on Kaggle)
+Run the Kaggle notebook → it prints an **API base URL** (`https://xxxx.gradio.live`). Your frontend uploads a sketch and
+gets GLB/OBJ URLs back. Requirements, endpoints, curl / `fetch()` / `@gradio/client` / Python examples, timings, CORS
+and security: **[docs/API.md](docs/API.md)**. Tested clients: [`examples/frontend/fetch_client.mjs`](examples/frontend/fetch_client.mjs)
+(no dependencies) and [`examples/frontend/client.mjs`](examples/frontend/client.mjs). Other integration options:
+[docs/FRONTEND.md](docs/FRONTEND.md).
 
 ### CLI
 ```bash

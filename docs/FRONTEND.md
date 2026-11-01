@@ -1,5 +1,7 @@
 # Building a frontend for the Sketch2Shape engine
 
+> Calling the engine hosted on Kaggle from your own app? Start with **[API.md](API.md)** (requirements, endpoints, tested examples).
+
 The engine is UI-agnostic (`sketch2shape.core.Pipeline`). There are three ways to put a frontend on it, from least
 to most work.
 

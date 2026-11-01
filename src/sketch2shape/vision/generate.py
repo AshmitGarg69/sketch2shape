@@ -109,7 +109,16 @@ class Generator:
         return self.profile == "balanced"   # lite already uses model CPU offload
 
     def park(self):
-        self.pipe.to("cpu")
+        """Move weights to system RAM between requests (restored with unpark() before the next run; never executed
+        on CPU). diffusers warns about fp16-on-CPU on every move, so silence it for this call only."""
+        from diffusers.utils import logging as dlog
+
+        prev = dlog.get_verbosity()
+        dlog.set_verbosity_error()
+        try:
+            self.pipe.to("cpu")
+        finally:
+            dlog.set_verbosity(prev)
         free_cuda()
 
     def unpark(self):

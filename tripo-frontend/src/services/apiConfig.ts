@@ -9,7 +9,7 @@ export interface ApiCapabilities {
   };
 }
 
-export const DEFAULT_API_URL = "https://fa5e20857d512e3420.gradio.live";
+export const DEFAULT_API_URL = "https://c390743a1c8023653b.gradio.live";
 
 export function getApiBaseUrl(): string {
   if (typeof window === "undefined") return DEFAULT_API_URL;

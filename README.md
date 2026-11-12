@@ -31,7 +31,7 @@ Laptop (`lite`) results for the same sketches are in `examples/outputs/*_rtx4050
 | 3D output quality & design (25) | Sample results below, `examples/outputs/*/mesh/model.glb` (14 complete runs, open in Blender / any glTF viewer), sketch-match scores in each `run.json` |
 | End-to-end validity & efficiency (20) | §2 measured timing table (generated from real `run.json`), canvas **and** upload in the UI, GLB+OBJ export, closed-loop validation (S8) |
 | Code reproducibility (15) | §3 Quick start (Kaggle notebook / `make setup && make weights && make demo`), §6 Reproducibility details, pinned lockfiles + model revisions |
-| Documentation & README (15) | this file, [TROUBLESHOOTING.md](TROUBLESHOOTING.md), [LICENSES_AND_MODELS.md](LICENSES_AND_MODELS.md), [docs/API.md](docs/API.md), [docs/FRONTEND.md](docs/FRONTEND.md), [docs/DEMO.md](docs/DEMO.md) |
+| Documentation & README (15) | this file, [RUN_GUIDE.md](RUN_GUIDE.md) (Full Kaggle to Web Guide), [TROUBLESHOOTING.md](TROUBLESHOOTING.md), [LICENSES_AND_MODELS.md](LICENSES_AND_MODELS.md), [docs/API.md](docs/API.md), [docs/FRONTEND.md](docs/FRONTEND.md), [docs/DEMO.md](docs/DEMO.md) |
 | Submission: prototype / code / README / artefact / repro / demo | UI + CLI · this repo · this README · `examples/outputs/` · §6 · [docs/DEMO.md](docs/DEMO.md) |
 
 ## 1. How it works

@@ -1,0 +1,316 @@
+{
+  "timestamp": "2026-10-31T23:30:23+0000",
+  "request": {
+    "source": "upload",
+    "prompt": "",
+    "object_override": "",
+    "material": "Auto",
+    "quality": "balanced",
+    "viewpoint": "Auto",
+    "seed": 13,
+    "out_root": "/kaggle/working/outputs",
+    "selected_candidate": null,
+    "reuse_run_dir": null
+  },
+  "profile": "balanced",
+  "environment": {
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "python": "3.10.22",
+    "git_commit": null,
+    "config_hash": "0ade7f0c9102",
+    "third_party": {
+      "TripoSR": "107cefdc244c39106fa830359024f6a2f1c78871",
+      "InstantMesh": "08822c52fdc399b93ea00e4fa9e596344ed52ccc"
+    },
+    "gpu": {
+      "name": "Tesla T4",
+      "total_gb": 14.56,
+      "compute_cap": [
+        7,
+        5
+      ]
+    },
+    "torch": "2.4.1+cu121",
+    "cuda": "12.1",
+    "driver": "580.178.04\n580.178.04"
+  },
+  "stages": {
+    "s1_input": {
+      "seconds": 0.01,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.66
+    },
+    "s2_understand": {
+      "seconds": 3.66,
+      "vram_peak_gb": 0.59,
+      "rss_gb": 16.66
+    },
+    "s3_generate": {
+      "seconds": 66.72,
+      "vram_peak_gb": 10.06,
+      "rss_gb": 16.52
+    },
+    "s4_prepare": {
+      "seconds": 0.33,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.52
+    },
+    "s5_reconstruct": {
+      "seconds": 120.39,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.52
+    },
+    "s6_cleanup": {
+      "seconds": 0.29,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.52
+    },
+    "s7_export": {
+      "seconds": 1.14,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.52
+    },
+    "s8_verify": {
+      "seconds": 2.17,
+      "vram_peak_gb": 0.01,
+      "rss_gb": 16.52
+    }
+  },
+  "warnings": [],
+  "fallbacks": [],
+  "attempts": [
+    {
+      "attempt": 0,
+      "candidate": 2,
+      "backend": "instantmesh",
+      "seed": 13,
+      "recon_consistency": 0.8964,
+      "sketch_fidelity": 0.8799,
+      "valid": true
+    }
+  ],
+  "total_seconds": 196.6,
+  "seed": 13,
+  "validation": {
+    "loads": true,
+    "vertices": 25567,
+    "faces": 40244,
+    "extent": [
+      0.5585340261459351,
+      1.0,
+      0.5562270879745483
+    ],
+    "nan": false,
+    "texture": {
+      "size": [
+        1024,
+        1024
+      ],
+      "std": 81.95340153646359
+    },
+    "vertex_colors": false,
+    "geometries": 1,
+    "gltf_color_0": false,
+    "gltf_base_color_texture": true,
+    "ok": true,
+    "problems": []
+  },
+  "recon_consistency": 0.8964,
+  "sketch_fidelity": 0.8799,
+  "sketch_match_kind": "silhouette",
+  "best_view": [
+    25.0,
+    10.0
+  ],
+  "input_view": [
+    5.0,
+    10.0
+  ],
+  "mirror_direct": 0.8938,
+  "mirror_flipped": 0.895,
+  "object": "lamp",
+  "object_conf": 0.017492899671196938,
+  "object_top5": [
+    [
+      "lamp",
+      0.017492899671196938
+    ],
+    [
+      "desk lamp",
+      0.016638947650790215
+    ],
+    [
+      "floor lamp",
+      0.016237642616033554
+    ],
+    [
+      "table",
+      0.011265348643064499
+    ],
+    [
+      "chandelier",
+      0.010361669585108757
+    ]
+  ],
+  "closed_sketch": true,
+  "prompts": {
+    "positive": [
+      "lamp, white lampshade on a brass stand, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "lamp, white lampshade on a brass stand, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "lamp, white lampshade on a brass stand, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus",
+      "lamp, white lampshade on a brass stand, single object, centered, full object visible, studio product render, soft diffuse lighting, neutral light-grey seamless background, high detail, sharp focus"
+    ],
+    "negative": "text, watermark, logo, multiple objects, cropped, out of frame, hard shadows, cast shadow, floor reflection, ground plane, motion blur, flat illustration, cartoon outline, low quality"
+  },
+  "candidate_scores": [
+    {
+      "index": 0,
+      "score": 0.8377,
+      "seed": 13,
+      "controlnet_scale": 0.5,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.1471576690673828,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9238131409039119,
+        "stroke": 0.8830724316706094,
+        "stroke_detail": {
+          "recall": 0.9314,
+          "precision": 0.8395,
+          "f": 0.8831,
+          "interior_density": 0.0036
+        },
+        "semantic": 0.5403594970703125,
+        "clean": 0.9515572952445142
+      }
+    },
+    {
+      "index": 1,
+      "score": 0.8616,
+      "seed": 14,
+      "controlnet_scale": 0.7,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.15839576721191406,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9108307959982601,
+        "stroke": 0.970260223048327,
+        "stroke_detail": {
+          "recall": 0.9422,
+          "precision": 1.0,
+          "f": 0.9703,
+          "interior_density": 0.0153
+        },
+        "semantic": 0.5476837158203125,
+        "clean": 0.966674694442772
+      }
+    },
+    {
+      "index": 2,
+      "score": 0.8726,
+      "seed": 15,
+      "controlnet_scale": 0.9,
+      "hedge": false,
+      "matte": {
+        "fg_frac": 0.14796066284179688,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9537366548042705,
+        "stroke": 0.9981916817359855,
+        "stroke_detail": {
+          "recall": 0.9964,
+          "precision": 1.0,
+          "f": 0.9982,
+          "interior_density": 0.0154
+        },
+        "semantic": 0.4762725830078125,
+        "clean": 0.9638216412715601
+      }
+    },
+    {
+      "index": 3,
+      "score": 0.8669,
+      "seed": 16,
+      "controlnet_scale": 0.5,
+      "hedge": true,
+      "matte": {
+        "fg_frac": 0.14937210083007812,
+        "touches_border": false,
+        "sketch_recovered_frac": 0.0
+      },
+      "terms": {
+        "silhouette_iou": 0.9581959039656363,
+        "stroke": 1.0,
+        "stroke_detail": {
+          "recall": 1.0,
+          "precision": 1.0,
+          "f": 1.0,
+          "interior_density": 0.0175
+        },
+        "semantic": 0.4356842041015625,
+        "clean": 0.9646997982480783
+      }
+    }
+  ],
+  "selected_candidate": 2,
+  "backend": "instantmesh",
+  "backend_meta": {
+    "backend": "instantmesh",
+    "mesh": "mesh.glb",
+    "config": "/tmp/s2s/repo/adapters/instantmesh_configs/g96/instant-mesh-large.yaml",
+    "fallback_used": false,
+    "texmap": true,
+    "seconds": 120.22,
+    "vram_peak_gb": 9.43,
+    "has_uv": true,
+    "has_pbr": false,
+    "faces": 40292
+  },
+  "gen_profile": "balanced",
+  "s3_timing": {
+    "load_s": 3.07,
+    "load_from": "ram",
+    "generate_s": 54.43,
+    "n": 4,
+    "ram_free_gb_after": 14.0,
+    "parked": true
+  },
+  "tier": 1,
+  "material": "metal",
+  "cleanup": {
+    "raw_faces": 40292,
+    "raw_vertices": 25655,
+    "prune": {
+      "components": 6,
+      "removed": 4,
+      "removed_area_frac": 2.2260690690542602e-05
+    },
+    "repair": {
+      "faces_in": 40244,
+      "faces_out": 40244,
+      "watertight": false
+    },
+    "decimate": {
+      "decimated": false
+    }
+  },
+  "files": {
+    "glb": {
+      "path": "/kaggle/working/outputs/20261031_232706_51d27a38/mesh/model.glb",
+      "bytes": 1877720
+    },
+    "obj_zip": {
+      "path": "/kaggle/working/outputs/20261031_232706_51d27a38/mesh/model.obj.zip",
+      "bytes": 1738373
+    }
+  },
+  "notice": null
+}

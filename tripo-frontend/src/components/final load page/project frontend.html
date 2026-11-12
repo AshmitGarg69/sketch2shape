@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sketch2Shape Studio</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0a0b0e;
+  --pn: #121317;
+  --pn2: #191b21;
+  --pn3: #20222a;
+  --bd: #282a34;
+  --bd-light: #383b48;
+  --tx: #eef0f5;
+  --mu: #858997;
+  --ac: #ffc21a;
+  --ac-glow: rgba(255, 194, 26, 0.25);
+  --pink: #ff66aa;
+  --pink-bg: #321625;
+  --pink-bd: #582440;
+  --green: #4dff7a;
+  --green-bg: #102d1b;
+  --green-bd: #1c4e2e;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* NAVBAR */
+nav {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--bd);
+  background: var(--pn);
+  flex: none;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.2px;
+  color: #fff;
+  cursor: pointer;
+}
+nav a {
+  color: var(--mu);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.15s;
+}
+nav a:hover { color: var(--tx); }
+
+.api-pill {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pn2);
+  border: 1px solid var(--bd);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.api-pill:hover { border-color: var(--ac); }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.dot-green { background: var(--green); box-shadow: 0 0 8px rgba(77, 255, 122, 0.5); }
+.dot-yellow { background: var(--ac); box-shadow: 0 0 8px rgba(255, 194, 26, 0.5); }
+.dot-red { background: #ff4d4d; box-shadow: 0 0 8px rgba(255, 77, 77, 0.5); }
+
+/* MAIN LAYOUT */
+main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 310px 1fr 270px;
+}
+aside {
+  background: var(--pn);
+  padding: 12px 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#L { border-right: 1px solid var(--bd); }
+#R { border-left: 1px solid var(--bd); }
+h3 { margin: 0; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -0.1px; }
+
+.card {
+  background: var(--pn2);
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  padding: 10px;
+}
+.sec-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--mu);
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+/* SKETCH BOX */
+#drop {
+  position: relative;
+  border: 1.5px dashed var(--bd);
+  border-radius: 10px;
+  background: #ffffff;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+#drop.over { border-color: var(--ac); }
+#prev { width: 100%; height: 100%; display: block; }
+#del {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: background 0.15s;
+}
+#del:hover { background: #000; }
+
+.row { display: flex; gap: 8px; margin-top: 6px; }
+.row button { flex: 1; }
+
+button {
+  font: inherit;
+  color: var(--tx);
+  background: var(--pn2);
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+button:hover:not(:disabled) {
+  border-color: var(--bd-light);
+  background: var(--pn3);
+}
+button:focus-visible, summary:focus-visible { outline: 2px solid var(--ac); outline-offset: 2px; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* BUILT-IN SKETCHES BUTTONS */
+.sample-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.sample-grid.second-row,
+.sample-grid.third-row {
+  margin-top: 5px;
+}
+.sample-btn {
+  padding: 6px 3px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 6px;
+  background: var(--pn2);
+  border: 1px solid var(--bd);
+  color: #cfd3dc;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sample-btn:hover {
+  background: var(--pn3);
+  color: #fff;
+  border-color: var(--bd-light);
+}
+.sample-btn.active {
+  border-color: var(--ac);
+  color: var(--ac);
+  background: rgba(255, 194, 26, 0.12);
+  font-weight: 700;
+}
+
+/* SIDEBAR LAYOUT & NO-OVERLAP GUARDS */
+#L > * {
+  flex-shrink: 0;
+}
+
+/* INPUTS & SELECTS */
+.input-field, .select-field {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--pn2);
+  color: var(--tx);
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input-field:focus, .select-field:focus { border-color: var(--ac); }
+
+#prompt-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 58px;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  resize: vertical;
+  background: var(--pn2);
+  color: var(--tx);
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  margin-bottom: 2px;
+}
+.field-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--mu);
+  margin: 7px 0 3px;
+}
+
+/* SETTINGS ACCORDION */
+details { color: var(--mu); }
+summary { cursor: pointer; padding: 4px 0; font-weight: 600; font-size: 12px; color: var(--tx); }
+summary::-webkit-details-marker { color: var(--mu); }
+
+/* GENERATE BUTTON */
+#gen {
+  width: 100%;
+  padding: 12px;
+  background: var(--ac);
+  color: #111;
+  font-weight: 800;
+  font-size: 14.5px;
+  border: 0;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px var(--ac-glow);
+  transition: all 0.15s;
+}
+#gen:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
+#gen:active:not(:disabled) { transform: translateY(0); }
+.sp {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #1118;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: r 0.7s linear infinite;
+  display: none;
+}
+.busy .sp { display: block; }
+@keyframes r { to { transform: rotate(360deg); } }
+
+/* TELEMETRY BADGES */
+.telemetry-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.badge-pink {
+  background: var(--pink-bg);
+  color: var(--pink);
+  border: 1px solid var(--pink-bd);
+}
+.badge-green {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid var(--green-bd);
+  font-weight: 600;
+}
+.badge-dark {
+  background: var(--pn2);
+  color: #d1d4de;
+  border: 1px solid var(--bd);
+}
+
+/* CENTER VIEWPORT */
+#vp {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  background: radial-gradient(ellipse at center, #1b1d24 0%, #0a0b0e 75%);
+}
+#cv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+#ov {
+  position: absolute;
+  left: 50%;
+  bottom: 84px;
+  transform: translateX(-50%);
+  text-align: center;
+  width: min(440px, 86%);
+  pointer-events: none;
+  transition: opacity 0.4s;
+  z-index: 5;
+}
+#ov b { font-size: 14.5px; font-weight: 600; letter-spacing: 0.2px; color: #fff; }
+#ov p { margin: 5px 0 0; color: var(--mu); font-size: 12px; }
+#bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  margin: 8px auto 0;
+  width: 160px;
+  overflow: hidden;
+}
+#bar i {
+  display: block;
+  height: 100%;
+  width: 30%;
+  background: var(--ac);
+  border-radius: 2px;
+  animation: ind 1.1s ease-in-out infinite;
+}
+@keyframes ind { 0% { margin-left: -30%; } 100% { margin-left: 100%; } }
+
+/* FLOATING TOOLBARS */
+#exp {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+#exp button { background: rgba(22, 23, 27, 0.85); backdrop-filter: blur(6px); }
+#exp .pri { background: var(--ac); color: #111; border: 0; font-weight: 700; }
+
+#tb {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10;
+}
+#tb button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: rgba(22, 23, 27, 0.85);
+  backdrop-filter: blur(6px);
+  font-size: 14px;
+  font-weight: 600;
+}
+#tb button.on { border-color: var(--ac); color: var(--ac); }
+
+#help {
+  position: absolute;
+  right: 52px;
+  top: 12px;
+  background: rgba(20, 21, 26, 0.95);
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--mu);
+  display: none;
+  line-height: 1.7;
+  z-index: 12;
+}
+
+/* FLOATING LOWER BAR: CANDIDATES */
+#candidates-bar {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(18, 19, 24, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 7px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+  transition: opacity 0.3s;
+}
+.candidates-title {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--mu);
+  letter-spacing: 0.8px;
+}
+.candidates-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cand-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.cand-card:hover { transform: translateY(-2px); }
+.cand-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid var(--bd);
+  background: #000;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cand-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cand-card.active .cand-thumb {
+  border-color: var(--ac);
+  box-shadow: 0 0 10px rgba(255, 194, 26, 0.4);
+}
+.cand-score {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--mu);
+  margin-top: 3px;
+}
+.cand-card.active .cand-score { color: var(--ac); }
+
+/* RIGHT PANEL: MODELS & DETAILS */
+#grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.m {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--pn2);
+  border: 1.5px solid var(--bd);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--mu);
+  font-size: 11.5px;
+  transition: border-color 0.15s;
+}
+.m.sel {
+  border-color: var(--ac);
+  box-shadow: 0 0 10px rgba(255, 194, 26, 0.2);
+}
+.m img { width: 100%; height: 100%; object-fit: cover; }
+.m .nm {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3px 6px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  text-align: left;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.m .ac {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+}
+.m:hover .ac { display: flex; }
+.m .ac button { padding: 4px; font-size: 11px; }
+
+#det {
+  font-size: 12px;
+  color: var(--mu);
+  line-height: 1.7;
+}
+#det b { color: var(--tx); font-weight: 600; }
+
+/* MODALS & TOAST */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  backdrop-filter: blur(4px);
+}
+.modal > div {
+  background: var(--pn);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 16px;
+  width: min(440px, 94vw);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+#dc {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 8px;
+  touch-action: none;
+  cursor: crosshair;
+  display: block;
+}
+#toast {
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  transform: translateX(-50%);
+  background: #3a1518;
+  border: 1px solid #7a2a30;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: none;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  z-index: 30;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 900px) {
+  body { overflow: auto; }
+  main { display: flex; flex-direction: column; }
+  #vp { height: 60vh; flex: none; }
+  #L, #R { border: 0; }
+  nav a { display: none; }
+  #candidates-bar { bottom: 10px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" id="nav-logo" title="Go to Hero / Main Menu">
+    <svg width="20" height="18" viewBox="0 0 22 20" aria-hidden="true">
+      <path d="M2 2h18L11 18z" fill="#ffc21a" stroke="#ffc21a" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    Sketch2Shape
+  </div>
+  <a href="#" id="nav-home">Home</a>
+  <a href="#" id="nav-gallery">Gallery</a>
+  <a href="#" id="nav-scribble">Scribble</a>
+
+  <div id="nav-api-badge" class="api-pill" title="Click to test or configure Kaggle GPU API">
+    <span id="nav-api-dot" class="dot dot-yellow"></span>
+    <span id="nav-api-text">Checking GPU...</span>
+  </div>
+</nav>
+
+<main>
+  <!-- LEFT PANEL -->
+  <aside id="L">
+    <div class="card" style="padding: 10px;">
+      <div id="drop" title="Click or drop an image">
+        <canvas id="prev" width="300" height="300"></canvas>
+        <button id="del" title="Remove sketch" aria-label="Remove sketch">🗑</button>
+      </div>
+      <div class="row">
+        <button id="epm">● Edit prompt</button>
+        <button id="drw">✏️ Draw</button>
+      </div>
+      <input type="file" id="fi" accept="image/*" hidden>
+    </div>
+
+    <!-- BUILT-IN MODEL SKETCHES -->
+    <div class="sec-label">BUILT-IN MODEL SKETCHES</div>
+    <div class="sample-grid">
+      <button class="sample-btn active" data-sample="none" title="None (Blank Canvas)">None</button>
+      <button class="sample-btn" data-sample="chair" title="Chair">Chair</button>
+      <button class="sample-btn" data-sample="car" title="Car">Car</button>
+      <button class="sample-btn" data-sample="mug" title="Mug">Mug</button>
+    </div>
+    <div class="sample-grid second-row">
+      <button class="sample-btn" data-sample="lamp" title="Lamp">Lamp</button>
+      <button class="sample-btn" data-sample="doodle" title="Doodle">Doodle</button>
+      <button class="sample-btn" data-sample="spacecraft" title="Spacecraft">Spacecraft</button>
+      <button class="sample-btn" data-sample="table" title="Table">Table</button>
+    </div>
+    <div class="sample-grid third-row">
+      <button class="sample-btn" data-sample="train" title="Train">Train</button>
+      <button class="sample-btn" data-sample="flower" title="Flower">Flower</button>
+      <button class="sample-btn" data-sample="truck" title="Truck (Concept SUV)">Truck</button>
+      <button class="sample-btn" data-sample="bottle" title="Bottle">Bottle</button>
+    </div>
+
+    <!-- DETECTED OBJECT OVERRIDE -->
+    <div class="sec-label">DETECTED OBJECT (EDITABLE)</div>
+    <input type="text" id="obj-input" class="input-field" value="" placeholder="auto-detected">
+
+    <!-- OBJECT DESCRIPTION / PROMPT -->
+    <div class="sec-label">OBJECT DESCRIPTION / PROMPT</div>
+    <textarea id="prompt-input" class="input-field" rows="2" placeholder="e.g. modern ergonomic chair, curved backrest, studio lighting..."></textarea>
+
+    <!-- SETTINGS & PRESETS -->
+    <details class="card" open>
+      <summary>Settings & Presets</summary>
+      
+      <div class="field-label">QUALITY / PRESET</div>
+      <select id="preset-sel" class="select-field">
+        <option value="balanced" selected>Balanced (SDXL + InstantMesh)</option>
+        <option value="fast">Fast (TripoSR)</option>
+        <option value="best">Best (InstantMesh HD)</option>
+      </select>
+
+      <div class="field-label">MATERIAL</div>
+      <select id="mat-sel" class="select-field">
+        <option value="Auto" selected>Auto</option>
+        <option value="Wood">Wood</option>
+        <option value="Metal">Metal</option>
+        <option value="Plastic">Plastic</option>
+        <option value="Ceramic">Ceramic</option>
+        <option value="Glass">Glass</option>
+        <option value="Fabric">Fabric</option>
+        <option value="Leather">Leather</option>
+        <option value="Stone">Stone</option>
+      </select>
+
+      <div class="field-label">SKETCH VIEWPOINT</div>
+      <select id="view-sel" class="select-field">
+        <option value="Auto" selected>Auto</option>
+        <option value="front">Front</option>
+        <option value="side profile">Side Profile</option>
+        <option value="back">Back</option>
+        <option value="top-down">Top-Down</option>
+        <option value="front three-quarter">Front Three-Quarter</option>
+      </select>
+
+      <div class="field-label">SEED (BLANK = RANDOM)</div>
+      <div style="display: flex; gap: 6px;">
+        <input type="text" id="seed-input" class="input-field" placeholder="Random integer" style="flex: 1;">
+        <button id="seed-rnd-btn" title="Randomize seed" style="padding: 4px 10px;">🎲</button>
+      </div>
+
+      <div style="margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 11px; color: var(--mu);" id="gpu-info-label">GPU: Detecting...</span>
+        <button id="open-api-btn" style="font-size: 11px; padding: 2px 7px;">⚙️ API Config</button>
+      </div>
+    </details>
+
+    <!-- GENERATE BUTTON -->
+    <button id="gen">
+      <span class="sp"></span>
+      <span id="gt">Generate</span>
+    </button>
+  </aside>
+
+  <!-- CENTER 3D VIEWPORT -->
+  <section id="vp">
+    <canvas id="cv"></canvas>
+    
+    <!-- Top-left export -->
+    <div id="exp">
+      <button class="pri" id="exb">⬇ Export</button>
+      <select id="fmt" class="select-field" style="width: 80px; padding: 5px;" aria-label="Format">
+        <option value="GLB">GLB</option>
+        <option value="OBJ">OBJ (ZIP)</option>
+      </select>
+    </div>
+
+    <!-- Right toolbar -->
+    <div id="tb">
+      <button id="b-zoomi" title="Zoom in">+</button>
+      <button id="b-zoomu" title="Zoom out">-</button>
+      <button id="bg" class="on" title="Toggle grid">▦</button>
+      <button id="bw" title="Toggle wireframe">⬡</button>
+      <button id="ba" class="on" title="Toggle axes">✛</button>
+      <button id="br" title="Reset camera">⟲</button>
+      <button id="vx" title="View along X">X</button>
+      <button id="vy" title="View from top (Y)">Y</button>
+      <button id="vz" title="View along Z">Z</button>
+      <button id="bh" title="Help">?</button>
+    </div>
+
+    <div id="help">
+      Left-drag: rotate 360°<br>
+      Scroll / pinch: zoom<br>
+      Right-drag: pan<br>
+      Double-click: reset view
+    </div>
+
+    <!-- Center generation overlay -->
+    <div id="ov"></div>
+
+    <!-- FLOATING LOWER BAR: CANDIDATES -->
+    <div id="candidates-bar">
+      <div class="candidates-title">CANDIDATES:</div>
+      <div class="candidates-list" id="candidates-list">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Toast alert -->
+    <div id="toast">
+      <span id="tm"></span>
+      <button id="retry" style="background: rgba(255,255,255,0.15); border: 0; color: #fff; padding: 3px 8px; border-radius: 4px;">Retry</button>
+      <button id="toast-cfg" style="background: var(--ac); border: 0; color: #111; padding: 3px 8px; border-radius: 4px; font-weight: 600;">Config API</button>
+    </div>
+  </section>
+
+  <!-- RIGHT PANEL -->
+  <aside id="R">
+    <h3>My Models</h3>
+    <div id="grid"></div>
+    <div id="det" class="card">Select a model to see details.</div>
+    <input type="file" id="gf" accept=".glb,.gltf" hidden>
+  </aside>
+</main>
+
+<!-- In-page Mini Draw Modal -->
+<div id="modal" class="modal">
+  <div>
+    <canvas id="dc" width="360" height="360"></canvas>
+    <div class="row" style="align-items: center; margin-top: 10px;">
+      <button id="pen">Pen</button>
+      <button id="ers">Eraser</button>
+      <input id="bs2" type="range" min="2" max="30" value="6" aria-label="Brush size" style="flex: 1;">
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <button id="und">Undo</button>
+      <button id="clr">Clear</button>
+      <button id="cnl">Cancel</button>
+      <button id="sav" style="background: var(--ac); color: #111; border: 0; font-weight: 700;">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Prompt Modal -->
+<div id="pm" class="modal">
+  <div>
+    <h3>Edit Prompt</h3>
+    <p style="font-size: 12px; color: var(--mu); margin: 4px 0 0;">
+      Provide descriptive attributes to steer generation
+    </p>
+    <textarea id="pt" placeholder="Describe your sketch, e.g. a wooden dining chair with fabric seat cushion" aria-label="Prompt" style="width: 100%; height: 110px; background: var(--pn2); color: var(--tx); border: 1px solid var(--bd); border-radius: 8px; padding: 10px; font: inherit; margin: 10px 0 8px; resize: vertical;"></textarea>
+    <div class="row">
+      <button id="pcn">Cancel</button>
+      <button id="psv">Save</button>
+      <button id="pgen" style="background: var(--ac); color: #111; border: 0; font-weight: 700;">Generate Now ⚡</button>
+    </div>
+  </div>
+</div>
+
+<!-- API Configuration Modal -->
+<div id="api-modal" class="modal">
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <h3 style="display: flex; align-items: center; gap: 8px; margin: 0;">⚡ Kaggle GPU Connection</h3>
+      <button id="api-modal-close" style="background: transparent; border: 0; color: var(--mu); font-size: 18px; cursor: pointer;">✕</button>
+    </div>
+    <p style="font-size: 12px; color: var(--mu); margin: 0 0 10px; line-height: 1.4;">
+      Enter the public Gradio live tunnel link printed in your Kaggle notebook.
+    </p>
+    <label style="display: block; font-size: 11px; font-weight: 700; color: var(--tx); margin-bottom: 5px;">API BASE URL</label>
+    <input type="text" id="api-url-input" class="input-field" style="margin-bottom: 10px; font-size: 13px;">
+    
+    <div id="api-test-box" style="padding: 10px; border-radius: 8px; background: var(--pn2); border: 1px solid var(--bd); font-size: 11.5px; line-height: 1.6; margin-bottom: 12px;">
+      Click "Test" to check live GPU connectivity.
+    </div>
+
+    <div class="row">
+      <button id="api-test-btn">🔄 Test</button>
+      <button id="api-reset-btn" style="color: var(--mu);">Default</button>
+      <button id="api-save-btn" style="background: var(--ac); color: #111; border: 0; font-weight: 700;">Save & Apply</button>
+    </div>
+    
+    <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--bd); font-size: 11px; color: var(--mu); line-height: 1.4;">
+      <b>💡 Tip:</b> Kaggle GPU sessions run up to 12 hours. Paste your new <code>https://xxxx.gradio.live</code> URL here whenever restarted.
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const tween = (ms, fn) => new Promise(r => {
+  const t0 = performance.now();
+  (function f() {
+    const t = Math.min(1, (performance.now() - t0) / ms);
+    fn(t);
+    t < 1 ? requestAnimationFrame(f) : r();
+  })();
+});
+
+/* ================= KAGGLE GRADIO API CONFIG ================= */
+const DEFAULT_API_URL = 'https://c390743a1c8023653b.gradio.live';
+
+function getApiBaseUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const fromQuery = urlParams.get('api');
+  const stored = localStorage.getItem('sketch2shape_api_url');
+  return (fromQuery || stored || DEFAULT_API_URL).trim().replace(/\/+$/, '');
+}
+
+function setApiBaseUrl(url) {
+  const clean = (url || DEFAULT_API_URL).trim().replace(/\/+$/, '');
+  localStorage.setItem('sketch2shape_api_url', clean);
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'api_url_changed', url: clean }, '*');
+    }
+  } catch (_) {}
+  return clean;
+}
+
+let activeCapabilities = null;
+
+async function checkCapabilities(targetBaseUrl = getApiBaseUrl()) {
+  const base = targetBaseUrl.replace(/\/+$/, '');
+  try {
+    const postRes = await fetch(`${base}/gradio_api/call/capabilities`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: [] })
+    });
+    if (!postRes.ok) throw new Error(`HTTP ${postRes.status} (${postRes.statusText})`);
+    const { event_id } = await postRes.json();
+    if (!event_id) throw new Error('No event_id returned');
+
+    const streamRes = await fetch(`${base}/gradio_api/call/capabilities/${event_id}`);
+    if (!streamRes.body) throw new Error('ReadableStream not supported');
+    const reader = streamRes.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '', eventType = '';
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf('\n')) >= 0) {
+        const line = buf.slice(0, i).trim();
+        buf = buf.slice(i + 1);
+        if (line.startsWith('event:')) {
+          eventType = line.slice(6).trim();
+        } else if (line.startsWith('data:') && eventType === 'complete') {
+          const raw = JSON.parse(line.slice(5).trim());
+          const caps = Array.isArray(raw) ? raw[0] : raw;
+          activeCapabilities = caps;
+          return { ok: true, data: caps };
+        }
+      }
+    }
+    throw new Error('Capabilities stream ended early');
+  } catch (err) {
+    return { ok: false, error: err.message || String(err) };
+  }
+}
+
+async function updateApiBadge() {
+  const dot = $('#nav-api-dot');
+  const txt = $('#nav-api-text');
+  const gpuLabel = $('#gpu-info-label');
+  dot.className = 'dot dot-yellow';
+  txt.textContent = 'Checking GPU...';
+
+  const res = await checkCapabilities();
+  if (res.ok && res.data) {
+    dot.className = 'dot dot-green';
+    txt.textContent = `${res.data.gpu || 'Tesla T4'} Ready`;
+    if (gpuLabel) gpuLabel.textContent = `GPU: ${res.data.gpu} (${res.data.vram_gb} GB)`;
+  } else {
+    dot.className = 'dot dot-red';
+    txt.textContent = 'API Offline';
+    if (gpuLabel) gpuLabel.textContent = 'GPU: Offline (Configure)';
+  }
+}
+
+async function callGenerateApi(sketchBlob, { prompt = '', preset = 'balanced', seed = '' } = {}, onProgress = () => {}) {
+  const base = getApiBaseUrl();
+
+  // 1) Upload sketch image
+  onProgress({ event: 'upload', message: 'Uploading sketch to GPU...' });
+  const form = new FormData();
+  form.append('files', sketchBlob, 'sketch.png');
+
+  const uploadRes = await fetch(`${base}/gradio_api/upload`, {
+    method: 'POST',
+    body: form
+  });
+  if (!uploadRes.ok) {
+    throw new Error(`Upload failed (HTTP ${uploadRes.status}). Verify Kaggle session is active.`);
+  }
+  const uploadData = await uploadRes.json();
+  const remotePath = Array.isArray(uploadData) ? uploadData[0] : uploadData;
+  if (!remotePath) throw new Error('Failed to retrieve uploaded file path');
+
+  // 2) Start generation job
+  onProgress({ event: 'queue', message: 'Queueing generation job on Kaggle GPU...' });
+  const callRes = await fetch(`${base}/gradio_api/call/generate_api`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      data: [
+        { path: remotePath, meta: { _type: 'gradio.FileData' } },
+        prompt || '',
+        preset || 'balanced',
+        String(seed || '')
+      ]
+    })
+  });
+  if (!callRes.ok) {
+    throw new Error(`Job submission failed (HTTP ${callRes.status})`);
+  }
+  const { event_id } = await callRes.json();
+  if (!event_id) throw new Error('No event_id returned for generation job');
+
+  // 3) Read result stream (SSE)
+  onProgress({ event: 'stream_start', message: 'Connecting to generation stream...' });
+  const streamRes = await fetch(`${base}/gradio_api/call/generate_api/${event_id}`);
+  if (!streamRes.body) throw new Error('ReadableStream not supported on this device');
+
+  const reader = streamRes.body.getReader();
+  const dec = new TextDecoder();
+  let buf = '', eventType = '', heartbeats = 0;
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    let i;
+    while ((i = buf.indexOf('\n')) >= 0) {
+      const line = buf.slice(0, i).trim();
+      buf = buf.slice(i + 1);
+      if (line.startsWith('event:')) {
+        eventType = line.slice(6).trim();
+      } else if (line.startsWith('data:')) {
+        const payload = line.slice(5).trim();
+        if (eventType === 'heartbeat') {
+          heartbeats++;
+          onProgress({ event: 'heartbeat', count: heartbeats });
+        } else if (eventType === 'status') {
+          try {
+            const st = JSON.parse(payload);
+            onProgress({ event: 'status', info: st });
+          } catch (_) {}
+        } else if (eventType === 'generating') {
+          onProgress({ event: 'generating', payload });
+        } else if (eventType === 'complete') {
+          const [info, glb, obj] = JSON.parse(payload);
+          const fullGlbUrl = glb?.url ? (glb.url.startsWith('http') ? glb.url : `${base}${glb.url}`) : null;
+          const fullObjUrl = obj?.url ? (obj.url.startsWith('http') ? obj.url : `${base}${obj.url}`) : null;
+          return { info, glbUrl: fullGlbUrl, objUrl: fullObjUrl };
+        } else if (eventType === 'error') {
+          throw new Error('Server returned error: ' + payload);
+        }
+      }
+    }
+  }
+  throw new Error('Stream ended without completion event');
+}
+
+function loadGLB(url) {
+  return new Promise((ok, no) => new THREE.GLTFLoader().load(url, g => ok(g.scene), undefined, no));
+}
+
+/* ================= BUILT-IN SAMPLES CATALOG ================= */
+const BUILT_IN_MODELS = {
+  chair: {
+    name: 'chair',
+    label: 'Chair',
+    prompt: 'a modern ergonomic wooden chair with curved backrest and clean minimalist lines',
+    sketch: '/sketches/synthetic_chair.png',
+    glb: '/models/chair.glb',
+    obj: '/examples/chair/model.obj.zip',
+    vertices: 22186,
+    faces: 32420,
+    dims: '0.63 × 1.00 × 0.69',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'chair',
+      backend: 'instantmesh (balanced)',
+      seconds: 198.4,
+      seed: 42,
+      match: 0.91,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/chair/candidates/cand_0.jpg', score: '0.86' },
+      { img: '/examples/chair/candidates/cand_1.jpg', score: '0.84' },
+      { img: '/examples/chair/candidates/cand_2.jpg', score: '0.81' },
+      { img: '/examples/chair/candidates/cand_3.jpg', score: '0.79' }
+    ]
+  },
+  car: {
+    name: 'car',
+    label: 'Car',
+    prompt: 'aerodynamic modern sedan vehicle, sleek side profile, clean studio lighting',
+    sketch: '/sketches/synthetic_car_side.png',
+    glb: '/models/car.glb',
+    obj: null,
+    vertices: 20067,
+    faces: 33900,
+    dims: '2.81 × 1.00 × 1.07',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'car',
+      backend: 'instantmesh (balanced)',
+      seconds: 205.2,
+      seed: 18,
+      match: 0.88,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/car/candidates/cand_0.jpg', score: '0.88' },
+      { img: '/examples/car/candidates/cand_1.jpg', score: '0.85' },
+      { img: '/examples/car/candidates/cand_2.jpg', score: '0.82' },
+      { img: '/examples/car/candidates/cand_3.jpg', score: '0.80' }
+    ]
+  },
+  mug: {
+    name: 'coffee mug',
+    label: 'Coffee Mug',
+    prompt: 'ceramic glazed coffee mug with solid handle, porcelain finish, tabletop product',
+    sketch: '/sketches/handdrawn_mug.jpg',
+    glb: '/models/mug.glb',
+    obj: null,
+    vertices: 51223,
+    faces: 75852,
+    dims: '1.44 × 1.00 × 1.44',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'coffee mug',
+      backend: 'instantmesh (balanced)',
+      seconds: 189.6,
+      seed: 7,
+      match: 0.94,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/mug/candidates/cand_0.jpg', score: '0.87' },
+      { img: '/examples/mug/candidates/cand_1.jpg', score: '0.85' },
+      { img: '/examples/mug/candidates/cand_2.jpg', score: '0.82' },
+      { img: '/examples/mug/candidates/cand_3.jpg', score: '0.80' }
+    ]
+  },
+  lamp: {
+    name: 'desk lamp',
+    label: 'Desk Lamp',
+    prompt: 'contemporary architect desk lamp, metallic finish with articulated arm and lamp shade',
+    sketch: '/sketches/synthetic_lamp.png',
+    glb: '/models/lamp.glb',
+    obj: null,
+    vertices: 25567,
+    faces: 40244,
+    dims: '0.56 × 1.00 × 0.56',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'desk lamp',
+      backend: 'instantmesh (balanced)',
+      seconds: 196.6,
+      seed: 13,
+      match: 0.88,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/lamp/candidates/cand_0.jpg', score: '0.89' },
+      { img: '/examples/lamp/candidates/cand_1.jpg', score: '0.86' },
+      { img: '/examples/lamp/candidates/cand_2.jpg', score: '0.83' },
+      { img: '/examples/lamp/candidates/cand_3.jpg', score: '0.81' }
+    ]
+  },
+  doodle: {
+    name: 'open doodle',
+    label: 'Open Doodle',
+    prompt: 'playful stylized open doodle character figure, whimsical posture, smooth surface',
+    sketch: '/sketches/synthetic_open_doodle.png',
+    glb: '/models/doodle.glb',
+    obj: null,
+    vertices: 26378,
+    faces: 43948,
+    dims: '1.15 × 1.00 × 0.51',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'open doodle',
+      backend: 'instantmesh (balanced)',
+      seconds: 205.1,
+      seed: 99,
+      match: 0.84,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/doodle/candidates/cand_0.jpg', score: '0.83' },
+      { img: '/examples/doodle/candidates/cand_1.jpg', score: '0.81' },
+      { img: '/examples/doodle/candidates/cand_2.jpg', score: '0.79' },
+      { img: '/examples/doodle/candidates/cand_3.jpg', score: '0.77' }
+    ]
+  },
+  spacecraft: {
+    name: 'spacecraft',
+    label: 'Spacecraft',
+    prompt: 'futuristic space exploration rocket shuttle, sleek titanium fuselage, aerodynamic fin stabilizers',
+    sketch: '/sketches/spacecraft.png',
+    glb: '/models/spacecraft.glb',
+    obj: null,
+    vertices: 17257,
+    faces: 27668,
+    dims: '0.56 × 1.00 × 0.38',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'spacecraft',
+      backend: 'instantmesh (balanced)',
+      seconds: 201.3,
+      seed: 88,
+      match: 0.90,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/spacecraft/candidates/cand_0.jpg', score: '0.90' },
+      { img: '/examples/spacecraft/candidates/cand_1.jpg', score: '0.87' },
+      { img: '/examples/spacecraft/candidates/cand_2.jpg', score: '0.84' },
+      { img: '/examples/spacecraft/candidates/cand_3.jpg', score: '0.82' }
+    ]
+  },
+  table: {
+    name: 'table',
+    label: 'Dining Table',
+    prompt: 'handcrafted solid oak dining table, sturdy rectangular wooden top with four robust legs',
+    sketch: '/sketches/table.png',
+    glb: '/models/table.glb',
+    obj: null,
+    vertices: 30447,
+    faces: 47544,
+    dims: '1.72 × 1.00 × 1.72',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'dining table',
+      backend: 'instantmesh (balanced)',
+      seconds: 192.5,
+      seed: 33,
+      match: 0.92,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/table/candidates/cand_0.jpg', score: '0.92' },
+      { img: '/examples/table/candidates/cand_1.jpg', score: '0.89' },
+      { img: '/examples/table/candidates/cand_2.jpg', score: '0.86' },
+      { img: '/examples/table/candidates/cand_3.jpg', score: '0.83' }
+    ]
+  },
+  train: {
+    name: 'train',
+    label: 'Passenger Train',
+    prompt: 'high-speed aerodynamic passenger bullet train engine locomotive, streamlined glass windshield',
+    sketch: '/sketches/train.png',
+    glb: '/models/train.glb',
+    obj: null,
+    vertices: 9604,
+    faces: 15312,
+    dims: '4.57 × 1.00 × 1.08',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'passenger train',
+      backend: 'instantmesh (balanced)',
+      seconds: 210.8,
+      seed: 55,
+      match: 0.87,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/train/candidates/cand_0.jpg', score: '0.88' },
+      { img: '/examples/train/candidates/cand_1.jpg', score: '0.85' },
+      { img: '/examples/train/candidates/cand_2.jpg', score: '0.82' },
+      { img: '/examples/train/candidates/cand_3.jpg', score: '0.79' }
+    ]
+  },
+  flower: {
+    name: 'flower',
+    label: 'Botanical Flower',
+    prompt: 'blooming potted botanical flower, vibrant petals and lush green leaves, natural terracotta pot',
+    sketch: '/sketches/flower.png',
+    glb: '/models/flower.glb',
+    obj: null,
+    vertices: 33989,
+    faces: 53688,
+    dims: '0.79 × 1.00 × 0.54',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'botanical flower',
+      backend: 'instantmesh (balanced)',
+      seconds: 197.0,
+      seed: 74,
+      match: 0.89,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/flower/candidates/cand_0.jpg', score: '0.89' },
+      { img: '/examples/flower/candidates/cand_1.jpg', score: '0.86' },
+      { img: '/examples/flower/candidates/cand_2.jpg', score: '0.83' },
+      { img: '/examples/flower/candidates/cand_3.jpg', score: '0.80' }
+    ]
+  },
+  truck: {
+    name: 'truck',
+    label: 'Concept SUV',
+    prompt: 'concept electric off-road SUV truck, modern cyber styling, rugged wheels and tinted canopy',
+    sketch: '/sketches/truck.png',
+    glb: '/models/truck.glb',
+    obj: null,
+    vertices: 49432,
+    faces: 77376,
+    dims: '1.69 × 1.00 × 0.76',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'concept suv truck',
+      backend: 'instantmesh (balanced)',
+      seconds: 203.4,
+      seed: 62,
+      match: 0.88,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/truck/candidates/cand_0.jpg', score: '0.88' },
+      { img: '/examples/truck/candidates/cand_1.jpg', score: '0.85' },
+      { img: '/examples/truck/candidates/cand_2.jpg', score: '0.82' },
+      { img: '/examples/truck/candidates/cand_3.jpg', score: '0.79' }
+    ]
+  },
+  bottle: {
+    name: 'bottle',
+    label: 'Glass Bottle / Tumbler',
+    prompt: 'minimalist cylindrical glass bottle tumbler, translucent surface with subtle reflections and clean rim',
+    sketch: '/examples/can/candidates/cand_0.jpg',
+    glb: '/models/bottle.glb',
+    obj: null,
+    vertices: 24700,
+    faces: 42100,
+    dims: '0.80 × 1.80 × 0.80',
+    format: 'GLB (PBR)',
+    telemetry: {
+      object: 'glass tumbler bottle',
+      backend: 'instantmesh (balanced)',
+      seconds: 195.2,
+      seed: 49,
+      match: 0.91,
+      texture: 'Baked Texture Map'
+    },
+    candidates: [
+      { img: '/examples/can/candidates/cand_0.jpg', score: '0.91' },
+      { img: '/examples/can/candidates/cand_1.jpg', score: '0.88' },
+      { img: '/examples/can/candidates/cand_2.jpg', score: '0.84' },
+      { img: '/examples/can/candidates/cand_3.jpg', score: '0.81' }
+    ]
+  }
+};
+
+/* ================= SKETCH CANVAS HANDLING ================= */
+const prev = $('#prev'), pc = prev.getContext('2d');
+let hasSketch = true, userPrompt = '';
+
+function blank() {
+  pc.fillStyle = '#fff';
+  pc.fillRect(0, 0, 300, 300);
+}
+
+function drawImg(img) {
+  blank();
+  const s = Math.min(300 / img.width, 300 / img.height);
+  pc.drawImage(img, (300 - img.width * s) / 2, (300 - img.height * s) / 2, img.width * s, img.height * s);
+  hasSketch = true;
+  sync();
+}
+
+function loadSketchFromUrl(url) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => drawImg(img);
+  img.src = url;
+}
+
+// Navigation helpers
+const sendNav = (page) => {
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: 'navigate', page }, '*');
+  } else {
+    window.location.href = page === 'gallery' ? '/' : `/${page}`;
+  }
+};
+$('#nav-logo')?.addEventListener('click', e => { e.preventDefault(); sendNav('main'); });
+$('#nav-home')?.addEventListener('click', e => { e.preventDefault(); sendNav('main'); });
+$('#nav-gallery')?.addEventListener('click', e => { e.preventDefault(); sendNav('gallery'); });
+$('#nav-scribble')?.addEventListener('click', e => { e.preventDefault(); sendNav('scribble'); });
+
+function loadFile(f) {
+  if (!f || !f.type.startsWith('image/')) return;
+  const i = new Image();
+  i.onload = () => drawImg(i);
+  i.src = URL.createObjectURL(f);
+}
+
+$('#drop').onclick = e => { if (e.target.id !== 'del') $('#fi').click(); };
+
+function updatePromptBtn() {
+  $('#epm').textContent = userPrompt ? '● ' + (userPrompt.length > 14 ? userPrompt.slice(0, 14) + '…' : userPrompt) : '● Edit prompt';
+}
+
+$('#epm').onclick = () => { $('#pt').value = userPrompt; $('#pm').style.display = 'flex'; $('#pt').focus(); };
+$('#pcn').onclick = () => $('#pm').style.display = 'none';
+$('#psv').onclick = () => { userPrompt = $('#pt').value.trim(); updatePromptBtn(); $('#pm').style.display = 'none'; };
+$('#pgen').onclick = () => { userPrompt = $('#pt').value.trim(); updatePromptBtn(); $('#pm').style.display = 'none'; generate(); };
+
+$('#fi').onchange = e => loadFile(e.target.files[0]);
+$('#drop').ondragover = e => { e.preventDefault(); $('#drop').classList.add('over'); };
+$('#drop').ondragleave = () => $('#drop').classList.remove('over');
+$('#drop').ondrop = e => { e.preventDefault(); $('#drop').classList.remove('over'); loadFile(e.dataTransfer.files[0]); };
+$('#del').onclick = () => { blank(); hasSketch = false; sync(); };
+
+// Draw button redirects to Scribble page with current sketch
+$('#drw').onclick = () => {
+  try {
+    const dataUrl = prev.toDataURL('image/png');
+    sessionStorage.setItem('sketch2shape_drawing', dataUrl);
+    sessionStorage.setItem('sketch2shape_mode', 'image');
+  } catch (err) {
+    console.error('Failed to capture sketch for scribble:', err);
+  }
+  sendNav('scribble');
+};
+
+// Seed randomize button
+$('#seed-rnd-btn').onclick = () => {
+  const rnd = Math.floor(Math.random() * 999999);
+  $('#seed-input').value = rnd;
+};
+
+/* ================= THREE.JS SCENE ================= */
+const cv = $('#cv'), vp = $('#vp');
+const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.autoClear = false;
+renderer.outputEncoding = THREE.sRGBEncoding;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x0a0b0e, 10, 26);
+
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+const HOME = new THREE.Vector3(0, 0.9, 7.2);
+camera.position.copy(HOME);
+
+const controls = new THREE.OrbitControls(camera, cv);
+controls.enableDamping = true;
+controls.minDistance = 1.2;
+controls.maxDistance = 22;
+
+const grid = new THREE.GridHelper(40, 40, 0x484c58, 0x1f2128);
+grid.position.y = -2.02;
+scene.add(grid);
+
+const axes = new THREE.AxesHelper(2.2);
+axes.position.set(-2.6, -2.0, 0);
+scene.add(axes);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x242730, 1.2));
+const dl = new THREE.DirectionalLight(0xffffff, 1.3);
+dl.position.set(4, 7, 5);
+scene.add(dl);
+const dl2 = new THREE.DirectionalLight(0x88aaff, 0.7);
+dl2.position.set(-5, 3, -4);
+scene.add(dl2);
+
+// Coordinate gizmo
+const gScene = new THREE.Scene(), gCam = new THREE.OrthographicCamera(-1.7, 1.7, 1.7, -1.7, 0.1, 10);
+[['x', 0xff4d4d, [1, 0, 0]], ['y', 0x4dff7a, [0, 1, 0]], ['z', 0x4d8dff, [0, 0, 1]]].forEach(([n, col, v]) => {
+  const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(...v)]);
+  gScene.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color: col })));
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const t = c.getContext('2d');
+  t.fillStyle = '#' + col.toString(16);
+  t.beginPath(); t.arc(32, 32, 26, 0, 7); t.fill();
+  t.fillStyle = '#000'; t.font = 'bold 34px sans-serif';
+  t.textAlign = 'center'; t.textBaseline = 'middle';
+  t.fillText(n.toUpperCase(), 32, 34);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), depthTest: false }));
+  s.position.set(...v).multiplyScalar(1.25); s.scale.setScalar(0.5);
+  gScene.add(s);
+});
+
+/* ---- DOTTED PARTICLE FIELD & MESH ANIMATION ---- */
+const COUNT = 28000;
+const logoPos = new Float32Array(COUNT * 3);
+const tgt = new Float32Array(COUNT * 3);
+const rnd = new Float32Array(COUNT);
+
+(function initParticles() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 240;
+  const x = c.getContext('2d');
+  x.strokeStyle = x.fillStyle = '#fff';
+  x.lineWidth = 16;
+  x.lineJoin = 'round';
+  x.beginPath();
+  x.moveTo(24, 28);
+  x.lineTo(216, 28);
+  x.lineTo(120, 192);
+  x.closePath();
+  x.fill();
+  x.stroke();
+
+  const d = x.getImageData(0, 0, 240, 240).data, px = [];
+  for (let i = 0; i < 57600; i++) {
+    if (d[i * 4 + 3] > 128) px.push(i);
+  }
+  for (let i = 0; i < COUNT; i++) {
+    const p = px[(Math.random() * px.length) | 0];
+    logoPos[i * 3] = ((p % 240) + Math.random() - 120) / 240 * 4.2;
+    logoPos[i * 3 + 1] = (120 - ((p / 240) | 0) - Math.random()) / 240 * 4.2;
+    logoPos[i * 3 + 2] = (Math.random() - 0.5) * 0.25;
+    rnd[i] = Math.random();
+  }
+  tgt.set(logoPos);
+})();
+
+const pgeo = new THREE.BufferGeometry();
+pgeo.setAttribute('position', new THREE.BufferAttribute(logoPos, 3));
+pgeo.setAttribute('aTarget', new THREE.BufferAttribute(tgt, 3));
+pgeo.setAttribute('aRand', new THREE.BufferAttribute(rnd, 1));
+
+const U = {
+  uTime: { value: 0 },
+  uMorph: { value: 0 },
+  uMouse: { value: new THREE.Vector2(99, 99) },
+  uHover: { value: 0 },
+  uFade: { value: 1 },
+  uSwirl: { value: 0 },
+  uPx: { value: renderer.getPixelRatio() }
+};
+
+const pmat = new THREE.ShaderMaterial({
+  uniforms: U,
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+  vertexShader: `
+    attribute vec3 aTarget;
+    attribute float aRand;
+    uniform float uTime, uMorph, uHover, uSwirl, uPx;
+    uniform vec2 uMouse;
+    varying float vA;
+    void main() {
+      float t = clamp(uMorph * 1.7 - aRand * 0.7, 0.0, 1.0);
+      t = t * t * (3.0 - 2.0 * t);
+      vec3 p = mix(position, aTarget, t);
+      p += sin(t * 3.14159) * 0.6 * vec3(sin(uTime * 2.0 + aRand * 40.0), cos(uTime * 1.7 + aRand * 31.0), sin(uTime * 2.3 + aRand * 17.0));
+      p += 0.02 * vec3(sin(uTime * 3.0 + aRand * 90.0), cos(uTime * 2.0 + aRand * 70.0), sin(uTime * 2.5 + aRand * 50.0));
+      float a = uSwirl * sin(uTime * 0.8) * 0.15 * (1.0 - t);
+      float c = cos(a), s = sin(a);
+      p.xy = mat2(c, -s, s, c) * p.xy;
+      p *= 1.0 + uSwirl * 0.03 * sin(uTime * 2.0) * (1.0 - t);
+      vec2 d = p.xy - uMouse;
+      float push = smoothstep(1.3, 0.0, length(d)) * uHover;
+      p.z += push * (1.2 + aRand);
+      p.xy += normalize(d + 1e-4) * push * 0.35;
+      vec4 mv = modelViewMatrix * vec4(p, 1.0);
+      gl_Position = projectionMatrix * mv;
+      gl_PointSize = (1.5 + aRand * 1.5 + push * 2.0) * uPx * (8.0 / -mv.z);
+      vA = 0.55 + 0.45 * aRand;
+    }
+  `,
+  fragmentShader: `
+    uniform float uFade;
+    varying float vA;
+    void main() {
+      float d = length(gl_PointCoord - 0.5);
+      if (d > 0.5) discard;
+      gl_FragColor = vec4(vec3(0.92, 0.95, 1.0), vA * uFade * smoothstep(0.5, 0.2, d));
+    }
+  `
+});
+
+const points = new THREE.Points(pgeo, pmat);
+points.frustumCulled = false;
+scene.add(points);
+
+let hoverT = 0;
+const ray = new THREE.Raycaster();
+const pl = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+const hit = new THREE.Vector3();
+const m2 = new THREE.Vector2();
+
+cv.addEventListener('pointermove', e => {
+  const r = cv.getBoundingClientRect();
+  m2.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(m2, camera);
+  if (ray.ray.intersectPlane(pl, hit)) U.uMouse.value.set(hit.x, hit.y);
+  hoverT = 1;
+});
+cv.addEventListener('pointerleave', () => { hoverT = 0; });
+
+/* ================= STATE & OVERLAY ================= */
+let status = 'idle', busy = false, current = null, wire = false, models = [], selId = null, uid = 0;
+let activeCandidates = [];
+let activeCandidateIndex = 3;
+const ov = $('#ov');
+
+function setOv(kind, title, sub) {
+  if (kind === 'idle' || kind === 'none') {
+    ov.innerHTML = '';
+  } else {
+    ov.innerHTML = `<b>${title || 'Synthesizing 3D Geometry on Tesla T4…'}</b><div id="bar"><i></i></div><p>${sub || 'Connecting to Sketch2Shape engine…'}</p>`;
+  }
+}
+
+function sync() {
+  const b = $('#gen');
+  b.disabled = busy || !hasSketch;
+  b.classList.toggle('busy', busy);
+  $('#gt').textContent = busy ? 'Generating…' : 'Generate';
+  $('#exb').disabled = !current;
+  $('#fmt').disabled = !current;
+}
+
+function toast(msg, retry) {
+  $('#tm').textContent = msg;
+  $('#retry').style.display = retry ? '' : 'none';
+  $('#toast').style.display = 'flex';
+  clearTimeout(toast.t);
+  toast.t = setTimeout(() => $('#toast').style.display = 'none', 9000);
+}
+$('#retry').onclick = () => { $('#toast').style.display = 'none'; generate(); };
+$('#toast-cfg').onclick = () => { $('#toast').style.display = 'none'; openApiModal(); };
+
+function setWire(g, on) {
+  if (!g) return;
+  g.traverse(o => {
+    if (o.material) o.material.wireframe = on;
+  });
+}
+
+function showGroup(g) {
+  if (current) scene.remove(current);
+  current = g;
+  if (g) {
+    scene.add(g);
+    setWire(g, wire);
+    U.uFade.value = 0;
+  } else {
+    U.uMorph.value = 0;
+    U.uFade.value = 1;
+    U.uSwirl.value = 0;
+    tgt.set(logoPos);
+    if (pgeo.attributes.aTarget) pgeo.attributes.aTarget.needsUpdate = true;
+  }
+  sync();
+}
+
+function normalizeModel(group) {
+  const box = new THREE.Box3().setFromObject(group);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const maxDim = Math.max(size.x, size.y, size.z) || 1;
+  const targetScale = 3.6 / maxDim;
+  group.scale.setScalar(targetScale);
+  group.position.sub(center.multiplyScalar(targetScale));
+  const adjBox = new THREE.Box3().setFromObject(group);
+  group.position.y += (-2.0 - adjBox.min.y);
+  group.userData.baseScale = targetScale;
+}
+
+/* ================= CANDIDATES LOWER BAR ================= */
+function renderCandidates(candidatesList, selectedIdx = 3) {
+  activeCandidates = candidatesList || [];
+  activeCandidateIndex = selectedIdx;
+  const container = $('#candidates-list');
+  if (!activeCandidates || !activeCandidates.length) {
+    $('#candidates-bar').style.display = 'none';
+    return;
+  }
+  $('#candidates-bar').style.display = 'flex';
+  container.innerHTML = '';
+  activeCandidates.forEach((cand, idx) => {
+    const card = document.createElement('div');
+    card.className = 'cand-card' + (idx === activeCandidateIndex ? ' active' : '');
+    card.title = `Candidate #${idx + 1} (Score: ${cand.score || '0.85'}). Click to build 3D mesh based on this candidate`;
+    card.innerHTML = `
+      <div class="cand-thumb">
+        <img src="${cand.img}" alt="Candidate ${idx}">
+      </div>
+      <div class="cand-score">${cand.score || '0.85'}</div>
+    `;
+    card.onclick = () => {
+      selectCandidate(idx);
+    };
+    container.appendChild(card);
+  });
+}
+
+async function selectCandidate(idx) {
+  activeCandidateIndex = idx;
+  $$('.cand-card').forEach((c, i) => c.classList.toggle('active', i === idx));
+  const cand = activeCandidates[idx];
+  if (!cand) return;
+
+  // Update telemetry sketch match dynamically
+  const matchScore = parseFloat(cand.score || '0.85');
+  const matchPct = Math.round(matchScore <= 1 ? matchScore * 100 : matchScore);
+  const telMatch = $('#tel-match');
+  if (telMatch) telMatch.textContent = `★ Sketch Match: ${matchPct}%`;
+
+  // Quickly replace doodle image with this candidate image
+  loadSketchFromUrl(cand.img);
+
+  toast(`Candidate #${idx + 1} chosen (Score: ${cand.score || '0.85'}). Reconstructing 3D model...`);
+
+  // Push to generate 3D model based on this candidate image
+  if (!busy) {
+    try {
+      const resp = await fetch(cand.img);
+      if (resp.ok) {
+        const candBlob = await resp.blob();
+        await generateFromBlob(candBlob, {
+          objectOverride: $('#obj-input')?.value || '',
+          promptLabel: `Candidate #${idx + 1}`,
+          score: cand.score
+        });
+      }
+    } catch (e) {
+      console.warn('Candidate reconstruction error:', e);
+    }
+  }
+}
+
+/* ================= TELEMETRY (REMOVED FROM UI) ================= */
+function renderTelemetry(data = {}) {}
+
+$('#prompt-input')?.addEventListener('input', () => {
+  userPrompt = $('#prompt-input').value.trim();
+  updatePromptBtn();
+});
+
+/* ================= BUILT-IN SAMPLES LOADER ================= */
+async function loadSample(sampleKey) {
+  if (sampleKey === 'none' || !sampleKey) {
+    // Select None option, reset canvas and all inputs
+    $$('.sample-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.sample === 'none');
+    });
+    blank();
+    hasSketch = false;
+    if ($('#obj-input')) $('#obj-input').value = '';
+    if ($('#prompt-input')) {
+      $('#prompt-input').value = '';
+      userPrompt = '';
+      updatePromptBtn();
+    }
+    if ($('#seed-input')) $('#seed-input').value = '';
+    renderCandidates([], 0);
+    showGroup(null);
+    selId = null;
+    renderModels();
+    sync();
+    return;
+  }
+
+  const sample = BUILT_IN_MODELS[sampleKey];
+  if (!sample) return;
+
+  // 1. Update active state on sample buttons
+  $$('.sample-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.sample === sampleKey);
+  });
+
+  // 2. Quickly replace doodle image with image created to make that model
+  loadSketchFromUrl(sample.sketch);
+
+  // 3. Set detected object and description fields
+  if ($('#obj-input')) $('#obj-input').value = sample.name;
+  if ($('#prompt-input')) {
+    $('#prompt-input').value = sample.prompt || '';
+    userPrompt = sample.prompt || '';
+    updatePromptBtn();
+  }
+
+  // 4. Set seed
+  if (sample.telemetry?.seed && $('#seed-input')) {
+    $('#seed-input').value = sample.telemetry.seed;
+  }
+
+  // 5. Render matching candidate images
+  renderCandidates(sample.candidates, 3);
+
+  // 6. Render dynamic telemetry for this model
+  renderTelemetry(sample.telemetry);
+
+  // 7. Load GLB model into Three.js scene
+  if (sample.glb) {
+    try {
+      const group = await loadGLB(sample.glb);
+      normalizeModel(group);
+      showGroup(group);
+
+      // Add to models list or select existing
+      const existing = models.find(m => m.sampleKey === sampleKey || m.label === sample.label);
+      if (!existing) {
+        addModel(group, sample.label, snap(), {
+          sampleKey,
+          glbUrl: sample.glb,
+          objUrl: sample.obj,
+          info: { badges: sample.telemetry },
+          bytes: sample.glb ? 1699400 : 0,
+          presetDims: sample.dims,
+          presetVertices: sample.vertices,
+          presetFaces: sample.faces,
+          presetFormat: sample.format,
+          telemetry: sample.telemetry,
+          candidates: sample.candidates,
+          sketch: sample.sketch,
+          objectName: sample.name,
+          promptText: sample.prompt
+        });
+      } else {
+        existing.group = group;
+        existing.telemetry = sample.telemetry;
+        existing.candidates = sample.candidates;
+        existing.sketch = sample.sketch;
+        existing.objectName = sample.name;
+        existing.promptText = sample.prompt;
+        selId = existing.id;
+        renderModels();
+      }
+    } catch (e) {
+      console.error('Failed to load sample GLB:', e);
+    }
+  }
+}
+
+// Bind built-in sample buttons
+$$('.sample-btn').forEach(btn => {
+  btn.onclick = () => loadSample(btn.dataset.sample);
+});
+
+/* ================= GENERATION WORKFLOW (REAL KAGGLE API) ================= */
+async function generateFromBlob(blob, options = {}) {
+  if (busy) return;
+  busy = true;
+  sync();
+  showGroup(null);
+  selId = null;
+  renderModels();
+
+  // Trigger swirling particle animation during synthesis
+  U.uMorph.value = 0;
+  U.uFade.value = 1;
+  U.uSwirl.value = 1;
+  status = 'pred';
+
+  const preset = $('#preset-sel')?.value || 'balanced';
+  const seed = ($('#seed-input')?.value || '').trim();
+  const objOverride = options.objectOverride || ($('#obj-input')?.value || '').trim();
+  const mat = $('#mat-sel')?.value || 'Auto';
+  const viewpoint = $('#view-sel')?.value || 'Auto';
+
+  const promptParts = [
+    $('#prompt-input')?.value.trim() || userPrompt,
+    objOverride ? `object: ${objOverride}` : '',
+    mat !== 'Auto' ? `${mat} material` : '',
+    viewpoint !== 'Auto' ? `${viewpoint} view` : ''
+  ].filter(Boolean);
+  const fullPrompt = promptParts.join(', ');
+
+  const titleSub = options.promptLabel ? `Reconstructing from ${options.promptLabel}…` : 'Uploading sketch & initializing GPU pipeline…';
+  setOv('gen', 'Generating 3D Model on Kaggle GPU', titleSub);
+
+  const startTime = Date.now();
+  let timerId = setInterval(() => {
+    if (!busy) return;
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const m = Math.floor(elapsed / 60);
+    const s = elapsed % 60;
+    const timeStr = `${m}m ${s < 10 ? '0' : ''}${s}s`;
+    let sub = `Synthesizing geometry & textures on Tesla T4 · Elapsed: ${timeStr}`;
+    if (elapsed > 210) {
+      sub = `Cold-start model loading in progress (~7m for 1st model) · Elapsed: ${timeStr}`;
+    }
+    setOv('gen', 'Generating 3D Model on Kaggle GPU', sub);
+  }, 1000);
+
+  try {
+    const result = await callGenerateApi(blob, { prompt: fullPrompt, preset, seed }, (prog) => {
+      if (prog.event === 'status' && prog.info?.position) {
+        setOv('gen', 'Waiting in Kaggle Queue', `Position #${prog.info.position} in queue. GPU will start shortly…`);
+      }
+    });
+
+    clearInterval(timerId);
+
+    if (!result.info?.ok) {
+      throw new Error(result.info?.message || 'Model generation was rejected by the engine');
+    }
+    if (!result.glbUrl) {
+      throw new Error('No 3D GLB model URL was returned');
+    }
+
+    setOv('gen', 'Downloading & Assembling 3D Mesh', 'Parsing textures and geometry…');
+
+    // Fetch GLB file into local memory
+    const glbRes = await fetch(result.glbUrl);
+    if (!glbRes.ok) throw new Error(`GLB download failed (HTTP ${glbRes.status})`);
+    const glbBlob = await glbRes.blob();
+    const localGlbUrl = URL.createObjectURL(glbBlob);
+
+    const group = await loadGLB(localGlbUrl);
+    normalizeModel(group);
+
+    // Sample mesh surface vertices for particle morph animation
+    const sampledVerts = [];
+    group.traverse(o => {
+      if (o.geometry && o.geometry.attributes.position) {
+        const pos = o.geometry.attributes.position;
+        const step = Math.max(1, Math.floor(pos.count / 3500));
+        o.updateMatrixWorld();
+        for (let i = 0; i < pos.count; i += step) {
+          const v = new THREE.Vector3(pos.getX(i), pos.getY(i), pos.getZ(i));
+          v.applyMatrix4(o.matrixWorld);
+          sampledVerts.push(v);
+        }
+      }
+    });
+    if (sampledVerts.length > 0) {
+      for (let i = 0; i < COUNT; i++) {
+        const sv = sampledVerts[Math.floor(Math.random() * sampledVerts.length)];
+        tgt[i * 3] = sv.x + (Math.random() - 0.5) * 0.04;
+        tgt[i * 3 + 1] = sv.y + (Math.random() - 0.5) * 0.04;
+        tgt[i * 3 + 2] = sv.z + (Math.random() - 0.5) * 0.04;
+      }
+      pgeo.attributes.aTarget.needsUpdate = true;
+    }
+
+    // Morph particle field onto the 3D model contour
+    setOv('gen', 'Reconstructing 3D Mesh Topology', 'Aligning mesh particle contour…');
+    await tween(1600, t => { U.uMorph.value = t; });
+
+    // Fade in 3D model while fading out particles
+    showGroup(group);
+    await tween(800, t => {
+      U.uFade.value = 1 - t;
+      group.traverse(o => {
+        if (o.material) {
+          o.material.transparent = true;
+          o.material.opacity = t;
+        }
+      });
+    });
+    group.traverse(o => {
+      if (o.material) {
+        o.material.transparent = false;
+        o.material.opacity = 1;
+      }
+    });
+    U.uFade.value = 0;
+
+    setOv('none');
+    status = 'final';
+    await sleep(60);
+
+    const badges = result.info.badges || {};
+    const detectedLabel = badges.object || objOverride || userPrompt || '3D Model';
+    if ($('#obj-input')) $('#obj-input').value = detectedLabel;
+
+    // Fetch and display the 4 candidate images provided by the API
+    const apiBase = getApiBaseUrl();
+    if (result.info?.run_json) {
+      try {
+        const rjRes = await fetch(`${apiBase}/gradio_api/file=${result.info.run_json}`);
+        if (rjRes.ok) {
+          const runData = await rjRes.json();
+          if (Array.isArray(runData.candidates) && runData.candidates.length) {
+            const apiCands = runData.candidates.map(c => ({
+              img: `${apiBase}/gradio_api/file=${c[0]}`,
+              score: c[1] !== undefined ? (typeof c[1] === 'number' ? c[1].toFixed(2) : String(c[1])) : '0.85'
+            }));
+            renderCandidates(apiCands, runData.selected_candidate || 0);
+          }
+        }
+      } catch (e) {
+        console.warn('API candidates parse notice:', e);
+      }
+    }
+
+    const elapsedSec = ((Date.now() - startTime) / 1000).toFixed(1);
+    const telemetryData = {
+      object: detectedLabel,
+      backend: `${badges.backend || 'instantmesh'} (${badges.profile || preset})`,
+      seconds: badges.seconds || elapsedSec,
+      seed: badges.seed !== undefined ? badges.seed : (seed || Math.floor(Math.random() * 99999)),
+      match: badges.sketch_match !== undefined ? badges.sketch_match : (options.score ? parseFloat(options.score) : 0.88),
+      texture: badges.tier === 1 ? 'Baked Texture Map' : 'Vertex Colours'
+    };
+
+    renderTelemetry(telemetryData);
+
+    // Add model to right panel
+    addModel(group, detectedLabel, snap(), {
+      glbBlob,
+      glbUrl: result.glbUrl,
+      objUrl: result.objUrl,
+      info: result.info,
+      bytes: glbBlob.size,
+      telemetry: telemetryData
+    });
+
+  } catch (err) {
+    clearInterval(timerId);
+    console.error('Generation failure:', err);
+    U.uMorph.value = 0;
+    U.uFade.value = 1;
+    U.uSwirl.value = 0;
+    tgt.set(logoPos);
+    if (pgeo.attributes.aTarget) pgeo.attributes.aTarget.needsUpdate = true;
+    setOv('none');
+    toast(err.message || 'Generation failed', true);
+  } finally {
+    busy = false;
+    U.uSwirl.value = 0;
+    sync();
+  }
+}
+
+async function generate() {
+  if (busy || !hasSketch) return;
+  const hiResCanvas = document.createElement('canvas');
+  hiResCanvas.width = 512;
+  hiResCanvas.height = 512;
+  const hctx = hiResCanvas.getContext('2d');
+  hctx.fillStyle = '#FFFFFF';
+  hctx.fillRect(0, 0, 512, 512);
+  hctx.imageSmoothingEnabled = true;
+  hctx.imageSmoothingQuality = 'high';
+  hctx.drawImage(prev, 0, 0, 512, 512);
+  const blob = await new Promise(r => hiResCanvas.toBlob(r, 'image/png'));
+  await generateFromBlob(blob);
+}
+$('#gen').onclick = generate;
+
+/* ================= MODELS PANEL ================= */
+function snap() {
+  renderer.render(scene, camera);
+  const t = document.createElement('canvas');
+  t.width = t.height = 160;
+  const s = Math.min(cv.width, cv.height);
+  t.getContext('2d').drawImage(cv, (cv.width - s) / 2, (cv.height - s) / 2, s, s, 0, 0, 160, 160);
+  return t.toDataURL('image/jpeg', 0.85);
+}
+
+function addModel(group, label, thumb, meta = {}) {
+  const m = { id: ++uid, label, group, thumb, ...meta };
+  models.unshift(m);
+  selId = m.id;
+  renderModels();
+}
+
+function stats(g) {
+  let v = 0, f = 0;
+  g.traverse(o => {
+    if (o.geometry) {
+      v += o.geometry.attributes.position ? o.geometry.attributes.position.count : 0;
+      f += (o.geometry.index ? o.geometry.index.count : (o.geometry.attributes.position ? o.geometry.attributes.position.count : 0)) / 3;
+    }
+  });
+  return [v, f | 0];
+}
+
+function renderModels() {
+  const G = $('#grid');
+  G.innerHTML = '<div class="m" id="gup" title="Import existing GLB">⬆<br>Upload GLB</div>';
+  models.forEach(m => {
+    const d = document.createElement('div');
+    d.className = 'm' + (m.id === selId ? ' sel' : '');
+    d.innerHTML = `
+      <img src="${m.thumb}" alt="${m.label}">
+      <div class="nm">${m.label}</div>
+      <div class="ac">
+        <button data-a="dl">Download</button>
+        <button data-a="rn">Rename</button>
+        <button data-a="rm">Delete</button>
+      </div>`;
+    d.onclick = e => {
+      const a = e.target.dataset.a;
+      if (a === 'dl') {
+        downloadModelFile(m);
+      } else if (a === 'rn') {
+        const n = prompt('Rename model', m.label);
+        if (n && n.trim()) { m.label = n.trim(); renderModels(); }
+      } else if (a === 'rm') {
+        models = models.filter(x => x !== m);
+        if (selId === m.id) {
+          selId = null;
+          if (current === m.group) showGroup(null);
+        }
+        renderModels();
+      } else if (!busy) {
+        selId = m.id;
+        if (m.sampleKey) {
+          loadSample(m.sampleKey);
+        } else {
+          showGroup(m.group);
+          renderModels();
+          if (m.telemetry) renderTelemetry(m.telemetry);
+          if (m.candidates) renderCandidates(m.candidates, 0);
+          if (m.sketch) loadSketchFromUrl(m.sketch);
+          if (m.objectName && $('#obj-input')) $('#obj-input').value = m.objectName;
+          if (m.promptText !== undefined && $('#prompt-input')) {
+            $('#prompt-input').value = m.promptText;
+            userPrompt = m.promptText;
+            updatePromptBtn();
+          }
+        }
+      }
+    };
+    G.appendChild(d);
+  });
+
+  $('#gup').onclick = () => $('#gf').click();
+
+  const m = models.find(x => x.id === selId);
+  if (m) {
+    const [calcV, calcF] = stats(m.group);
+    const v = m.presetVertices || calcV;
+    const f = m.presetFaces || calcF;
+    const b = new THREE.Box3().setFromObject(m.group);
+    const s = b.getSize(new THREE.Vector3());
+    const dimsStr = m.presetDims || `${s.x.toFixed(2)} × ${s.y.toFixed(2)} × ${s.z.toFixed(2)}`;
+    const formatStr = m.presetFormat || 'GLB (PBR)';
+
+    $('#det').innerHTML = `
+      <div style="font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 5px;">${m.label}</div>
+      <div>Vertices: <b>${v.toLocaleString()}</b> · Faces: <b>${f.toLocaleString()}</b></div>
+      <div>Dimensions: <b>${dimsStr}</b></div>
+      <div>Format: <b>${formatStr}</b></div>
+      <div class="row" style="margin-top: 8px;">
+        <button id="det-dl-glb" style="font-size: 11px; padding: 4px;">⬇ GLB</button>
+        ${m.objUrl ? '<button id="det-dl-obj" style="font-size: 11px; padding: 4px;">⬇ OBJ</button>' : ''}
+      </div>`;
+    $('#det-dl-glb')?.addEventListener('click', () => downloadModelFile(m, 'GLB'));
+    $('#det-dl-obj')?.addEventListener('click', () => downloadModelFile(m, 'OBJ'));
+  } else {
+    $('#det').textContent = 'Select a model to see details.';
+  }
+}
+
+function downloadModelFile(m, requestedFmt) {
+  const fmt = requestedFmt || $('#fmt')?.value || 'GLB';
+  if (fmt === 'OBJ' && m.objUrl) {
+    const a = document.createElement('a');
+    a.href = m.objUrl;
+    a.download = `${m.label || 'model'}.obj.zip`;
+    a.target = '_blank';
+    a.click();
+    return;
+  }
+  if (m.glbBlob) {
+    dl_(m.glbBlob, `${m.label || 'model'}.glb`);
+  } else if (m.glbUrl) {
+    const a = document.createElement('a');
+    a.href = m.glbUrl;
+    a.download = `${m.label || 'model'}.glb`;
+    a.target = '_blank';
+    a.click();
+  } else if (m.group) {
+    exportGLB(m.group, m.label);
+  }
+}
+
+// Local GLB upload
+$('#gf').onchange = e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const u = URL.createObjectURL(f);
+  loadGLB(u).then(g => {
+    normalizeModel(g);
+    showGroup(g);
+    addModel(g, f.name.replace(/\.\w+$/, ''), snap(), { glbBlob: f, bytes: f.size });
+  }).catch(() => toast('Could not read that GLB file'));
+  e.target.value = '';
+};
+
+/* ================= EXPORT & TOOLBAR ================= */
+function dl_(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+function exportGLB(g, name) {
+  if (!g) return;
+  new THREE.GLTFExporter().parse(
+    g,
+    r => dl_(new Blob([r], { type: 'model/gltf-binary' }), (name || 'model') + '.glb'),
+    { binary: true }
+  );
+}
+
+$('#exb').onclick = () => {
+  const m = models.find(x => x.group === current) || models.find(x => x.id === selId);
+  downloadModelFile(m || { group: current, label: 'sketch2shape' });
+};
+
+const tg = (id, fn) => $(id).onclick = () => {
+  const on = $(id).classList.toggle('on');
+  fn(on);
+};
+tg('#bg', on => grid.visible = on);
+tg('#ba', on => axes.visible = on);
+tg('#bw', on => { wire = on; setWire(current, on); });
+$('#bh').onclick = () => {
+  const h = $('#help');
+  h.style.display = h.style.display === 'block' ? 'none' : 'block';
+};
+
+// Zoom In / Out
+$('#b-zoomi').onclick = () => {
+  camera.position.multiplyScalar(0.85);
+  controls.update();
+};
+$('#b-zoomu').onclick = () => {
+  camera.position.multiplyScalar(1.15);
+  controls.update();
+};
+
+function view(v) {
+  camera.position.copy(v);
+  controls.target.set(0, 0, 0);
+  controls.update();
+}
+$('#br').onclick = () => view(HOME);
+cv.ondblclick = () => view(HOME);
+$('#vx').onclick = () => view(new THREE.Vector3(7.5, 0, 0));
+$('#vy').onclick = () => view(new THREE.Vector3(0, 7.5, 0.001));
+$('#vz').onclick = () => view(new THREE.Vector3(0, 0, 7.5));
+
+/* ================= API CONFIG MODAL LOGIC ================= */
+function openApiModal() {
+  $('#api-url-input').value = getApiBaseUrl();
+  $('#api-test-box').innerHTML = 'Click "Test" to check live GPU connectivity.';
+  $('#api-modal').style.display = 'flex';
+}
+$('#nav-api-badge').onclick = openApiModal;
+$('#open-api-btn').onclick = openApiModal;
+$('#api-modal-close').onclick = () => $('#api-modal').style.display = 'none';
+
+$('#api-test-btn').onclick = async () => {
+  const testUrl = $('#api-url-input').value.trim();
+  $('#api-test-box').innerHTML = '<span style="color:var(--ac)">Testing connection to Kaggle GPU…</span>';
+  const res = await checkCapabilities(testUrl);
+  if (res.ok && res.data) {
+    $('#api-test-box').innerHTML = `
+      <span style="color:var(--green);font-weight:700">✓ Connected successfully</span><br>
+      GPU: <b>${res.data.gpu}</b> (${res.data.vram_gb} GB VRAM)<br>
+      Profile: <b>${res.data.profile}</b> · Backends: <b>${Object.keys(res.data.backends || {}).join(', ')}</b>`;
+  } else {
+    $('#api-test-box').innerHTML = `
+      <span style="color:#ff4d4d;font-weight:700">✗ Connection failed</span><br>
+      <span style="color:#ff8888">${res.error || 'Server unreachable'}</span><br>
+      Ensure the Kaggle notebook cell is actively running with GPU T4 and Internet on.`;
+  }
+};
+
+$('#api-reset-btn').onclick = () => {
+  $('#api-url-input').value = DEFAULT_API_URL;
+  $('#api-test-btn').click();
+};
+
+$('#api-save-btn').onclick = async () => {
+  const newUrl = $('#api-url-input').value.trim();
+  setApiBaseUrl(newUrl);
+  $('#api-modal').style.display = 'none';
+  await updateApiBadge();
+};
+
+/* ================= RENDER LOOP & RESIZE ================= */
+function resize() {
+  const w = vp.clientWidth, h = vp.clientHeight;
+  if (!w || !h) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(vp);
+resize();
+
+const clock = new THREE.Clock();
+(function loop() {
+  requestAnimationFrame(loop);
+  U.uTime.value = clock.getElapsedTime();
+  U.uHover.value += (hoverT - U.uHover.value) * 0.08;
+  controls.update();
+
+  const W = cv.clientWidth, H = cv.clientHeight;
+  renderer.setScissorTest(false);
+  renderer.setViewport(0, 0, W, H);
+  renderer.clear();
+  renderer.render(scene, camera);
+
+  gCam.position.copy(camera.position).sub(controls.target).normalize().multiplyScalar(5);
+  gCam.up.copy(camera.up);
+  gCam.lookAt(0, 0, 0);
+
+  const gs = 96;
+  renderer.clearDepth();
+  renderer.setScissorTest(true);
+  renderer.setViewport(W - gs - 50, H - gs - 12, gs, gs);
+  renderer.setScissor(W - gs - 50, H - gs - 12, gs, gs);
+  renderer.render(gScene, gCam);
+  renderer.setScissorTest(false);
+})();
+
+/* ================= INITIALIZATION ================= */
+function initCatalogModels() {
+  models = [];
+  Object.keys(BUILT_IN_MODELS).forEach(k => {
+    const s = BUILT_IN_MODELS[k];
+    models.push({
+      id: ++uid,
+      label: s.label,
+      sampleKey: k,
+      thumb: s.candidates[0]?.img || s.sketch,
+      glbUrl: s.glb,
+      objUrl: s.obj,
+      group: null,
+      telemetry: s.telemetry,
+      candidates: s.candidates,
+      sketch: s.sketch,
+      objectName: s.name,
+      promptText: s.prompt,
+      presetDims: s.dims,
+      presetVertices: s.vertices,
+      presetFaces: s.faces,
+      presetFormat: s.format
+    });
+  });
+  renderModels();
+}
+
+initCatalogModels();
+
+const savedDrawing = sessionStorage.getItem('sketch2shape_drawing');
+const shouldAutogen = sessionStorage.getItem('sketch2shape_autogen') === 'true';
+sessionStorage.removeItem('sketch2shape_ask_prompt');
+sessionStorage.removeItem('sketch2shape_autogen');
+
+if (savedDrawing) {
+  const i = new Image();
+  i.onload = () => {
+    drawImg(i);
+    if (shouldAutogen) {
+      setTimeout(() => generate(), 250);
+    }
+  };
+  i.src = savedDrawing;
+} else {
+  // Default to None option as requested
+  loadSample('none');
+}
+
+updateApiBadge();
+sync();
+</script>
+</body>
+</html>
